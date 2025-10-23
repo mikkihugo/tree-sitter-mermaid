@@ -502,6 +502,21 @@
     ]
   },
   {
+    "type": "architecture_stmt",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "block_stmt",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "c4_stmt",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "class_annotation_line",
     "named": true,
     "fields": {},
@@ -732,6 +747,51 @@
     }
   },
   {
+    "type": "diagram_architecture",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "architecture_stmt",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "diagram_block",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "block_stmt",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "diagram_c4",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "c4_stmt",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "diagram_class",
     "named": true,
     "fields": {},
@@ -826,6 +886,21 @@
     }
   },
   {
+    "type": "diagram_kanban",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "kanban_stmt",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
     "type": "diagram_mindmap",
     "named": true,
     "fields": {},
@@ -835,6 +910,21 @@
       "types": [
         {
           "type": "mmap_node",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "diagram_packet",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "packet_stmt",
           "named": true
         }
       ]
@@ -854,6 +944,70 @@
         },
         {
           "type": "pie_showdata",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "diagram_quadrant_chart",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "quadrant_chart_data",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "diagram_radar",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "radar_stmt",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "diagram_requirement",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "requirement_stmt",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "diagram_sankey",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "sankey_stmt",
           "named": true
         }
       ]
@@ -884,6 +1038,70 @@
       "types": [
         {
           "type": "_state_stmt",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "diagram_timeline",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "timeline_stmt",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "diagram_treemap",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "treemap_stmt",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "diagram_xy_chart",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "xy_chart_data",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "diagram_zenuml",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "zenuml_stmt",
           "named": true
         }
       ]
@@ -2019,6 +2237,11 @@
     "fields": {}
   },
   {
+    "type": "kanban_stmt",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "mmap_class",
     "named": true,
     "fields": {}
@@ -2225,6 +2448,11 @@
     "fields": {}
   },
   {
+    "type": "packet_stmt",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "pie_label",
     "named": true,
     "fields": {}
@@ -2267,6 +2495,26 @@
         }
       ]
     }
+  },
+  {
+    "type": "quadrant_chart_data",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "radar_stmt",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "requirement_stmt",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "sankey_stmt",
+    "named": true,
+    "fields": {}
   },
   {
     "type": "sequence_actor",
@@ -2742,6 +2990,18 @@
       "required": true,
       "types": [
         {
+          "type": "diagram_architecture",
+          "named": true
+        },
+        {
+          "type": "diagram_block",
+          "named": true
+        },
+        {
+          "type": "diagram_c4",
+          "named": true
+        },
+        {
           "type": "diagram_class",
           "named": true
         },
@@ -2766,11 +3026,35 @@
           "named": true
         },
         {
+          "type": "diagram_kanban",
+          "named": true
+        },
+        {
           "type": "diagram_mindmap",
           "named": true
         },
         {
+          "type": "diagram_packet",
+          "named": true
+        },
+        {
           "type": "diagram_pie",
+          "named": true
+        },
+        {
+          "type": "diagram_quadrant_chart",
+          "named": true
+        },
+        {
+          "type": "diagram_radar",
+          "named": true
+        },
+        {
+          "type": "diagram_requirement",
+          "named": true
+        },
+        {
+          "type": "diagram_sankey",
           "named": true
         },
         {
@@ -2779,6 +3063,22 @@
         },
         {
           "type": "diagram_state",
+          "named": true
+        },
+        {
+          "type": "diagram_timeline",
+          "named": true
+        },
+        {
+          "type": "diagram_treemap",
+          "named": true
+        },
+        {
+          "type": "diagram_xy_chart",
+          "named": true
+        },
+        {
+          "type": "diagram_zenuml",
           "named": true
         },
         {
@@ -3012,7 +3312,27 @@
     }
   },
   {
+    "type": "timeline_stmt",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "title",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "treemap_stmt",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "xy_chart_data",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "zenuml_stmt",
     "named": true,
     "fields": {}
   },
@@ -3129,6 +3449,26 @@
     "named": false
   },
   {
+    "type": "C4Component",
+    "named": false
+  },
+  {
+    "type": "C4Container",
+    "named": false
+  },
+  {
+    "type": "C4Context",
+    "named": false
+  },
+  {
+    "type": "C4Deployment",
+    "named": false
+  },
+  {
+    "type": "C4Dynamic",
+    "named": false
+  },
+  {
     "type": "HIGHLIGHT",
     "named": false
   },
@@ -3209,6 +3549,10 @@
     "named": true
   },
   {
+    "type": "architecture-beta",
+    "named": false
+  },
+  {
     "type": "arg_directive",
     "named": true
   },
@@ -3222,6 +3566,10 @@
   },
   {
     "type": "axisformat",
+    "named": false
+  },
+  {
+    "type": "block-beta",
     "named": false
   },
   {
@@ -3409,6 +3757,10 @@
     "named": false
   },
   {
+    "type": "kanban",
+    "named": false
+  },
+  {
     "type": "left of",
     "named": false
   },
@@ -3457,6 +3809,10 @@
     "named": false
   },
   {
+    "type": "packet-beta",
+    "named": false
+  },
+  {
     "type": "par",
     "named": false
   },
@@ -3485,7 +3841,19 @@
     "named": false
   },
   {
+    "type": "quadrantChart",
+    "named": false
+  },
+  {
+    "type": "radar-beta",
+    "named": false
+  },
+  {
     "type": "rect",
+    "named": false
+  },
+  {
+    "type": "requirementDiagram",
     "named": false
   },
   {
@@ -3494,6 +3862,10 @@
   },
   {
     "type": "rl",
+    "named": false
+  },
+  {
+    "type": "sankey-beta",
     "named": false
   },
   {
@@ -3557,6 +3929,10 @@
     "named": false
   },
   {
+    "type": "timeline",
+    "named": false
+  },
+  {
     "type": "title",
     "named": false
   },
@@ -3569,6 +3945,10 @@
     "named": false
   },
   {
+    "type": "treemap",
+    "named": false
+  },
+  {
     "type": "type",
     "named": false
   },
@@ -3578,6 +3958,14 @@
   },
   {
     "type": "v",
+    "named": false
+  },
+  {
+    "type": "xychart-beta",
+    "named": false
+  },
+  {
+    "type": "zenuml",
     "named": false
   },
   {

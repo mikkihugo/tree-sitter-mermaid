@@ -62,6 +62,58 @@
             {
               "type": "SYMBOL",
               "name": "diagram_journey"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "diagram_quadrant_chart"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "diagram_xy_chart"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "diagram_timeline"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "diagram_zenuml"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "diagram_sankey"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "diagram_block"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "diagram_packet"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "diagram_kanban"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "diagram_architecture"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "diagram_radar"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "diagram_treemap"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "diagram_c4"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "diagram_requirement"
             }
           ]
         }
@@ -4854,6 +4906,616 @@
         }
       ]
     },
+    "diagram_quadrant_chart": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[qQ][uU][aA][dD][rR][aA][nN][tT][CC][hH][aA][rR][tT]"
+              }
+            }
+          },
+          "named": false,
+          "value": "quadrantChart"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "quadrant_chart_data"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_newline"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "comment"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "quadrant_chart_data": {
+      "type": "PATTERN",
+      "value": "[^\\n;]+"
+    },
+    "diagram_xy_chart": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[xX][yY][cC][hH][aA][rR][tT][--][bB][eE][tT][aA]"
+              }
+            }
+          },
+          "named": false,
+          "value": "xychart-beta"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "xy_chart_data"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_newline"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "comment"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "xy_chart_data": {
+      "type": "PATTERN",
+      "value": "[^\\n;]+"
+    },
+    "diagram_timeline": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[tT][iI][mM][eE][lL][iI][nN][eE]"
+              }
+            }
+          },
+          "named": false,
+          "value": "timeline"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "timeline_stmt"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_newline"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "timeline_stmt": {
+      "type": "PATTERN",
+      "value": "[^\\n;]+"
+    },
+    "diagram_zenuml": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[zZ][eE][nN][uU][mM][lL]"
+              }
+            }
+          },
+          "named": false,
+          "value": "zenuml"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "zenuml_stmt"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_newline"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "zenuml_stmt": {
+      "type": "PATTERN",
+      "value": "[^\\n;]+"
+    },
+    "diagram_sankey": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[sS][aA][nN][kK][eE][yY][--][bB][eE][tT][aA]"
+              }
+            }
+          },
+          "named": false,
+          "value": "sankey-beta"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "sankey_stmt"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_newline"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "sankey_stmt": {
+      "type": "PATTERN",
+      "value": "[^\\n;]+"
+    },
+    "diagram_block": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[bB][lL][oO][cC][kK][--][bB][eE][tT][aA]"
+              }
+            }
+          },
+          "named": false,
+          "value": "block-beta"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "block_stmt"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_newline"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "block_stmt": {
+      "type": "PATTERN",
+      "value": "[^\\n;]+"
+    },
+    "diagram_packet": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[pP][aA][cC][kK][eE][tT][--][bB][eE][tT][aA]"
+              }
+            }
+          },
+          "named": false,
+          "value": "packet-beta"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "packet_stmt"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_newline"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "packet_stmt": {
+      "type": "PATTERN",
+      "value": "[^\\n;]+"
+    },
+    "diagram_kanban": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[kK][aA][nN][bB][aA][nN]"
+              }
+            }
+          },
+          "named": false,
+          "value": "kanban"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "kanban_stmt"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_newline"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "kanban_stmt": {
+      "type": "PATTERN",
+      "value": "[^\\n;]+"
+    },
+    "diagram_architecture": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[aA][rR][cC][hH][iI][tT][eE][cC][tT][uU][rR][eE][--][bB][eE][tT][aA]"
+              }
+            }
+          },
+          "named": false,
+          "value": "architecture-beta"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "architecture_stmt"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_newline"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "architecture_stmt": {
+      "type": "PATTERN",
+      "value": "[^\\n;]+"
+    },
+    "diagram_radar": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[rR][aA][dD][aA][rR][--][bB][eE][tT][aA]"
+              }
+            }
+          },
+          "named": false,
+          "value": "radar-beta"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "radar_stmt"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_newline"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "radar_stmt": {
+      "type": "PATTERN",
+      "value": "[^\\n;]+"
+    },
+    "diagram_treemap": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[tT][rR][eE][eE][mM][aA][pP]"
+              }
+            }
+          },
+          "named": false,
+          "value": "treemap"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "treemap_stmt"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_newline"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "treemap_stmt": {
+      "type": "PATTERN",
+      "value": "[^\\n;]+"
+    },
+    "diagram_c4": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[CC][44][CC][oO][nN][tT][eE][xX][tT]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "C4Context"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[CC][44][CC][oO][nN][tT][aA][iI][nN][eE][rR]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "C4Container"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[CC][44][CC][oO][mM][pP][oO][nN][eE][nN][tT]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "C4Component"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[CC][44][DD][yY][nN][aA][mM][iI][cC]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "C4Dynamic"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[CC][44][DD][eE][pP][lL][oO][yY][mM][eE][nN][tT]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "C4Deployment"
+            }
+          ]
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "c4_stmt"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_newline"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "c4_stmt": {
+      "type": "PATTERN",
+      "value": "[^\\n;]+"
+    },
+    "diagram_requirement": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[rR][eE][qQ][uU][iI][rR][eE][mM][eE][nN][tT][DD][iI][aA][gG][rR][aA][mM]"
+              }
+            }
+          },
+          "named": false,
+          "value": "requirementDiagram"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "requirement_stmt"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_newline"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "requirement_stmt": {
+      "type": "PATTERN",
+      "value": "[^\\n;]+"
+    },
     "_whitespace": {
       "type": "PATTERN",
       "value": "[ \\t]+"
@@ -5690,7 +6352,7 @@
     },
     "_journey_actor": {
       "type": "PATTERN",
-      "value": "[^ ,\\n;][^,\\n;]*"
+      "value": "[^,\\n;]+"
     }
   },
   "extras": [

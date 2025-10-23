@@ -15,13 +15,19 @@ gitGraph
 
 (source_file
   (diagram_gitgraph
-    (gitgraph_stmt_commit)
-    (gitgraph_stmt_commit)
+    (gitgraph_stmt_commit
+      (gitgraph_commit_attrs
+        (gitgraph_commit_attr_id)))
+    (gitgraph_stmt_commit
+      (gitgraph_commit_attrs
+        (gitgraph_commit_attr_id)))
     (gitgraph_stmt_branch
       (gitgraph_branch_name))
     (gitgraph_stmt_checkout
       (gitgraph_branch_name))
-    (gitgraph_stmt_commit)
+    (gitgraph_stmt_commit
+      (gitgraph_commit_attrs
+        (gitgraph_commit_attr_id)))
     (gitgraph_stmt_checkout
       (gitgraph_branch_name))
     (gitgraph_stmt_merge
@@ -43,11 +49,18 @@ gitGraph
 
 (source_file
   (diagram_gitgraph
-    (gitgraph_stmt_commit)
-    (gitgraph_stmt_commit)
+    (gitgraph_stmt_commit
+      (gitgraph_commit_attrs
+        (gitgraph_commit_attr_id)))
+    (gitgraph_stmt_commit
+      (gitgraph_commit_attrs
+        (gitgraph_commit_attr_id)
+        (gitgraph_commit_attr_tag)))
     (gitgraph_stmt_branch
       (gitgraph_branch_name))
-    (gitgraph_stmt_commit)
+    (gitgraph_stmt_commit
+      (gitgraph_commit_attrs
+        (gitgraph_commit_attr_id)))
     (gitgraph_stmt_checkout
       (gitgraph_branch_name))
     (gitgraph_stmt_merge
@@ -71,14 +84,24 @@ gitGraph
 
 (source_file
   (diagram_gitgraph
-    (gitgraph_stmt_commit)
-    (gitgraph_stmt_commit)
-    (gitgraph_stmt_commit)
+    (gitgraph_stmt_commit
+      (gitgraph_commit_attrs
+        (gitgraph_commit_attr_id)))
+    (gitgraph_stmt_commit
+      (gitgraph_commit_attrs
+        (gitgraph_commit_attr_id)
+        (gitgraph_commit_attr_type)))
+    (gitgraph_stmt_commit
+      (gitgraph_commit_attrs
+        (gitgraph_commit_attr_id)
+        (gitgraph_commit_attr_type)))
     (gitgraph_stmt_branch
       (gitgraph_branch_name))
     (gitgraph_stmt_checkout
       (gitgraph_branch_name))
-    (gitgraph_stmt_commit)
+    (gitgraph_stmt_commit
+      (gitgraph_commit_attrs
+        (gitgraph_commit_attr_id)))
     (gitgraph_stmt_checkout
       (gitgraph_branch_name))
     (gitgraph_stmt_merge

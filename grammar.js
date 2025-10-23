@@ -189,6 +189,19 @@ module.exports = grammar({
                 $.diagram_mindmap,
                 $.diagram_gitgraph,
                 $.diagram_journey,
+                $.diagram_quadrant_chart,
+                $.diagram_xy_chart,
+                $.diagram_timeline,
+                $.diagram_zenuml,
+                $.diagram_sankey,
+                $.diagram_block,
+                $.diagram_packet,
+                $.diagram_kanban,
+                $.diagram_architecture,
+                $.diagram_radar,
+                $.diagram_treemap,
+                $.diagram_c4,
+                $.diagram_requirement,
         )),
 
         directive: $ => seq(
@@ -921,6 +934,157 @@ module.exports = grammar({
             $._journey_actor,
             repeat(seq(",", optional($._whitespace), $._journey_actor)),
         ),
+
+        /// quadrant chart diagram
+        diagram_quadrant_chart: $ => seq(
+            kwd("quadrantChart"),
+            repeat(choice(
+                $.quadrant_chart_data,
+                $._newline,
+                $.comment,
+            )),
+        ),
+
+        quadrant_chart_data: $ => /[^\n;]+/,
+
+        /// xy chart diagram
+        diagram_xy_chart: $ => seq(
+            kwd("xychart-beta"),
+            repeat(choice(
+                $.xy_chart_data,
+                $._newline,
+                $.comment,
+            )),
+        ),
+
+        xy_chart_data: $ => /[^\n;]+/,
+
+        /// timeline diagram
+        diagram_timeline: $ => seq(
+            kwd("timeline"),
+            repeat(choice(
+                $.timeline_stmt,
+                $._newline,
+            )),
+        ),
+
+        timeline_stmt: $ => /[^\n;]+/,
+
+        /// zenuml diagram
+        diagram_zenuml: $ => seq(
+            kwd("zenuml"),
+            repeat(choice(
+                $.zenuml_stmt,
+                $._newline,
+            )),
+        ),
+
+        zenuml_stmt: $ => /[^\n;]+/,
+
+        /// sankey diagram
+        diagram_sankey: $ => seq(
+            kwd("sankey-beta"),
+            repeat(choice(
+                $.sankey_stmt,
+                $._newline,
+            )),
+        ),
+
+        sankey_stmt: $ => /[^\n;]+/,
+
+        /// block diagram
+        diagram_block: $ => seq(
+            kwd("block-beta"),
+            repeat(choice(
+                $.block_stmt,
+                $._newline,
+            )),
+        ),
+
+        block_stmt: $ => /[^\n;]+/,
+
+        /// packet diagram
+        diagram_packet: $ => seq(
+            kwd("packet-beta"),
+            repeat(choice(
+                $.packet_stmt,
+                $._newline,
+            )),
+        ),
+
+        packet_stmt: $ => /[^\n;]+/,
+
+        /// kanban diagram
+        diagram_kanban: $ => seq(
+            kwd("kanban"),
+            repeat(choice(
+                $.kanban_stmt,
+                $._newline,
+            )),
+        ),
+
+        kanban_stmt: $ => /[^\n;]+/,
+
+        /// architecture diagram
+        diagram_architecture: $ => seq(
+            kwd("architecture-beta"),
+            repeat(choice(
+                $.architecture_stmt,
+                $._newline,
+            )),
+        ),
+
+        architecture_stmt: $ => /[^\n;]+/,
+
+        /// radar chart diagram
+        diagram_radar: $ => seq(
+            kwd("radar-beta"),
+            repeat(choice(
+                $.radar_stmt,
+                $._newline,
+            )),
+        ),
+
+        radar_stmt: $ => /[^\n;]+/,
+
+        /// treemap diagram
+        diagram_treemap: $ => seq(
+            kwd("treemap"),
+            repeat(choice(
+                $.treemap_stmt,
+                $._newline,
+            )),
+        ),
+
+        treemap_stmt: $ => /[^\n;]+/,
+
+        /// c4 diagram
+        diagram_c4: $ => seq(
+            choice(
+                kwd("C4Context"),
+                kwd("C4Container"),
+                kwd("C4Component"),
+                kwd("C4Dynamic"),
+                kwd("C4Deployment"),
+            ),
+            repeat(choice(
+                $.c4_stmt,
+                $._newline,
+            )),
+        ),
+
+        c4_stmt: $ => /[^\n;]+/,
+
+        /// requirement diagram
+        diagram_requirement: $ => seq(
+            kwd("requirementDiagram"),
+            repeat(choice(
+                $.requirement_stmt,
+                $._newline,
+            )),
+        ),
+
+        requirement_stmt: $ => /[^\n;]+/,
 
         ... tokensFunc
     }
