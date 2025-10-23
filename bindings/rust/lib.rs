@@ -1,14 +1,40 @@
-//! This crate provides mermaid language support for the [tree-sitter][] parsing library.
+//! This crate provides Mermaid language support for the [tree-sitter][] parsing library.
+//!
+//! Mermaid is a diagramming and charting tool that uses Markdown-inspired text definitions
+//! to create and modify diagrams dynamically. This grammar supports parsing various Mermaid
+//! diagram types including flowcharts, sequence diagrams, class diagrams, state diagrams,
+//! Gantt charts, and more.
+//!
+//! ## Usage
 //!
 //! Typically, you will use the [language][language func] function to add this language to a
-//! tree-sitter [Parser][], and then use the parser to parse some code:
+//! tree-sitter [Parser][], and then use the parser to parse some Mermaid code:
 //!
-//! ```
-//! let code = "";
+//! ```rust
+//! use tree_sitter_mermaid::language;
+//!
+//! let mermaid_code = r#"
+//! graph TD
+//!     A[Start] --> B{Decision}
+//!     B -->|Yes| C[Action 1]
+//!     B -->|No| D[Action 2]
+//! "#;
+//!
 //! let mut parser = tree_sitter::Parser::new();
-//! parser.set_language(tree_sitter_mermaid::language()).expect("Error loading mermaid grammar");
-//! let tree = parser.parse(code, None).unwrap();
+//! parser.set_language(&language()).expect("Error loading mermaid grammar");
+//! let tree = parser.parse(mermaid_code, None).unwrap();
 //! ```
+//!
+//! ## Supported Diagram Types
+//!
+//! - **Flowcharts**: `graph TD`, `graph LR`, etc.
+//! - **Sequence Diagrams**: `sequenceDiagram`
+//! - **Class Diagrams**: `classDiagram`
+//! - **State Diagrams**: `stateDiagram-v2`
+//! - **Gantt Charts**: `gantt`
+//! - **Pie Charts**: `pie`
+//! - **Git Graphs**: `gitGraph`
+//! - **User Journey**: `journey`
 //!
 //! [Language]: https://docs.rs/tree-sitter/*/tree_sitter/struct.Language.html
 //! [language func]: fn.language.html
@@ -35,7 +61,7 @@ pub const NODE_TYPES: &'static str = include_str!("../../src/node-types.json");
 
 // Uncomment these to include any queries that this grammar contains
 
-// pub const HIGHLIGHTS_QUERY: &'static str = include_str!("../../queries/highlights.scm");
+pub const HIGHLIGHTS_QUERY: &'static str = include_str!("../../queries/highlights.scm");
 // pub const INJECTIONS_QUERY: &'static str = include_str!("../../queries/injections.scm");
 // pub const LOCALS_QUERY: &'static str = include_str!("../../queries/locals.scm");
 // pub const TAGS_QUERY: &'static str = include_str!("../../queries/tags.scm");

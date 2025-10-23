@@ -1,6 +1,24 @@
+# Rust
+target/
 Cargo.lock
-node_modules
-build
-*.log
-package-lock.json
-/target/
+**/*.rs.bk
+
+# Build artifacts
+.cargo-build/
+*.o
+*.so
+*.dylib
+*.dll
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Test artifacts
+test_mermaid

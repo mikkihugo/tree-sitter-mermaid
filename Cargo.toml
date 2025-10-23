@@ -1,12 +1,16 @@
 [package]
 name = "tree-sitter-mermaid"
-description = "mermaid grammar for the tree-sitter parsing library"
-version = "0.0.1"
-keywords = ["incremental", "parsing", "mermaid"]
-categories = ["parsing", "text-editors"]
-repository = "https://github.com/tree-sitter/tree-sitter-mermaid"
+description = "Mermaid grammar for the tree-sitter parsing library (updated for tree-sitter 0.25)"
+version = "0.1.0"
+keywords = ["incremental", "parsing", "mermaid", "tree-sitter", "diagram"]
+categories = ["parsing", "text-editors", "development-tools"]
+repository = "https://github.com/mikkihugo/tree-sitter-mermaid"
+homepage = "https://github.com/mikkihugo/tree-sitter-mermaid"
+documentation = "https://docs.rs/tree-sitter-mermaid"
 edition = "2021"
+rust-version = "1.70"
 license = "MIT"
+authors = ["mikkihugo <mhugo@example.com>"]
 
 build = "bindings/rust/build.rs"
 include = [
@@ -25,9 +29,17 @@ tree-sitter = "~0.25"
 [build-dependencies]
 cc = "1.0"
 
-[[bin]]
-name = "test_mermaid"
-path = "test_mermaid.rs"
+[features]
+default = ["parser"]
+parser = []
+
+# Enable all features for development
+[package.metadata.docs.rs]
+features = ["parser"]
+
+[[example]]
+name = "basic_usage"
+path = "examples/basic_usage.rs"
 
 [workspace]
 
