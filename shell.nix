@@ -14,12 +14,13 @@ pkgs.mkShell {
     pkgs.makeWrapper
     pkgs.gnumake
     pkgs.git
+    pkgs.gh
     pkgs.python3Packages.setuptools
     pkgs.python3Packages.wheel
     pkgs.nodePackages.node-gyp
   ];
 
   shellHook = ''
-    echo "Nix shell loaded: C/C++, Python, Node.js, Rust, Go, Swift, tree-sitter, pkg-config, make, git, setuptools, wheel, node-gyp."
+    echo "Nix shell loaded: C/C++, Python, Node.js, Rust, Go, Swift, tree-sitter, pkg-config, make, git, gh, setuptools, wheel, node-gyp."
   '';
 }
