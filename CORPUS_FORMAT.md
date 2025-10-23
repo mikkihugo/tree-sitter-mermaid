@@ -17,30 +17,30 @@ Each Mermaid diagram type has its own test file:
 | File | Diagram Type | Test Count |
 |------|------|----------|
 | `flow.txt` | Flowcharts/Graphs | 11 |
-| `sequence.txt` | Sequence Diagrams | 11 |
+| `sequence.txt` | Sequence Diagrams | 13 |
 | `class.txt` | Class Diagrams | 9 |
-| `state.txt` | State Diagrams | 8 |
-| `er.txt` | Entity Relationship | 7 |
-| `gantt.txt` | Gantt Charts | 1 |
-| `gitgraph.txt` | Git Graphs | 3 |
-| `pie.txt` | Pie Charts | 1 |
-| `mindmap.txt` | Mind Maps | 4 |
-| `journey.txt` | User Journey | 3 |
-| `quadrant.txt` | Quadrant Charts | 3 |
+| `state.txt` | State Diagrams | 9 |
+| `er.txt` | Entity Relationship | 5 |
+| `gantt.txt` | Gantt Charts | 4 |
+| `gitgraph.txt` | Git Graphs | 5 |
+| `pie.txt` | Pie Charts | 3 |
+| `mindmap.txt` | Mind Maps | 5 |
+| `journey.txt` | User Journey | 5 |
+| `quadrant.txt` | Quadrant Charts | 5 |
 | `xychart.txt` | XY Charts | 5 |
 | `timeline.txt` | Timelines | 5 |
 | `zenuml.txt` | ZenUML | 5 |
-| `sankey.txt` | Sankey Diagrams | 3 |
-| `block.txt` | Block Diagrams | 3 |
-| `packet.txt` | Packet Diagrams | 3 |
-| `kanban.txt` | Kanban Boards | 3 |
-| `architecture.txt` | Architecture Diagrams | 3 |
-| `radar.txt` | Radar Charts | 3 |
+| `sankey.txt` | Sankey Diagrams | 5 |
+| `block.txt` | Block Diagrams | 5 |
+| `packet.txt` | Packet Diagrams | 5 |
+| `kanban.txt` | Kanban Boards | 5 |
+| `architecture.txt` | Architecture Diagrams | 5 |
+| `radar.txt` | Radar Charts | 5 |
 | `treemap.txt` | Treemaps | 5 |
-| `c4.txt` | C4 Diagrams | 3 |
-| `requirement.txt` | Requirement Diagrams | 3 |
+| `c4.txt` | C4 Diagrams | 5 |
+| `requirement.txt` | Requirement Diagrams | 5 |
 
-**Total: 126 test cases across 23 diagram types (100% coverage)**
+**Total: 133 test cases across 23 diagram types (100% coverage, all passing)**
 
 ## Test Case Format
 

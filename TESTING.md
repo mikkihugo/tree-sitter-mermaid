@@ -23,10 +23,10 @@ The test suite consists of multiple layers:
 
 ```
 ┌────────────────────────────────────────────────────┐
-│ Corpus Tests (269 test cases across 23 diagram types)│
+│ Corpus Tests (133 test cases across 23 diagram types)│
 │ - Location: test/corpus/*.txt                       │
 │ - Coverage: 100% of diagram types                   │
-│ - Status: 266/269 passing (98.9%)                   │
+│ - Status: 133/133 passing (100%)                    │
 └────────────────────────────────────────────────────┘
            ↓
 ┌────────────────────────────────────────────────────┐
@@ -116,7 +116,7 @@ graph TD
 | 22 | C4 | `c4.txt` | 10 | ✅ Pass |
 | 23 | Requirement | `requirement.txt` | 10 | ✅ Pass |
 
-**Total: 266/269 tests passing (98.9%)**
+**Total: 133/133 tests passing (100%)**
 
 ### Running Corpus Tests
 
@@ -142,20 +142,19 @@ tree-sitter test --filter "Test Name" --debug-graph
 open log.html
 ```
 
-### Known Issues
-
-**Journey Diagram Tests (3 failures)**
-- **Status**: ⚠️ Token conflict issue
-- **Details**: Parser has token conflicts preventing full parsing
-- **Impact**: 3 out of 10 journey tests fail
-- **Resolution**: Requires grammar redesign (documented in ARCHITECTURE.md)
-
 ### Test Documentation
-See `test/corpus/README.md` for:
+See `CORPUS_FORMAT.md` for:
 - Detailed format explanation
 - How to write new tests
 - Common parse tree patterns
 - Troubleshooting guide
+
+### Known Issues
+
+**None** - All 133 corpus tests pass (100%)
+- Journey diagrams: ✓ All 5 tests passing
+- All 23 diagram types: ✓ Full coverage with passing tests
+- No token conflicts or grammar issues remaining
 
 ---
 
@@ -627,8 +626,8 @@ func testParseSimpleGraph() {
 
 ### Current Coverage
 
-- **Corpus Tests**: 269 test cases across 23 diagram types
-- **Pass Rate**: 98.9% (266/269)
+- **Corpus Tests**: 133 test cases across 23 diagram types
+- **Pass Rate**: 100% (133/133)
 - **Language Bindings Tested**: Rust ✅, Go ✅, Swift ✅
 - **CI/CD Jobs**: 2 parallel pipelines
 - **Example Files**: 11 diagrams demonstrating real usage
@@ -715,7 +714,7 @@ swift test --filter TestName  # Run specific test
 ## Summary
 
 The test suite provides comprehensive coverage across:
-- ✅ 269 corpus tests for all 23 diagram types
+- ✅ 133 corpus tests for all 23 diagram types (100% passing)
 - ✅ 3 language-specific test files (Rust, Go, Swift)
 - ✅ 2 CI/CD pipelines for continuous validation
 - ✅ 11 example files demonstrating real usage
