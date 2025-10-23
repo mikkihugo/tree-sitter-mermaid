@@ -199,7 +199,7 @@ flowchart LR
     A---|This is the text|B
     A-->|text|B
     A-- text -->B
-    A-.->B;
+    A-.->B
     A-. text .-> B
     A ==> B
     A == text ==> B
@@ -279,11 +279,6 @@ flowchart LR
       (flow_node
         (flow_vertex
           (flow_vertex_id))))
-    (flow_stmt_vertice
-      (flow_node
-        (flow_vertex
-          (flow_vertex_id
-            (MISSING _alpha_num_token)))))
     (flow_stmt_vertice
       (flow_node
         (flow_vertex
