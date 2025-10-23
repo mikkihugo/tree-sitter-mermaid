@@ -655,3 +655,92 @@ flowchart LR
       (flow_node
         (flow_vertex
           (flow_vertex_id))))))
+==========================
+Node with hyphen in name (Issue #13)
+==========================
+
+flowchart TD
+    First-Task -- Error --> SomeTask
+
+---
+
+(source_file
+  (diagram_flow
+    (flowchart_direction_tb)
+    (flow_stmt_vertice
+      (flow_node
+        (flow_vertex
+          (flow_vertex_id)))
+      (flow_link_middletext
+        (flow_link_arrow_start)
+        (flow_arrow_text)
+        (flow_link_arrow))
+      (flow_node
+        (flow_vertex
+          (flow_vertex_id))))))
+
+==========================
+Multiline string in node (Issue #13)
+==========================
+
+flowchart TD
+    SomeTask["Multiline 
+        String with Task Name"] -- Success --> Node
+
+---
+
+(source_file
+  (diagram_flow
+    (flowchart_direction_tb)
+    (flow_stmt_vertice
+      (flow_node
+        (flow_vertex
+          (flow_vertex_id)
+          (flow_vertex_square
+            (flow_text_quoted))))
+      (flow_link_middletext
+        (flow_link_arrow_start)
+        (flow_arrow_text)
+        (flow_link_arrow))
+      (flow_node
+        (flow_vertex
+          (flow_vertex_id))))))
+
+==========================
+Complete Issue #13 example
+==========================
+
+flowchart TD
+    First-Task -- Error --> SomeTask
+    SomeTask["Multiline 
+        String with Task Name"] -- Success --> Node
+
+---
+
+(source_file
+  (diagram_flow
+    (flowchart_direction_tb)
+    (flow_stmt_vertice
+      (flow_node
+        (flow_vertex
+          (flow_vertex_id)))
+      (flow_link_middletext
+        (flow_link_arrow_start)
+        (flow_arrow_text)
+        (flow_link_arrow))
+      (flow_node
+        (flow_vertex
+          (flow_vertex_id))))
+    (flow_stmt_vertice
+      (flow_node
+        (flow_vertex
+          (flow_vertex_id)
+          (flow_vertex_square
+            (flow_text_quoted))))
+      (flow_link_middletext
+        (flow_link_arrow_start)
+        (flow_arrow_text)
+        (flow_link_arrow))
+      (flow_node
+        (flow_vertex
+          (flow_vertex_id))))))
