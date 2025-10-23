@@ -41,7 +41,7 @@ const tokens = {
     _bquote_string: /`[^`]+`/,
     _dquote_string: /"[^"]+"/,
 
-    class_reltype_aggregation: "o",
+    // class_reltype_aggregation is now handled by external scanner (see src/scanner.c)
     class_reltype_extension: choice("<|", "|>"),
     class_reltype_composition: "*",
     class_reltype_dependency: choice("<", ">"),
@@ -129,7 +129,7 @@ const tokens = {
     // tokens in journey diagram
     _journey_title_text: /[^\n;]+/,
     _journey_section_title: /[^\n]+/,
-    _journey_task_name: /[^:\n;]+/,
+    _journey_task_name: token(prec(-1, /[^:\n;]+/)),
     _journey_score: /[0-9]+/,
     _journey_actor: /[^,\n;]+/,
 }
@@ -143,6 +143,10 @@ const tokensFunc = Object.fromEntries(
 module.exports = grammar({
     /// meta information
     name: 'mermaid',
+
+    externals: $ => [
+        $.class_reltype_aggregation,  // Handled by external scanner
+    ],
 
     extras: $ => [
         $._whitespace,

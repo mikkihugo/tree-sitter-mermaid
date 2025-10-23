@@ -5700,10 +5700,6 @@
       "type": "PATTERN",
       "value": "\"[^\"]+\""
     },
-    "class_reltype_aggregation": {
-      "type": "STRING",
-      "value": "o"
-    },
     "class_reltype_extension": {
       "type": "CHOICE",
       "members": [
@@ -6343,8 +6339,15 @@
       "value": "[^\\n]+"
     },
     "_journey_task_name": {
-      "type": "PATTERN",
-      "value": "[^:\\n;]+"
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": -1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[^:\\n;]+"
+        }
+      }
     },
     "_journey_score": {
       "type": "PATTERN",
@@ -6367,7 +6370,12 @@
   ],
   "conflicts": [],
   "precedences": [],
-  "externals": [],
+  "externals": [
+    {
+      "type": "SYMBOL",
+      "name": "class_reltype_aggregation"
+    }
+  ],
   "inline": [],
   "supertypes": [
     "_direction",

@@ -1,9 +1,15 @@
 from os.path import isdir, join
 from platform import system
+import tomllib
 
 from setuptools import Extension, find_packages, setup
 from setuptools.command.build import build
 from wheel.bdist_wheel import bdist_wheel
+
+# Read version from pyproject.toml
+with open("pyproject.toml", "rb") as f:
+    pyproject = tomllib.load(f)
+    version = pyproject["project"]["version"]
 
 
 class Build(build):
@@ -23,6 +29,7 @@ class BdistWheel(bdist_wheel):
 
 
 setup(
+    version=version,
     packages=find_packages("bindings/python"),
     package_dir={"": "bindings/python"},
     package_data={
@@ -36,7 +43,7 @@ setup(
             sources=[
                 "bindings/python/tree_sitter_mermaid/binding.c",
                 "src/parser.c",
-                # NOTE: if your language uses an external scanner, add it here.
+                "src/scanner.c",
             ],
             extra_compile_args=(
                 ["-std=c11"] if system() != 'Windows' else []

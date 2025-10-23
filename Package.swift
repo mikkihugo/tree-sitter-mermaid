@@ -3,6 +3,7 @@ import PackageDescription
 
 let package = Package(
     name: "TreeSitterMermaid",
+    version: "0.25.10",
     platforms: [.macOS(.v10_13), .iOS(.v11)],
     products: [
         .library(name: "TreeSitterMermaid", targets: ["TreeSitterMermaid"]),
@@ -39,7 +40,7 @@ let package = Package(
                 ],
                 sources: [
                     "src/parser.c",
-                    // NOTE: if your language has an external scanner, add it here.
+                    "src/scanner.c",
                 ],
                 resources: [
                     .copy("queries")
