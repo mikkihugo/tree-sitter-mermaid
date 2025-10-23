@@ -1494,6 +1494,11 @@
     "fields": {}
   },
   {
+    "type": "flow_text_quoted",
+    "named": true,
+    "fields": {}
+  },
+  {
     "type": "flow_vertex",
     "named": true,
     "fields": {},
@@ -3715,10 +3720,6 @@
   {
     "type": "fk",
     "named": false
-  },
-  {
-    "type": "flow_text_quoted",
-    "named": true
   },
   {
     "type": "flowchart",

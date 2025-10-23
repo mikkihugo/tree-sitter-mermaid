@@ -91,7 +91,8 @@ const tokens = {
     flowchart_direction_bt: choice(kwd("bt"), "^"),
 
     flow_text_literal: repeat1(/[^-|}\])\s\n;/\\]+/),
-    flow_text_quoted: (/"[^"\n]*"/),
+    flow_text_quoted: (/"[^"]*"/),
+    _flow_vertex_id_token: token(prec(-1, /[a-zA-Z0-9_~!?]+(-[a-zA-Z0-9_~!?]+)*/)),
 
     // 適当
     flow_link_arrow: choice(
@@ -644,7 +645,7 @@ module.exports = grammar({
         ),
         flow_arrow_text: $ => repeat1($._alpha_num_token),
 
-        flow_vertex_id: $ => $._alpha_num_token,
+        flow_vertex_id: $ => $._flow_vertex_id_token,
 
         flow_vertex: $ => seq(
             $.flow_vertex_id,

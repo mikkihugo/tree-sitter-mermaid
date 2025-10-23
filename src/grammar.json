@@ -3200,7 +3200,7 @@
     },
     "flow_vertex_id": {
       "type": "SYMBOL",
-      "name": "_alpha_num_token"
+      "name": "_flow_vertex_id_token"
     },
     "flow_vertex": {
       "type": "SEQ",
@@ -6178,7 +6178,18 @@
     },
     "flow_text_quoted": {
       "type": "PATTERN",
-      "value": "\"[^\"\\n]*\""
+      "value": "\"[^\"]*\""
+    },
+    "_flow_vertex_id_token": {
+      "type": "TOKEN",
+      "content": {
+        "type": "PREC",
+        "value": -1,
+        "content": {
+          "type": "PATTERN",
+          "value": "[a-zA-Z0-9_~!?]+(-[a-zA-Z0-9_~!?]+)*"
+        }
+      }
     },
     "flow_link_arrow": {
       "type": "CHOICE",
