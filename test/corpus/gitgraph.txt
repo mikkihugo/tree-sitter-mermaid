@@ -1,0 +1,85 @@
+==========================
+Simple git graph
+==========================
+
+gitGraph
+    commit id:"a"
+    commit id:"b"
+    branch develop
+    checkout develop
+    commit id:"c"
+    checkout main
+    merge develop
+
+---
+
+(source_file
+  (diagram_gitgraph
+    (gitgraph_stmt_commit)
+    (gitgraph_stmt_commit)
+    (gitgraph_stmt_branch
+      (gitgraph_branch_name))
+    (gitgraph_stmt_checkout
+      (gitgraph_branch_name))
+    (gitgraph_stmt_commit)
+    (gitgraph_stmt_checkout
+      (gitgraph_branch_name))
+    (gitgraph_stmt_merge
+      (gitgraph_branch_name))))
+
+==========================
+Git graph with custom IDs and tags
+==========================
+
+gitGraph
+    commit id:"first"
+    commit id:"second" tag:"v1.0"
+    branch feature
+    commit id:"feature-work"
+    checkout main
+    merge feature
+
+---
+
+(source_file
+  (diagram_gitgraph
+    (gitgraph_stmt_commit)
+    (gitgraph_stmt_commit)
+    (gitgraph_stmt_branch
+      (gitgraph_branch_name))
+    (gitgraph_stmt_commit)
+    (gitgraph_stmt_checkout
+      (gitgraph_branch_name))
+    (gitgraph_stmt_merge
+      (gitgraph_branch_name))))
+
+==========================
+Git graph with commit types
+==========================
+
+gitGraph
+    commit id:"normal-commit"
+    commit id:"highlight" type:HIGHLIGHT
+    commit id:"reverse" type:REVERSE
+    branch release
+    checkout release
+    commit id:"release-prep"
+    checkout main
+    merge release
+
+---
+
+(source_file
+  (diagram_gitgraph
+    (gitgraph_stmt_commit)
+    (gitgraph_stmt_commit)
+    (gitgraph_stmt_commit)
+    (gitgraph_stmt_branch
+      (gitgraph_branch_name))
+    (gitgraph_stmt_checkout
+      (gitgraph_branch_name))
+    (gitgraph_stmt_commit)
+    (gitgraph_stmt_checkout
+      (gitgraph_branch_name))
+    (gitgraph_stmt_merge
+      (gitgraph_branch_name))))

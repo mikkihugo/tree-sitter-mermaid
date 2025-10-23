@@ -121,6 +121,17 @@ const tokens = {
 
     // tokens in mindmap diagram
     _mindmap_text: /[^(){}\[\]\n\r]+/,
+
+    // tokens in gitgraph diagram
+    _gitgraph_branch_name: /[a-zA-Z_][a-zA-Z0-9_]*/,
+    _gitgraph_string: /"[^"]*"/,
+
+    // tokens in journey diagram
+    _journey_title_text: /[^\n;]+/,
+    _journey_section_title: /[^\n]+/,
+    _journey_task_name: /[^:\n;]+/,
+    _journey_score: /[0-9]+/,
+    _journey_actor: /[^,\n;]+/,
 }
 
 const tokensFunc = Object.fromEntries(
@@ -149,6 +160,8 @@ module.exports = grammar({
         $._pie_stmt,
         $._flow_stmt,
         $._er_stmt,
+        $._gitgraph_stmt,
+        $._journey_stmt,
 
         $._class_reltype,
         $._class_linetype,
@@ -174,6 +187,8 @@ module.exports = grammar({
                 $.diagram_flow,
                 $.diagram_er,
                 $.diagram_mindmap,
+                $.diagram_gitgraph,
+                $.diagram_journey,
         )),
 
         directive: $ => seq(
@@ -780,6 +795,132 @@ module.exports = grammar({
         // experimental icon https://mermaid.js.org/syntax/mindmap.html#icons
         mmap_icon: _ => seq(/\n?\s*::icon\(/, /[^)\n\r]+/, ")"),
 
+        /// gitgraph diagram
+        diagram_gitgraph: $ => seq(
+            kwd("gitGraph"),
+            repeat(choice($._gitgraph_stmt, $._newline)),
+        ),
+
+        _gitgraph_stmt: $ => choice(
+            $.gitgraph_stmt_commit,
+            $.gitgraph_stmt_branch,
+            $.gitgraph_stmt_checkout,
+            $.gitgraph_stmt_merge,
+            $.gitgraph_stmt_cherry_pick,
+        ),
+
+        gitgraph_stmt_commit: $ => seq(
+            kwd("commit"),
+            optional($.gitgraph_commit_attrs),
+            $._newline,
+        ),
+
+        gitgraph_commit_attrs: $ => repeat1(
+            choice(
+                $.gitgraph_commit_attr_id,
+                $.gitgraph_commit_attr_tag,
+                $.gitgraph_commit_attr_type,
+            )
+        ),
+
+        gitgraph_commit_attr_id: $ => seq(
+            kwd("id"),
+            ":",
+            choice($._gitgraph_string, $._gitgraph_branch_name),
+        ),
+
+        gitgraph_commit_attr_tag: $ => seq(
+            kwd("tag"),
+            ":",
+            choice($._gitgraph_string, $._gitgraph_branch_name),
+        ),
+
+        gitgraph_commit_attr_type: $ => seq(
+            kwd("type"),
+            ":",
+            choice(
+                kwd("NORMAL"),
+                kwd("REVERSE"),
+                kwd("HIGHLIGHT"),
+            ),
+        ),
+
+        gitgraph_stmt_branch: $ => seq(
+            kwd("branch"),
+            $.gitgraph_branch_name,
+            $._newline,
+        ),
+
+        gitgraph_branch_name: $ => $._gitgraph_branch_name,
+
+        gitgraph_stmt_checkout: $ => seq(
+            kwd("checkout"),
+            $.gitgraph_branch_name,
+            $._newline,
+        ),
+
+        gitgraph_stmt_merge: $ => seq(
+            kwd("merge"),
+            $.gitgraph_branch_name,
+            $._newline,
+        ),
+
+        gitgraph_stmt_cherry_pick: $ => seq(
+            kwd("cherry-pick"),
+            $.gitgraph_cherry_pick_id,
+            $._newline,
+        ),
+
+        gitgraph_cherry_pick_id: $ => seq(
+            kwd("id"),
+            ":",
+            choice($._gitgraph_string, $._gitgraph_branch_name),
+        ),
+
+        /// journey diagram
+        diagram_journey: $ => seq(
+            kwd("journey"),
+            repeat(choice($._journey_stmt, $._newline)),
+        ),
+
+        _journey_stmt: $ => choice(
+            $.journey_title,
+            $.journey_section,
+        ),
+
+        journey_title: $ => seq(
+            kwd("title"),
+            $.journey_title_text,
+            $._newline,
+        ),
+
+        journey_title_text: $ => $._journey_title_text,
+
+        journey_section: $ => seq(
+            kwd("section"), $.journey_section_title,
+            $._newline,
+            repeat($.journey_task),
+        ),
+
+        journey_section_title: $ => $._journey_section_title,
+
+        journey_task: $ => seq(
+            $.journey_task_name,
+            ":",
+            $.journey_task_score,
+            ":",
+            $.journey_task_actors,
+            $._newline,
+        ),
+
+        journey_task_name: $ => $._journey_task_name,
+
+        journey_task_score: $ => $._journey_score,
+
+        journey_task_actors: $ => seq(
+            $._journey_actor,
+            repeat(seq(",", optional($._whitespace), $._journey_actor)),
+        ),
 
         ... tokensFunc
     }

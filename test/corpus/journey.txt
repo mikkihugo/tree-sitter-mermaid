@@ -1,0 +1,121 @@
+==========================
+Simple user journey
+==========================
+
+journey
+    title My working day
+    section Go to work
+      Make tea: 5: Me
+      Go upstairs: 3: Me
+      Do work: 1: Me,Cat
+    section Go home
+      Go downstairs: 5: Me
+      Sit down: 5: Me
+
+---
+
+(source_file
+  (diagram_journey
+    (journey_title
+      (journey_title_text))
+    (journey_section
+      (journey_section_title)
+      (journey_task
+        (journey_task_name)
+        (journey_task_score)
+        (journey_task_actors))
+      (journey_task
+        (journey_task_name)
+        (journey_task_score)
+        (journey_task_actors))
+      (journey_task
+        (journey_task_name)
+        (journey_task_score)
+        (journey_task_actors)))
+    (journey_section
+      (journey_section_title)
+      (journey_task
+        (journey_task_name)
+        (journey_task_score)
+        (journey_task_actors))
+      (journey_task
+        (journey_task_name)
+        (journey_task_score)
+        (journey_task_actors)))))
+
+==========================
+User journey without title
+==========================
+
+journey
+    section Morning routine
+      Wake up: 4: User
+      Brush teeth: 5: User
+    section Commute
+      Drive to work: 2: User
+
+---
+
+(source_file
+  (diagram_journey
+    (journey_section
+      (journey_section_title)
+      (journey_task
+        (journey_task_name)
+        (journey_task_score)
+        (journey_task_actors))
+      (journey_task
+        (journey_task_name)
+        (journey_task_score)
+        (journey_task_actors)))
+    (journey_section
+      (journey_section_title)
+      (journey_task
+        (journey_task_name)
+        (journey_task_score)
+        (journey_task_actors)))))
+
+==========================
+User journey with multiple actors
+==========================
+
+journey
+    title Team collaboration
+    section Planning
+      Brainstorm ideas: 4: Alice,Bob,Charlie
+      Create mockups: 3: Alice
+      Review designs: 5: Bob,Charlie
+    section Development
+      Write code: 4: Alice,Bob
+      Code review: 5: Charlie
+
+---
+
+(source_file
+  (diagram_journey
+    (journey_title
+      (journey_title_text))
+    (journey_section
+      (journey_section_title)
+      (journey_task
+        (journey_task_name)
+        (journey_task_score)
+        (journey_task_actors))
+      (journey_task
+        (journey_task_name)
+        (journey_task_score)
+        (journey_task_actors))
+      (journey_task
+        (journey_task_name)
+        (journey_task_score)
+        (journey_task_actors)))
+    (journey_section
+      (journey_section_title)
+      (journey_task
+        (journey_task_name)
+        (journey_task_score)
+        (journey_task_actors))
+      (journey_task
+        (journey_task_name)
+        (journey_task_score)
+        (journey_task_actors)))))

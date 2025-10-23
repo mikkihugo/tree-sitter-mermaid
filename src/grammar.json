@@ -54,6 +54,14 @@
             {
               "type": "SYMBOL",
               "name": "diagram_mindmap"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "diagram_gitgraph"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "diagram_journey"
             }
           ]
         }
@@ -4218,6 +4226,634 @@
         }
       ]
     },
+    "diagram_gitgraph": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[gG][iI][tT][GG][rR][aA][pP][hH]"
+              }
+            }
+          },
+          "named": false,
+          "value": "gitGraph"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_gitgraph_stmt"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_newline"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "_gitgraph_stmt": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "gitgraph_stmt_commit"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "gitgraph_stmt_branch"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "gitgraph_stmt_checkout"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "gitgraph_stmt_merge"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "gitgraph_stmt_cherry_pick"
+        }
+      ]
+    },
+    "gitgraph_stmt_commit": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[cC][oO][mM][mM][iI][tT]"
+              }
+            }
+          },
+          "named": false,
+          "value": "commit"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "gitgraph_commit_attrs"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_newline"
+        }
+      ]
+    },
+    "gitgraph_commit_attrs": {
+      "type": "REPEAT1",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "gitgraph_commit_attr_id"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "gitgraph_commit_attr_tag"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "gitgraph_commit_attr_type"
+          }
+        ]
+      }
+    },
+    "gitgraph_commit_attr_id": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[iI][dD]"
+              }
+            }
+          },
+          "named": false,
+          "value": "id"
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_gitgraph_string"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_gitgraph_branch_name"
+            }
+          ]
+        }
+      ]
+    },
+    "gitgraph_commit_attr_tag": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[tT][aA][gG]"
+              }
+            }
+          },
+          "named": false,
+          "value": "tag"
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_gitgraph_string"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_gitgraph_branch_name"
+            }
+          ]
+        }
+      ]
+    },
+    "gitgraph_commit_attr_type": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[tT][yY][pP][eE]"
+              }
+            }
+          },
+          "named": false,
+          "value": "type"
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[NN][OO][RR][MM][AA][LL]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "NORMAL"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[RR][EE][VV][EE][RR][SS][EE]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "REVERSE"
+            },
+            {
+              "type": "ALIAS",
+              "content": {
+                "type": "TOKEN",
+                "content": {
+                  "type": "PREC",
+                  "value": 1,
+                  "content": {
+                    "type": "PATTERN",
+                    "value": "[HH][II][GG][HH][LL][II][GG][HH][TT]"
+                  }
+                }
+              },
+              "named": false,
+              "value": "HIGHLIGHT"
+            }
+          ]
+        }
+      ]
+    },
+    "gitgraph_stmt_branch": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[bB][rR][aA][nN][cC][hH]"
+              }
+            }
+          },
+          "named": false,
+          "value": "branch"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "gitgraph_branch_name"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_newline"
+        }
+      ]
+    },
+    "gitgraph_branch_name": {
+      "type": "SYMBOL",
+      "name": "_gitgraph_branch_name"
+    },
+    "gitgraph_stmt_checkout": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[cC][hH][eE][cC][kK][oO][uU][tT]"
+              }
+            }
+          },
+          "named": false,
+          "value": "checkout"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "gitgraph_branch_name"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_newline"
+        }
+      ]
+    },
+    "gitgraph_stmt_merge": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[mM][eE][rR][gG][eE]"
+              }
+            }
+          },
+          "named": false,
+          "value": "merge"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "gitgraph_branch_name"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_newline"
+        }
+      ]
+    },
+    "gitgraph_stmt_cherry_pick": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[cC][hH][eE][rR][rR][yY][--][pP][iI][cC][kK]"
+              }
+            }
+          },
+          "named": false,
+          "value": "cherry-pick"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "gitgraph_cherry_pick_id"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_newline"
+        }
+      ]
+    },
+    "gitgraph_cherry_pick_id": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[iI][dD]"
+              }
+            }
+          },
+          "named": false,
+          "value": "id"
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_gitgraph_string"
+            },
+            {
+              "type": "SYMBOL",
+              "name": "_gitgraph_branch_name"
+            }
+          ]
+        }
+      ]
+    },
+    "diagram_journey": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[jJ][oO][uU][rR][nN][eE][yY]"
+              }
+            }
+          },
+          "named": false,
+          "value": "journey"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_journey_stmt"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_newline"
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "_journey_stmt": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "journey_title"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "journey_section"
+        }
+      ]
+    },
+    "journey_title": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[tT][iI][tT][lL][eE]"
+              }
+            }
+          },
+          "named": false,
+          "value": "title"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "journey_title_text"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_newline"
+        }
+      ]
+    },
+    "journey_title_text": {
+      "type": "SYMBOL",
+      "name": "_journey_title_text"
+    },
+    "journey_section": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "ALIAS",
+          "content": {
+            "type": "TOKEN",
+            "content": {
+              "type": "PREC",
+              "value": 1,
+              "content": {
+                "type": "PATTERN",
+                "value": "[sS][eE][cC][tT][iI][oO][nN]"
+              }
+            }
+          },
+          "named": false,
+          "value": "section"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "journey_section_title"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_newline"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SYMBOL",
+            "name": "journey_task"
+          }
+        }
+      ]
+    },
+    "journey_section_title": {
+      "type": "SYMBOL",
+      "name": "_journey_section_title"
+    },
+    "journey_task": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "journey_task_name"
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "journey_task_score"
+        },
+        {
+          "type": "STRING",
+          "value": ":"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "journey_task_actors"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_newline"
+        }
+      ]
+    },
+    "journey_task_name": {
+      "type": "SYMBOL",
+      "name": "_journey_task_name"
+    },
+    "journey_task_score": {
+      "type": "SYMBOL",
+      "name": "_journey_score"
+    },
+    "journey_task_actors": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_journey_actor"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "STRING",
+                "value": ","
+              },
+              {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "_whitespace"
+                  },
+                  {
+                    "type": "BLANK"
+                  }
+                ]
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_journey_actor"
+              }
+            ]
+          }
+        }
+      ]
+    },
     "_whitespace": {
       "type": "PATTERN",
       "value": "[ \\t]+"
@@ -5027,6 +5663,34 @@
     "_mindmap_text": {
       "type": "PATTERN",
       "value": "[^(){}\\[\\]\\n\\r]+"
+    },
+    "_gitgraph_branch_name": {
+      "type": "PATTERN",
+      "value": "[a-zA-Z_][a-zA-Z0-9_]*"
+    },
+    "_gitgraph_string": {
+      "type": "PATTERN",
+      "value": "\"[^\"]*\""
+    },
+    "_journey_title_text": {
+      "type": "PATTERN",
+      "value": "[^\\n;]+"
+    },
+    "_journey_section_title": {
+      "type": "PATTERN",
+      "value": "[^\\n]+"
+    },
+    "_journey_task_name": {
+      "type": "PATTERN",
+      "value": "[^:\\n;]+"
+    },
+    "_journey_score": {
+      "type": "PATTERN",
+      "value": "[0-9]+"
+    },
+    "_journey_actor": {
+      "type": "PATTERN",
+      "value": "[^ ,\\n;][^,\\n;]*"
     }
   },
   "extras": [
@@ -5053,6 +5717,8 @@
     "_pie_stmt",
     "_flow_stmt",
     "_er_stmt",
+    "_gitgraph_stmt",
+    "_journey_stmt",
     "_class_reltype",
     "_class_linetype",
     "_state_annotation",
