@@ -7,9 +7,12 @@ let package = Package(
     products: [
         .library(name: "TreeSitterMermaid", targets: ["TreeSitterMermaid"]),
     ],
-    dependencies: [],
+    dependencies: [
+        .package(url: "https://github.com/tree-sitter/swift-tree-sitter.git", from: "0.1.0")
+    ],
     targets: [
         .target(name: "TreeSitterMermaid",
+                dependencies: [.product(name: "SwiftTreeSitter", package: "swift-tree-sitter")],
                 path: ".",
                 exclude: [
                     "Cargo.toml",
@@ -42,7 +45,10 @@ let package = Package(
                     .copy("queries")
                 ],
                 publicHeadersPath: "bindings/swift",
-                cSettings: [.headerSearchPath("src")])
+                cSettings: [.headerSearchPath("src")]),
+        .testTarget(name: "TreeSitterMermaidTests",
+                   dependencies: ["TreeSitterMermaid", .product(name: "SwiftTreeSitter", package: "swift-tree-sitter")],
+                   path: "Tests")
     ],
     cLanguageStandard: .c11
 )

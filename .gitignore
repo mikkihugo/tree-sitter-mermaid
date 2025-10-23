@@ -32,6 +32,9 @@ result
 # Swift Package Manager
 .build/
 
+# Mermaid spec checking
+mermaid-examples/
+
 # Node.js
 node_modules/
 package-lock.json

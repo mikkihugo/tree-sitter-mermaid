@@ -75,6 +75,31 @@ direnv allow
 
 This will automatically load the Nix shell when you enter the directory.
 
+## Testing & Staying Current
+
+This grammar includes comprehensive tests and tools to stay current with Mermaid's specification:
+
+### Running Tests
+```bash
+make test  # Run tree-sitter test suite
+```
+
+### Checking Mermaid Spec Status
+```bash
+make check-spec  # Check for new Mermaid diagram types
+```
+
+### Test Coverage
+- ✅ **8 diagram types** currently supported with full test coverage
+- ❌ **15+ diagram types** missing from latest Mermaid spec
+- 📅 **Weekly CI checks** for Mermaid updates
+
+### Contributing New Diagram Types
+1. Add test cases to `test/corpus/`
+2. Implement grammar rules in `grammar.js`
+3. Update `README.md` supported features
+4. Run `make test` to verify
+
 ## License
 
 MIT - See [LICENSE](LICENSE) for details.

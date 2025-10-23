@@ -107,4 +107,7 @@ clean:
 test:
 	$(TS) test
 
-.PHONY: all install uninstall clean test
+check-spec:
+	./check-mermaid-spec.sh
+
+.PHONY: all install uninstall clean test check-spec
