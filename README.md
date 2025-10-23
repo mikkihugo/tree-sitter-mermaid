@@ -53,6 +53,28 @@ Add to your `Cargo.toml`:
 tree-sitter-mermaid = { git = "https://github.com/mikkihugo/tree-sitter-mermaid" }
 ```
 
+## Development Environment (Nix)
+
+For a fully reproducible development environment, use [Nix](https://nixos.org/):
+
+```sh
+nix-shell
+```
+
+This will provide all required toolchains and dependencies (C/C++, Python, Node.js, Rust, Go, Swift, tree-sitter, pkg-config, make, git, setuptools, wheel, node-gyp).
+
+## Automatic Environment with direnv
+
+For seamless environment activation, install [direnv](https://direnv.net/) and allow the `.envrc`:
+
+```sh
+brew install direnv  # or use your OS package manager
+# In the repo root:
+direnv allow
+```
+
+This will automatically load the Nix shell when you enter the directory.
+
 ## License
 
 MIT - See [LICENSE](LICENSE) for details.

@@ -9,6 +9,7 @@ Cargo.lock
 *.so
 *.dylib
 *.dll
+build/
 
 # IDE
 .vscode/
@@ -22,3 +23,15 @@ Thumbs.db
 
 # Test artifacts
 test_mermaid
+
+# Nix
+result
+.direnv/
+.envrc.local
+
+# Swift Package Manager
+.build/
+
+# Node.js
+node_modules/
+package-lock.json
