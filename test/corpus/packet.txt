@@ -1,5 +1,5 @@
 ==========================
-Packet Diagram
+Simple packet diagram
 ==========================
 
 packet-beta
@@ -7,6 +7,52 @@ packet-beta
     16-31: Destination Port
     32-63: Sequence Number
     64-95: Acknowledgment Number
+
+---
+
+(source_file
+  (diagram_packet
+    (packet_stmt)
+    (packet_stmt)
+    (packet_stmt)
+    (packet_stmt)))
+
+==========================
+Packet diagram with TCP header
+==========================
+
+packet-beta
+    0-15: Source Port
+    16-31: Destination Port
+    32-63: Sequence Number
+    64-95: Acknowledgment Number
+    96-99: Data Offset
+    100-105: Flags
+    106-121: Window Size
+    122-137: Checksum
+
+---
+
+(source_file
+  (diagram_packet
+    (packet_stmt)
+    (packet_stmt)
+    (packet_stmt)
+    (packet_stmt)
+    (packet_stmt)
+    (packet_stmt)
+    (packet_stmt)
+    (packet_stmt)))
+
+==========================
+Packet diagram with Ethernet frame
+==========================
+
+packet-beta
+    0-47: Destination MAC
+    48-95: Source MAC
+    96-111: EtherType
+    112-End: Payload
 
 ---
 

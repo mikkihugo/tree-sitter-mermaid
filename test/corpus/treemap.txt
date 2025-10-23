@@ -1,5 +1,5 @@
 ==========================
-Treemap Diagram
+Simple treemap diagram
 ==========================
 
 treemap
@@ -14,6 +14,58 @@ treemap
 
 (source_file
   (diagram_treemap
+    (treemap_stmt)
+    (treemap_stmt)
+    (treemap_stmt)
+    (treemap_stmt)
+    (treemap_stmt)
+    (treemap_stmt)))
+
+==========================
+Treemap with disk usage
+==========================
+
+treemap
+    title Disk Usage
+    Applications: 450
+    Documents: 200
+    Media: 800
+      Photos: 500
+      Videos: 300
+    System: 350
+
+---
+
+(source_file
+  (diagram_treemap
+    (treemap_stmt)
+    (treemap_stmt)
+    (treemap_stmt)
+    (treemap_stmt)
+    (treemap_stmt)
+    (treemap_stmt)
+    (treemap_stmt)))
+
+==========================
+Treemap with budget breakdown
+==========================
+
+treemap
+    title Budget Allocation
+    Operations: 1000
+    Development: 2000
+      Frontend: 800
+      Backend: 700
+      DevOps: 500
+    Marketing: 800
+    Administration: 400
+
+---
+
+(source_file
+  (diagram_treemap
+    (treemap_stmt)
+    (treemap_stmt)
     (treemap_stmt)
     (treemap_stmt)
     (treemap_stmt)

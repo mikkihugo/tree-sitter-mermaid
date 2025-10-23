@@ -1,5 +1,5 @@
 ==========================
-Architecture Diagram
+Simple architecture diagram
 ==========================
 
 architecture-beta
@@ -16,6 +16,78 @@ architecture-beta
 
 (source_file
   (diagram_architecture
+    (architecture_stmt)
+    (architecture_stmt)
+    (architecture_stmt)
+    (architecture_stmt)
+    (architecture_stmt)
+    (architecture_stmt)
+    (architecture_stmt)
+    (architecture_stmt)))
+
+==========================
+Architecture with multiple services
+==========================
+
+architecture-beta
+    Service Frontend {
+      - React
+      - Vue
+    }
+    Service Backend {
+      - Node.js
+      - Python
+    }
+    Service Database {
+      - PostgreSQL
+      - MongoDB
+    }
+
+---
+
+(source_file
+  (diagram_architecture
+    (architecture_stmt)
+    (architecture_stmt)
+    (architecture_stmt)
+    (architecture_stmt)
+    (architecture_stmt)
+    (architecture_stmt)
+    (architecture_stmt)
+    (architecture_stmt)
+    (architecture_stmt)
+    (architecture_stmt)
+    (architecture_stmt)
+    (architecture_stmt)))
+
+==========================
+Architecture with infrastructure
+==========================
+
+architecture-beta
+    Service Cloud {
+      - AWS
+      - GCP
+      - Azure
+    }
+    Service Monitoring {
+      - Prometheus
+      - Grafana
+    }
+    Service Logging {
+      - ELK Stack
+      - Splunk
+    }
+
+---
+
+(source_file
+  (diagram_architecture
+    (architecture_stmt)
+    (architecture_stmt)
+    (architecture_stmt)
+    (architecture_stmt)
+    (architecture_stmt)
     (architecture_stmt)
     (architecture_stmt)
     (architecture_stmt)

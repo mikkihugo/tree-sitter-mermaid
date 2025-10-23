@@ -1,5 +1,5 @@
 ==========================
-Block Diagram
+Simple block diagram
 ==========================
 
 block-beta
@@ -15,6 +15,64 @@ block-beta
 
 (source_file
   (diagram_block
+    (block_stmt)
+    (block_stmt)
+    (block_stmt)
+    (block_stmt)
+    (block_stmt)
+    (block_stmt)
+    (block_stmt)))
+
+==========================
+Block diagram with architecture
+==========================
+
+block-beta
+    columns 2
+    block frontend
+        block ui
+        block components
+    block backend
+        block api
+        block database
+
+---
+
+(source_file
+  (diagram_block
+    (block_stmt)
+    (block_stmt)
+    (block_stmt)
+    (block_stmt)
+    (block_stmt)
+    (block_stmt)
+    (block_stmt)))
+
+==========================
+Block diagram with multiple columns
+==========================
+
+block-beta
+    columns 4
+    block services
+        block web
+        block api
+        block cache
+        block queue
+    block infrastructure
+        block load-balancer
+        block server1
+        block server2
+        block storage
+
+---
+
+(source_file
+  (diagram_block
+    (block_stmt)
+    (block_stmt)
+    (block_stmt)
+    (block_stmt)
     (block_stmt)
     (block_stmt)
     (block_stmt)

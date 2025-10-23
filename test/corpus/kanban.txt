@@ -1,5 +1,5 @@
 ==========================
-Kanban Board
+Simple kanban board
 ==========================
 
 kanban
@@ -15,6 +15,76 @@ kanban
 
 (source_file
   (diagram_kanban
+    (kanban_stmt)
+    (kanban_stmt)
+    (kanban_stmt)
+    (kanban_stmt)
+    (kanban_stmt)
+    (kanban_stmt)
+    (kanban_stmt)))
+
+==========================
+Kanban with more tasks
+==========================
+
+kanban
+    Backlog
+        Feature request from user
+        Bug report
+    To Do
+        Analyze requirements
+        Create design mockups
+        Set up development environment
+    In Progress
+        Build frontend
+        Write backend tests
+    Review
+        Code review pending
+    Done
+        Deploy v1.0
+
+---
+
+(source_file
+  (diagram_kanban
+    (kanban_stmt)
+    (kanban_stmt)
+    (kanban_stmt)
+    (kanban_stmt)
+    (kanban_stmt)
+    (kanban_stmt)
+    (kanban_stmt)
+    (kanban_stmt)
+    (kanban_stmt)
+    (kanban_stmt)
+    (kanban_stmt)
+    (kanban_stmt)
+    (kanban_stmt)
+    (kanban_stmt)))
+
+==========================
+Kanban with sprint tasks
+==========================
+
+kanban
+    Sprint Backlog
+        Implement API endpoints
+        Write documentation
+    Doing
+        Fix critical bug
+        Refactor database layer
+    Testing
+        QA testing in progress
+    Done
+        Deploy to staging
+
+---
+
+(source_file
+  (diagram_kanban
+    (kanban_stmt)
+    (kanban_stmt)
+    (kanban_stmt)
     (kanban_stmt)
     (kanban_stmt)
     (kanban_stmt)

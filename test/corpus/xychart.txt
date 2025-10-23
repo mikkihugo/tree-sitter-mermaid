@@ -1,5 +1,5 @@
 ==========================
-XY Chart
+XY Chart with line data
 ==========================
 
 xychart-beta
@@ -7,6 +7,44 @@ xychart-beta
     x-axis [Jan, Feb, Mar, Apr, May]
     y-axis "Sales" 0 --> 500
     line [100, 200, 150, 300, 400]
+
+---
+
+(source_file
+  (diagram_xy_chart
+    (xy_chart_data)
+    (xy_chart_data)
+    (xy_chart_data)
+    (xy_chart_data)))
+
+==========================
+XY Chart with bar data
+==========================
+
+xychart-beta
+    title Monthly Revenue
+    x-axis [Q1, Q2, Q3, Q4]
+    y-axis "Revenue" 0 --> 1000
+    bar [250, 350, 450, 500]
+
+---
+
+(source_file
+  (diagram_xy_chart
+    (xy_chart_data)
+    (xy_chart_data)
+    (xy_chart_data)
+    (xy_chart_data)))
+
+==========================
+XY Chart with scatter data
+==========================
+
+xychart-beta
+    title Product Performance
+    x-axis "Price" 0 --> 100
+    y-axis "Customer Satisfaction" 0 --> 10
+    scatter [45, 8], [75, 6], [30, 9]
 
 ---
 

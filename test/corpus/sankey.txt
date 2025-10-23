@@ -1,5 +1,5 @@
 ==========================
-Sankey Diagram
+Simple Sankey diagram
 ==========================
 
 sankey-beta
@@ -12,6 +12,60 @@ sankey-beta
 
 (source_file
   (diagram_sankey
+    (sankey_stmt)
+    (sankey_stmt)
+    (sankey_stmt)
+    (sankey_stmt)))
+
+==========================
+Sankey with multiple flows
+==========================
+
+sankey-beta
+    Source,Target,Value
+    Energy,Electricity,40
+    Energy,Heat,30
+    Energy,Transport,20
+    Electricity,Heating,25
+    Electricity,Lighting,15
+    Transport,Road,15
+    Transport,Rail,5
+
+---
+
+(source_file
+  (diagram_sankey
+    (sankey_stmt)
+    (sankey_stmt)
+    (sankey_stmt)
+    (sankey_stmt)
+    (sankey_stmt)
+    (sankey_stmt)
+    (sankey_stmt)
+    (sankey_stmt)))
+
+==========================
+Sankey with budget allocation
+==========================
+
+sankey-beta
+    Source,Target,Value
+    Budget,Development,500
+    Budget,Marketing,300
+    Budget,Operations,200
+    Development,Frontend,300
+    Development,Backend,200
+    Marketing,Digital,200
+    Marketing,Traditional,100
+
+---
+
+(source_file
+  (diagram_sankey
+    (sankey_stmt)
+    (sankey_stmt)
+    (sankey_stmt)
+    (sankey_stmt)
     (sankey_stmt)
     (sankey_stmt)
     (sankey_stmt)

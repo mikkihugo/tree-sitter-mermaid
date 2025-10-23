@@ -1,5 +1,5 @@
 ==========================
-ZenUML Diagram
+Simple ZenUML diagram
 ==========================
 
 zenuml
@@ -9,6 +9,50 @@ zenuml
     Database -> Server : Result
     Server -> Client : Response
     Client -> User : Display
+
+---
+
+(source_file
+  (diagram_zenuml
+    (zenuml_stmt)
+    (zenuml_stmt)
+    (zenuml_stmt)
+    (zenuml_stmt)
+    (zenuml_stmt)
+    (zenuml_stmt)))
+
+==========================
+ZenUML with multiple actors
+==========================
+
+zenuml
+    Alice -> Bob : Hello
+    Bob -> Charlie : Hi
+    Charlie -> Bob : Response
+    Bob -> Alice : Goodbye
+    Alice -> Bob : See you
+
+---
+
+(source_file
+  (diagram_zenuml
+    (zenuml_stmt)
+    (zenuml_stmt)
+    (zenuml_stmt)
+    (zenuml_stmt)
+    (zenuml_stmt)))
+
+==========================
+ZenUML with service interactions
+==========================
+
+zenuml
+    Client -> API : POST /users
+    API -> Database : INSERT
+    Database -> API : OK
+    API -> Cache : SET
+    Cache -> API : Done
+    API -> Client : 201 Created
 
 ---
 

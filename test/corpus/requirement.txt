@@ -1,5 +1,5 @@
 ==========================
-Requirement Diagram
+Simple requirement diagram
 ==========================
 
 requirementDiagram
@@ -19,6 +19,116 @@ requirementDiagram
 
 (source_file
   (diagram_requirement
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)))
+
+==========================
+Requirements with relationships
+==========================
+
+requirementDiagram
+    requirement R001 {
+        id: 1
+        text: Authentication system
+        risk: high
+        verifymethod: test
+    }
+    requirement R002 {
+        id: 2
+        text: User login endpoint
+        risk: high
+        verifymethod: test
+    }
+    requirement R003 {
+        id: 3
+        text: Session management
+        risk: medium
+        verifymethod: inspection
+    }
+    functionalRequirement F001 {
+        id: 4
+        text: Support OAuth 2.0
+        risk: low
+    }
+
+---
+
+(source_file
+  (diagram_requirement
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)))
+
+==========================
+Full requirements specification
+==========================
+
+requirementDiagram
+    requirement REQ001 {
+        id: 1
+        text: System shall authenticate users
+        risk: high
+        verifymethod: test
+    }
+    functionalRequirement FREQ001 {
+        id: 2
+        text: Login with username and password
+        risk: high
+    }
+    nonFunctionalRequirement NFREQ001 {
+        id: 3
+        text: Response time under 1 second
+        risk: medium
+    }
+    performanceRequirement PREQ001 {
+        id: 4
+        text: Handle 10000 concurrent users
+        risk: high
+    }
+
+---
+
+(source_file
+  (diagram_requirement
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)
     (requirement_stmt)
     (requirement_stmt)
     (requirement_stmt)

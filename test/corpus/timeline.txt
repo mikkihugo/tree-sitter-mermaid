@@ -18,3 +18,49 @@ timeline
     (timeline_stmt)
     (timeline_stmt)
     (timeline_stmt)))
+
+==========================
+Timeline with many events
+==========================
+
+timeline
+    title Product Development Timeline
+    2020 : Project started
+    2021 : Beta release
+    2022 : v1.0 launch
+    2023 : v2.0 with new features
+    2024 : Enterprise edition
+
+---
+
+(source_file
+  (diagram_timeline
+    (timeline_stmt)
+    (timeline_stmt)
+    (timeline_stmt)
+    (timeline_stmt)
+    (timeline_stmt)
+    (timeline_stmt)))
+
+==========================
+Timeline with detailed descriptions
+==========================
+
+timeline
+    title Company Milestones
+    1995 : Founded by John and Jane
+    2005 : Series A funding
+    2010 : IPO on NASDAQ
+    2015 : Acquired competitors
+    2020 : Expanded to Asia
+
+---
+
+(source_file
+  (diagram_timeline
+    (timeline_stmt)
+    (timeline_stmt)
+    (timeline_stmt)
+    (timeline_stmt)
+    (timeline_stmt)
+    (timeline_stmt)))

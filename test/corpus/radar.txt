@@ -1,5 +1,5 @@
 ==========================
-Radar Chart
+Simple radar chart
 ==========================
 
 radar-beta
@@ -15,6 +15,58 @@ radar-beta
 
 (source_file
   (diagram_radar
+    (radar_stmt)
+    (radar_stmt)
+    (radar_stmt)
+    (radar_stmt)
+    (radar_stmt)
+    (radar_stmt)
+    (radar_stmt)))
+
+==========================
+Radar chart with team skills
+==========================
+
+radar-beta
+    title Team Competencies
+    Frontend: 9
+    Backend: 8
+    DevOps: 7
+    Security: 9
+    Database: 8
+    Testing: 7
+
+---
+
+(source_file
+  (diagram_radar
+    (radar_stmt)
+    (radar_stmt)
+    (radar_stmt)
+    (radar_stmt)
+    (radar_stmt)
+    (radar_stmt)
+    (radar_stmt)))
+
+==========================
+Radar chart with product features
+==========================
+
+radar-beta
+    title Product Maturity
+    Features: 8
+    Reliability: 9
+    Performance: 7
+    Usability: 8
+    Documentation: 6
+    Support: 9
+    Price: 7
+
+---
+
+(source_file
+  (diagram_radar
+    (radar_stmt)
     (radar_stmt)
     (radar_stmt)
     (radar_stmt)

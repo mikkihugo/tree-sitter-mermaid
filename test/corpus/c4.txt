@@ -1,5 +1,5 @@
 ==========================
-C4 Context Diagram
+C4 Context diagram
 ==========================
 
 C4Context
@@ -12,6 +12,60 @@ C4Context
 
 (source_file
   (diagram_c4
+    (c4_stmt)
+    (c4_stmt)
+    (c4_stmt)
+    (c4_stmt)))
+
+==========================
+C4 Container diagram
+==========================
+
+C4Container
+    title Web Application Container Diagram
+    System_Boundary(system, "Web System") {
+        Container(web, "Web App", "React", "User interface")
+        Container(api, "API Server", "Node.js", "REST API")
+        Container(db, "Database", "PostgreSQL", "Stores user data")
+    }
+    Person(user, "User", "End user")
+    Rel(user, web, "Uses")
+
+---
+
+(source_file
+  (diagram_c4
+    (c4_stmt)
+    (c4_stmt)
+    (c4_stmt)
+    (c4_stmt)
+    (c4_stmt)
+    (c4_stmt)
+    (c4_stmt)
+    (c4_stmt)))
+
+==========================
+C4 Component diagram
+==========================
+
+C4Component
+    title API Components
+    System(web, "Web App")
+    System_Boundary(api, "API System") {
+        Component(auth, "Auth Service", "Node.js", "Handles authentication")
+        Component(user, "User Service", "Node.js", "Manages users")
+        Component(data, "Data Layer", "Node.js", "Data access")
+    }
+    Rel(web, auth, "Uses")
+
+---
+
+(source_file
+  (diagram_c4
+    (c4_stmt)
+    (c4_stmt)
+    (c4_stmt)
+    (c4_stmt)
     (c4_stmt)
     (c4_stmt)
     (c4_stmt)
