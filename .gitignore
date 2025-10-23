@@ -9,6 +9,7 @@ Cargo.lock
 *.so
 *.dylib
 *.dll
+*.dSYM/
 build/
 
 # IDE
@@ -31,6 +32,7 @@ result
 
 # Swift Package Manager
 .build/
+Package.resolved
 
 # Mermaid spec checking
 mermaid-examples/
