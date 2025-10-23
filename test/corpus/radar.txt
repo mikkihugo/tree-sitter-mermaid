@@ -1,0 +1,24 @@
+==========================
+Radar Chart
+==========================
+
+radar-beta
+    title Tech Stack
+    Performance: 8
+    Scalability: 9
+    Security: 7
+    User Experience: 8
+    Documentation: 6
+    Testing: 9
+
+---
+
+(source_file
+  (diagram_radar
+    (radar_stmt)
+    (radar_stmt)
+    (radar_stmt)
+    (radar_stmt)
+    (radar_stmt)
+    (radar_stmt)
+    (radar_stmt)))

@@ -1,0 +1,22 @@
+==========================
+ZenUML Diagram
+==========================
+
+zenuml
+    User -> Client : Click
+    Client -> Server : Request
+    Server -> Database : Query
+    Database -> Server : Result
+    Server -> Client : Response
+    Client -> User : Display
+
+---
+
+(source_file
+  (diagram_zenuml
+    (zenuml_stmt)
+    (zenuml_stmt)
+    (zenuml_stmt)
+    (zenuml_stmt)
+    (zenuml_stmt)
+    (zenuml_stmt)))

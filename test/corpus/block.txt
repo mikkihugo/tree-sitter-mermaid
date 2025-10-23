@@ -1,0 +1,24 @@
+==========================
+Block Diagram
+==========================
+
+block-beta
+    columns 3
+    block row1
+        block row1a
+        block row1b
+        block row1c
+    block row2
+        block row2a
+
+---
+
+(source_file
+  (diagram_block
+    (block_stmt)
+    (block_stmt)
+    (block_stmt)
+    (block_stmt)
+    (block_stmt)
+    (block_stmt)
+    (block_stmt)))

@@ -1,0 +1,32 @@
+==========================
+Requirement Diagram
+==========================
+
+requirementDiagram
+    requirement R001 {
+        id: 1
+        text: User login
+        risk: high
+        verifymethod: test
+    }
+    requirement R002 {
+        id: 2
+        text: Password strength
+        risk: medium
+    }
+
+---
+
+(source_file
+  (diagram_requirement
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)
+    (requirement_stmt)))

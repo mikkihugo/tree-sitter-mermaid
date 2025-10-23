@@ -1,0 +1,18 @@
+==========================
+Packet Diagram
+==========================
+
+packet-beta
+    0-15: Source Port
+    16-31: Destination Port
+    32-63: Sequence Number
+    64-95: Acknowledgment Number
+
+---
+
+(source_file
+  (diagram_packet
+    (packet_stmt)
+    (packet_stmt)
+    (packet_stmt)
+    (packet_stmt)))

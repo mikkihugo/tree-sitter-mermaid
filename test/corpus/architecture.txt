@@ -1,0 +1,26 @@
+==========================
+Architecture Diagram
+==========================
+
+architecture-beta
+    Service Auth {
+      - Passport
+      - Guardian
+    }
+    Service API {
+      - GraphQL
+      - REST
+    }
+
+---
+
+(source_file
+  (diagram_architecture
+    (architecture_stmt)
+    (architecture_stmt)
+    (architecture_stmt)
+    (architecture_stmt)
+    (architecture_stmt)
+    (architecture_stmt)
+    (architecture_stmt)
+    (architecture_stmt)))

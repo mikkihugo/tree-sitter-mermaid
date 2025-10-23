@@ -1,0 +1,22 @@
+==========================
+Treemap Diagram
+==========================
+
+treemap
+    title File System
+    folder1: 100
+    folder2: 200
+    folder3: 150
+      subfolder3a: 50
+      subfolder3b: 100
+
+---
+
+(source_file
+  (diagram_treemap
+    (treemap_stmt)
+    (treemap_stmt)
+    (treemap_stmt)
+    (treemap_stmt)
+    (treemap_stmt)
+    (treemap_stmt)))
