@@ -184,3 +184,79 @@ erDiagram
         (er_attribute
           (er_attribute_type)
           (er_attribute_name))))))
+
+==========================
+ER with only relationships
+==========================
+
+erDiagram
+    USER ||--o{ POST : creates
+    POST ||--|{ COMMENT : has
+    USER ||--o{ COMMENT : writes
+
+---
+
+(source_file
+  (diagram_er
+    (er_stmt_entity_relation
+      (er_entity_name)
+      (er_relation
+        (er_cardinarity_only_one)
+        (er_reltype_identifying)
+        (er_cardinarity_zero_or_more))
+      (er_entity_name)
+      (er_role))
+    (er_stmt_entity_relation
+      (er_entity_name)
+      (er_relation
+        (er_cardinarity_only_one)
+        (er_reltype_identifying)
+        (er_cardinarity_one_or_more))
+      (er_entity_name)
+      (er_role))
+    (er_stmt_entity_relation
+      (er_entity_name)
+      (er_relation
+        (er_cardinarity_only_one)
+        (er_reltype_identifying)
+        (er_cardinarity_zero_or_more))
+      (er_entity_name)
+      (er_role))))
+
+==========================
+ER with mixed cardinality
+==========================
+
+erDiagram
+    A ||..|| B : exactly-one
+    C }o--o{ D : zero-or-many
+    E }|--|{ F : one-or-many
+
+---
+
+(source_file
+  (diagram_er
+    (er_stmt_entity_relation
+      (er_entity_name)
+      (er_relation
+        (er_cardinarity_only_one)
+        (er_reltype_non_identifying)
+        (er_cardinarity_only_one))
+      (er_entity_name)
+      (er_role))
+    (er_stmt_entity_relation
+      (er_entity_name)
+      (er_relation
+        (er_cardinarity_zero_or_more)
+        (er_reltype_identifying)
+        (er_cardinarity_zero_or_more))
+      (er_entity_name)
+      (er_role))
+    (er_stmt_entity_relation
+      (er_entity_name)
+      (er_relation
+        (er_cardinarity_one_or_more)
+        (er_reltype_identifying)
+        (er_cardinarity_one_or_more))
+      (er_entity_name)
+      (er_role))))
