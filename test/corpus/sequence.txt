@@ -344,3 +344,25 @@ sequenceDiagram
         (dotted_arrow))
       (sequence_actor)
       (sequence_text))))
+
+==========================
+Minimal sequence diagram
+==========================
+
+==========================
+Minimal sequence diagram
+==========================
+
+sequenceDiagram
+    A->>B: Message
+
+---
+
+(source_file
+  (diagram_sequence
+    (sequence_stmt_signal
+      (sequence_actor)
+      (sequence_signal_type
+        (solid_arrow))
+      (sequence_actor)
+      (sequence_text))))

@@ -3,11 +3,12 @@ Simple git graph
 ==========================
 
 gitGraph
-    commit id:"a"
-    commit id:"b"
+    commit
+    commit
     branch develop
     checkout develop
-    commit id:"c"
+    commit
+    commit
     checkout main
     merge develop
 
@@ -15,19 +16,14 @@ gitGraph
 
 (source_file
   (diagram_gitgraph
-    (gitgraph_stmt_commit
-      (gitgraph_commit_attrs
-        (gitgraph_commit_attr_id)))
-    (gitgraph_stmt_commit
-      (gitgraph_commit_attrs
-        (gitgraph_commit_attr_id)))
+    (gitgraph_stmt_commit)
+    (gitgraph_stmt_commit)
     (gitgraph_stmt_branch
       (gitgraph_branch_name))
     (gitgraph_stmt_checkout
       (gitgraph_branch_name))
-    (gitgraph_stmt_commit
-      (gitgraph_commit_attrs
-        (gitgraph_commit_attr_id)))
+    (gitgraph_stmt_commit)
+    (gitgraph_stmt_commit)
     (gitgraph_stmt_checkout
       (gitgraph_branch_name))
     (gitgraph_stmt_merge
@@ -102,6 +98,84 @@ gitGraph
     (gitgraph_stmt_commit
       (gitgraph_commit_attrs
         (gitgraph_commit_attr_id)))
+    (gitgraph_stmt_checkout
+      (gitgraph_branch_name))
+    (gitgraph_stmt_merge
+      (gitgraph_branch_name))))
+
+==========================
+Git graph with cherry-pick
+==========================
+
+gitGraph
+    commit id:"main-1"
+    branch feature
+    commit id:"feature-1"
+    checkout main
+    cherry-pick id:"feature-1"
+    commit id:"main-2"
+
+---
+
+(source_file
+  (diagram_gitgraph
+    (gitgraph_stmt_commit
+      (gitgraph_commit_attrs
+        (gitgraph_commit_attr_id)))
+    (gitgraph_stmt_branch
+      (gitgraph_branch_name))
+    (gitgraph_stmt_commit
+      (gitgraph_commit_attrs
+        (gitgraph_commit_attr_id)))
+    (gitgraph_stmt_checkout
+      (gitgraph_branch_name))
+    (gitgraph_stmt_cherry_pick
+      (gitgraph_cherry_pick_id))
+    (gitgraph_stmt_commit
+      (gitgraph_commit_attrs
+        (gitgraph_commit_attr_id)))))
+
+==========================
+Git graph with multiple branches
+==========================
+
+gitGraph
+    commit
+    branch develop
+    commit
+    branch featureA
+    commit
+    checkout develop
+    branch featureB
+    commit
+    checkout develop
+    merge featureA
+    merge featureB
+    checkout main
+    merge develop
+
+---
+
+(source_file
+  (diagram_gitgraph
+    (gitgraph_stmt_commit)
+    (gitgraph_stmt_branch
+      (gitgraph_branch_name))
+    (gitgraph_stmt_commit)
+    (gitgraph_stmt_branch
+      (gitgraph_branch_name))
+    (gitgraph_stmt_commit)
+    (gitgraph_stmt_checkout
+      (gitgraph_branch_name))
+    (gitgraph_stmt_branch
+      (gitgraph_branch_name))
+    (gitgraph_stmt_commit)
+    (gitgraph_stmt_checkout
+      (gitgraph_branch_name))
+    (gitgraph_stmt_merge
+      (gitgraph_branch_name))
+    (gitgraph_stmt_merge
+      (gitgraph_branch_name))
     (gitgraph_stmt_checkout
       (gitgraph_branch_name))
     (gitgraph_stmt_merge

@@ -402,3 +402,22 @@ stateDiagram
       (state_name)
       (state_arrow)
       (state_name))))
+
+==========================
+Minimal state diagram
+
+==========================
+Minimal state diagram
+==========================
+
+stateDiagram-v2
+    [*] --> Done
+
+---
+
+(source_file
+  (diagram_state
+    (state_stmt_arrow
+      (state_name)
+      (state_arrow)
+      (state_name))))

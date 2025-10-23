@@ -119,3 +119,62 @@ journey
         (journey_task_name)
         (journey_task_score)
         (journey_task_actors)))))
+
+==========================
+Journey with single section
+==========================
+
+journey
+    title Quick Task
+    section Work
+    Complete task: 5: Me
+
+---
+
+(source_file
+  (diagram_journey
+    (journey_title
+      (journey_title_text))
+    (journey_section
+      (journey_section_title)
+      (journey_task
+        (journey_task_name)
+        (journey_task_score)
+        (journey_task_actors)))))
+
+==========================
+Journey with varying scores
+==========================
+
+journey
+    title Score Range Test
+    section Tasks
+    Easy task: 9: User
+    Medium task: 5: User
+    Hard task: 1: User
+    Perfect task: 10: User
+
+---
+
+(source_file
+  (diagram_journey
+    (journey_title
+      (journey_title_text))
+    (journey_section
+      (journey_section_title)
+      (journey_task
+        (journey_task_name)
+        (journey_task_score)
+        (journey_task_actors))
+      (journey_task
+        (journey_task_name)
+        (journey_task_score)
+        (journey_task_actors))
+      (journey_task
+        (journey_task_name)
+        (journey_task_score)
+        (journey_task_actors))
+      (journey_task
+        (journey_task_name)
+        (journey_task_score)
+        (journey_task_actors)))))

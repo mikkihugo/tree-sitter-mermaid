@@ -143,3 +143,17 @@ mindmap
           (mmap_text)))
       (mmap_icon)
       (mmap_class))))
+
+==========================
+Minimal mindmap
+==========================
+
+mindmap
+  Root
+
+---
+
+(source_file
+  (diagram_mindmap
+    (mmap_node
+      (mmap_node_id))))

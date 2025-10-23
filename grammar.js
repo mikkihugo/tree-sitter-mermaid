@@ -1,3 +1,46 @@
+/**
+ * Tree-sitter grammar for Mermaid diagram language
+ *
+ * This grammar defines the complete syntax for parsing Mermaid diagrams,
+ * a diagramming and charting tool that uses markdown-inspired syntax.
+ *
+ * Supported diagram types (23 total):
+ * - Flowcharts/Graphs (graph, flowchart with directions: TD, LR, RL, BT)
+ * - Sequence Diagrams (sequenceDiagram)
+ * - Class Diagrams (classDiagram)
+ * - State Diagrams (stateDiagram-v2)
+ * - Entity Relationship (erDiagram)
+ * - Gantt Charts (gantt)
+ * - Git Graphs (gitGraph)
+ * - Pie Charts (pie)
+ * - Mind Maps (mindmap)
+ * - User Journey (journey)
+ * - Quadrant Charts (quadrantChart)
+ * - XY Charts (xychart-beta)
+ * - Timelines (timeline)
+ * - ZenUML (zenuml)
+ * - Sankey Diagrams (sankey-beta)
+ * - Block Diagrams (block-beta)
+ * - Packet Diagrams (packet-beta)
+ * - Kanban Boards (kanban)
+ * - Architecture Diagrams (architecture-beta)
+ * - Radar Charts (radar-beta)
+ * - Treemaps (treemap)
+ * - C4 Diagrams (C4Context, C4Container, C4Component, C4Dynamic, C4Deployment)
+ * - Requirement Diagrams (requirementDiagram)
+ *
+ * Grammar Structure:
+ * - Tokens (lines 3-193): Regular expressions and keywords for lexical analysis
+ * - Rules (lines 238-1289): Grammar rules defining syntax for each diagram type
+ * - Helpers (lines 1295-1314): Utility functions for common patterns
+ *
+ * External Scanner:
+ * - src/scanner.c handles the 'o' token in class diagrams to distinguish
+ *   aggregation notation from regular text
+ *
+ * Reference: https://mermaid.js.org/
+ */
+
 /* global $, prec, seq, choice, repeat, repeat1, optional, token, field */
 
 const tokens = {
@@ -1292,25 +1335,91 @@ module.exports = grammar({
     }
 });
 
-/// common functions
+/// ============================================================================
+/// HELPER FUNCTIONS
+/// ============================================================================
+
+/**
+ * Creates a keyword token with case-insensitive matching and aliasing
+ *
+ * Keywords in Mermaid are case-insensitive (e.g., "graph", "Graph", "GRAPH"
+ * are all valid). This function creates a token that matches any case variation
+ * and aliases it to the canonical form for consistent AST nodes.
+ *
+ * @param {string} word - The keyword to match (canonical form)
+ * @returns {Token} A token that matches the word case-insensitively and aliases
+ *                  all variations to the canonical form
+ *
+ * @example
+ * direction_tb: kwd("direction tb"),  // Matches "direction tb", "Direction TB", etc.
+ */
 function kwd(word) {
     return alias(reserved(caseInsensitive(word)), word)
 }
 
+/**
+ * Creates a reserved token with higher precedence to avoid conflicts
+ *
+ * This ensures keywords are matched before other patterns. The precedence
+ * value of 1 gives keywords priority in the lexer.
+ *
+ * @param {RegExp|string} regex - Pattern to match as a reserved token
+ * @returns {Token} A token with high precedence for keyword matching
+ * @private
+ */
 function reserved(regex) {
     return token(prec(1, new RegExp(regex)))
 }
 
+/**
+ * Converts a word to a case-insensitive regex pattern
+ *
+ * Generates a regex that matches the word in any case combination by creating
+ * character classes for each letter: "AB" becomes "[Aa][Bb]"
+ *
+ * @param {string} word - The word to convert
+ * @returns {string} A case-insensitive regex pattern
+ * @private
+ *
+ * @example
+ * caseInsensitive("graph") // Returns "[Gg][Rr][Aa][Pp][Hh]"
+ */
 function caseInsensitive(word) {
     return word.split('')
         .map(letter => `[${letter}${letter.toUpperCase()}]`)
         .join('')
 }
 
+/**
+ * Creates an optional sequence of rules
+ *
+ * Convenience function combining optional() and seq() for more readable grammar
+ * definitions. Useful for optional groups of rules.
+ *
+ * @param {...*} args - Variable number of grammar rules to sequence
+ * @returns {Rule} An optional sequence of the provided rules
+ *
+ * @example
+ * optseq("(", $._content, ")")  // Matches "(content)" or nothing
+ */
 function optseq(...args) {
     return optional(seq(...args))
 }
 
+/**
+ * Creates a separated sequence of rules
+ *
+ * Matches one or more instances of a rule separated by a delimiter.
+ * Common pattern for comma-separated lists, newline-separated statements, etc.
+ *
+ * @param {Rule} rule - The grammar rule to match (can repeat)
+ * @param {Rule|Token|string} delimiter - The separator between rules
+ * @returns {Rule} A sequence of rule(s) with delimiter(s)
+ *
+ * @example
+ * sep($._flow_stmt, choice($._newline, ";"))  // Matches: stmt \n stmt ; stmt ...
+ * sep($._identifier, ",")                      // Matches: id, id, id, ...
+ */
 function sep(rule, delimiter) {
   return seq(rule, repeat(seq(delimiter, rule)));
 }
