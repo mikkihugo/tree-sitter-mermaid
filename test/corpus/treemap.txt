@@ -14,12 +14,12 @@ treemap
 
 (source_file
   (diagram_treemap
-    (treemap_stmt)
-    (treemap_stmt)
-    (treemap_stmt)
-    (treemap_stmt)
-    (treemap_stmt)
-    (treemap_stmt)))
+    (treemap_title)
+    (treemap_item)
+    (treemap_item)
+    (treemap_item)
+    (treemap_item)
+    (treemap_item)))
 
 ==========================
 Treemap with disk usage
@@ -38,13 +38,13 @@ treemap
 
 (source_file
   (diagram_treemap
-    (treemap_stmt)
-    (treemap_stmt)
-    (treemap_stmt)
-    (treemap_stmt)
-    (treemap_stmt)
-    (treemap_stmt)
-    (treemap_stmt)))
+    (treemap_title)
+    (treemap_item)
+    (treemap_item)
+    (treemap_item)
+    (treemap_item)
+    (treemap_item)
+    (treemap_item)))
 
 ==========================
 Treemap with budget breakdown
@@ -64,11 +64,49 @@ treemap
 
 (source_file
   (diagram_treemap
-    (treemap_stmt)
-    (treemap_stmt)
-    (treemap_stmt)
-    (treemap_stmt)
-    (treemap_stmt)
-    (treemap_stmt)
-    (treemap_stmt)
-    (treemap_stmt)))
+    (treemap_title)
+    (treemap_item)
+    (treemap_item)
+    (treemap_item)
+    (treemap_item)
+    (treemap_item)
+    (treemap_item)
+    (treemap_item)))
+
+==========================
+Treemap without title
+==========================
+
+treemap
+    Data: 500
+    Logs: 300
+    Cache: 200
+
+---
+
+(source_file
+  (diagram_treemap
+    (treemap_item)
+    (treemap_item)
+    (treemap_item)))
+
+==========================
+Treemap with large values
+==========================
+
+treemap
+    title Cloud Storage
+    Project A: 50000
+    Project B: 125000
+    Project C: 75000
+    Archive: 250000
+
+---
+
+(source_file
+  (diagram_treemap
+    (treemap_title)
+    (treemap_item)
+    (treemap_item)
+    (treemap_item)
+    (treemap_item)))

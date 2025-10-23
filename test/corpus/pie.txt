@@ -27,3 +27,60 @@ pie
     (pie_stmt_element
       (pie_label)
       (pie_value))))
+
+==========================
+Pie chart without title
+==========================
+
+pie
+    "Development" : 45
+    "Testing" : 25
+    "Documentation" : 20
+    "Deployment" : 10
+
+---
+
+(source_file
+  (diagram_pie
+    (pie_stmt_element
+      (pie_label)
+      (pie_value))
+    (pie_stmt_element
+      (pie_label)
+      (pie_value))
+    (pie_stmt_element
+      (pie_label)
+      (pie_value))
+    (pie_stmt_element
+      (pie_label)
+      (pie_value))))
+
+==========================
+Pie chart with integer values
+==========================
+
+pie
+    title Market Share
+    "Company A" : 30
+    "Company B" : 25
+    "Company C" : 20
+    "Others" : 25
+
+---
+
+(source_file
+  (diagram_pie
+    (pie_stmt_title
+      (pie_title))
+    (pie_stmt_element
+      (pie_label)
+      (pie_value))
+    (pie_stmt_element
+      (pie_label)
+      (pie_value))
+    (pie_stmt_element
+      (pie_label)
+      (pie_value))
+    (pie_stmt_element
+      (pie_label)
+      (pie_value))))

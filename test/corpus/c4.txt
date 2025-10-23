@@ -12,10 +12,10 @@ C4Context
 
 (source_file
   (diagram_c4
-    (c4_stmt)
-    (c4_stmt)
-    (c4_stmt)
-    (c4_stmt)))
+    (c4_title)
+    (c4_person)
+    (c4_system)
+    (c4_rel)))
 
 ==========================
 C4 Container diagram
@@ -35,14 +35,14 @@ C4Container
 
 (source_file
   (diagram_c4
+    (c4_title)
     (c4_stmt)
     (c4_stmt)
     (c4_stmt)
     (c4_stmt)
     (c4_stmt)
-    (c4_stmt)
-    (c4_stmt)
-    (c4_stmt)))
+    (c4_person)
+    (c4_rel)))
 
 ==========================
 C4 Component diagram
@@ -62,11 +62,49 @@ C4Component
 
 (source_file
   (diagram_c4
+    (c4_title)
+    (c4_system)
     (c4_stmt)
     (c4_stmt)
     (c4_stmt)
     (c4_stmt)
     (c4_stmt)
-    (c4_stmt)
-    (c4_stmt)
-    (c4_stmt)))
+    (c4_rel)))
+
+==========================
+C4 Dynamic diagram
+==========================
+
+C4Dynamic
+    title User Authentication Flow
+    Person(user, "User", "App user")
+    System(app, "Application", "Web app")
+    Rel(user, app, "Login request")
+
+---
+
+(source_file
+  (diagram_c4
+    (c4_title)
+    (c4_person)
+    (c4_system)
+    (c4_rel)))
+
+==========================
+C4 Deployment diagram
+==========================
+
+C4Deployment
+    title Production Environment
+    Person(admin, "Admin", "System admin")
+    System(web, "Web Server", "Production")
+    Rel(admin, web, "Manages")
+
+---
+
+(source_file
+  (diagram_c4
+    (c4_title)
+    (c4_person)
+    (c4_system)
+    (c4_rel)))

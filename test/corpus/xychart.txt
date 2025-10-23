@@ -12,10 +12,10 @@ xychart-beta
 
 (source_file
   (diagram_xy_chart
-    (xy_chart_data)
-    (xy_chart_data)
-    (xy_chart_data)
-    (xy_chart_data)))
+    (xy_title)
+    (xy_x_axis)
+    (xy_y_axis)
+    (xy_line)))
 
 ==========================
 XY Chart with bar data
@@ -31,10 +31,10 @@ xychart-beta
 
 (source_file
   (diagram_xy_chart
-    (xy_chart_data)
-    (xy_chart_data)
-    (xy_chart_data)
-    (xy_chart_data)))
+    (xy_title)
+    (xy_x_axis)
+    (xy_y_axis)
+    (xy_bar)))
 
 ==========================
 XY Chart with scatter data
@@ -50,7 +50,45 @@ xychart-beta
 
 (source_file
   (diagram_xy_chart
-    (xy_chart_data)
-    (xy_chart_data)
-    (xy_chart_data)
+    (xy_title)
+    (xy_x_axis)
+    (xy_y_axis)
     (xy_chart_data)))
+
+==========================
+XY Chart without title
+==========================
+
+xychart-beta
+    x-axis [Mon, Tue, Wed, Thu, Fri]
+    y-axis "Temperature" 0 --> 40
+    line [20, 25, 23, 28, 30]
+
+---
+
+(source_file
+  (diagram_xy_chart
+    (xy_x_axis)
+    (xy_y_axis)
+    (xy_line)))
+
+==========================
+XY Chart with multiple datasets
+==========================
+
+xychart-beta
+    title Quarterly Comparison
+    x-axis [Q1, Q2, Q3, Q4]
+    y-axis "Revenue" 0 --> 1000
+    line [100, 200, 300, 400]
+    bar [150, 250, 350, 450]
+
+---
+
+(source_file
+  (diagram_xy_chart
+    (xy_title)
+    (xy_x_axis)
+    (xy_y_axis)
+    (xy_line)
+    (xy_bar)))

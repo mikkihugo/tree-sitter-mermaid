@@ -14,12 +14,12 @@ zenuml
 
 (source_file
   (diagram_zenuml
-    (zenuml_stmt)
-    (zenuml_stmt)
-    (zenuml_stmt)
-    (zenuml_stmt)
-    (zenuml_stmt)
-    (zenuml_stmt)))
+    (zenuml_message)
+    (zenuml_message)
+    (zenuml_message)
+    (zenuml_message)
+    (zenuml_message)
+    (zenuml_message)))
 
 ==========================
 ZenUML with multiple actors
@@ -36,11 +36,11 @@ zenuml
 
 (source_file
   (diagram_zenuml
-    (zenuml_stmt)
-    (zenuml_stmt)
-    (zenuml_stmt)
-    (zenuml_stmt)
-    (zenuml_stmt)))
+    (zenuml_message)
+    (zenuml_message)
+    (zenuml_message)
+    (zenuml_message)
+    (zenuml_message)))
 
 ==========================
 ZenUML with service interactions
@@ -58,9 +58,41 @@ zenuml
 
 (source_file
   (diagram_zenuml
-    (zenuml_stmt)
-    (zenuml_stmt)
-    (zenuml_stmt)
-    (zenuml_stmt)
-    (zenuml_stmt)
-    (zenuml_stmt)))
+    (zenuml_message)
+    (zenuml_message)
+    (zenuml_message)
+    (zenuml_message)
+    (zenuml_message)
+    (zenuml_message)))
+
+==========================
+ZenUML with simple flow
+==========================
+
+zenuml
+    A -> B : Message
+    B -> A : Reply
+
+---
+
+(source_file
+  (diagram_zenuml
+    (zenuml_message)
+    (zenuml_message)))
+
+==========================
+ZenUML with long message text
+==========================
+
+zenuml
+    Frontend -> Backend : Submit user registration form with email and password
+    Backend -> Database : Check if email already exists in users table
+    Database -> Backend : Email is unique
+
+---
+
+(source_file
+  (diagram_zenuml
+    (zenuml_message)
+    (zenuml_message)
+    (zenuml_message)))

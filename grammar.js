@@ -133,6 +133,63 @@ const tokens = {
     _journey_task_name: token(prec(-1, /[^:\n;]+/)),
     _journey_score: /[0-9]+/,
     _journey_actor: /[^,\n;]+/,
+
+    // tokens in quadrant chart
+    _quadrant_title_text: /[^\n;]+/,
+    _quadrant_axis_text: /[^\n;]+/,
+    _quadrant_label_text: /[^\n;]+/,
+
+    // tokens in xy chart
+    _xy_title_text: /[^\n;]+/,
+
+    // tokens in timeline
+    _timeline_title_text: /[^\n;]+/,
+    _timeline_period: /[0-9]{4}/,
+    _timeline_event_text: /[^\n;]+/,
+
+    // tokens in zenuml
+    _zenuml_actor: /[A-Za-z_][A-Za-z0-9_]*/,
+    _zenuml_message: /[^\n;]+/,
+
+    // tokens in sankey
+    _sankey_value: /[0-9]+/,
+
+    // tokens in block diagram
+    _block_id: /[a-zA-Z_][a-zA-Z0-9_-]*/,  // Allow hyphens in block IDs
+    _block_columns: /[0-9]+/,
+
+    // tokens in packet diagram
+    _packet_label: /[^:\n;]+/,
+    _packet_range_start: /[0-9]+/,
+    _packet_range_end: /[0-9]+/,
+
+    // tokens in kanban
+    _kanban_column_name: /[^\n]+/,
+    _kanban_task_text: /[^\n]+/,
+    _kanban_4_spaces: token(/[ ]{4}/),   // For column indent (exactly 4 spaces)
+    _kanban_8_spaces: token(/[ ]{8}/),   // For task indent (exactly 8 spaces)
+
+    // tokens in architecture
+    _architecture_service_name: /[a-zA-Z_][a-zA-Z0-9_ ]*/,
+    _architecture_component: /[^\n]+/,
+
+    // tokens in radar chart
+    _radar_title_text: /[^\n;]+/,
+    _radar_metric_name: token(prec(-1, /[^:\n;]+/)),
+    _radar_value: /[0-9]+/,
+
+    // tokens in treemap
+    _treemap_title_text: /[^\n;]+/,
+    _treemap_label: token(prec(-1, /[^:\n;]+/)),
+    _treemap_value: /[0-9]+/,
+
+    // tokens in c4 diagram
+    _c4_id: /[a-zA-Z_][a-zA-Z0-9_]*/,
+    _c4_string: /"[^"]*"/,
+
+    // tokens in requirement diagram
+    _requirement_id: /[a-zA-Z_][a-zA-Z0-9_]*/,
+    _requirement_text: /[^\n;]+/,
 }
 
 const tokensFunc = Object.fromEntries(
@@ -943,125 +1000,219 @@ module.exports = grammar({
         /// quadrant chart diagram
         diagram_quadrant_chart: $ => seq(
             kwd("quadrantChart"),
-            repeat(choice(
-                $.quadrant_chart_data,
-                $._newline,
-                $.comment,
-            )),
+            repeat(choice($._quadrant_stmt, $._newline)),
         ),
 
-        quadrant_chart_data: $ => /[^\n;]+/,
+        _quadrant_stmt: $ => choice(
+            $.quadrant_title,
+            $.quadrant_x_axis,
+            $.quadrant_y_axis,
+            $.quadrant_1,
+            $.quadrant_2,
+            $.quadrant_3,
+            $.quadrant_4,
+        ),
+
+        quadrant_title: $ => seq(kwd("title"), $._quadrant_title_text, $._newline),
+        quadrant_x_axis: $ => seq(kwd("x-axis"), $._quadrant_axis_text, $._newline),
+        quadrant_y_axis: $ => seq(kwd("y-axis"), $._quadrant_axis_text, $._newline),
+        quadrant_1: $ => seq(kwd("quadrant-1"), $._quadrant_label_text, $._newline),
+        quadrant_2: $ => seq(kwd("quadrant-2"), $._quadrant_label_text, $._newline),
+        quadrant_3: $ => seq(kwd("quadrant-3"), $._quadrant_label_text, $._newline),
+        quadrant_4: $ => seq(kwd("quadrant-4"), $._quadrant_label_text, $._newline),
 
         /// xy chart diagram
         diagram_xy_chart: $ => seq(
             kwd("xychart-beta"),
-            repeat(choice(
-                $.xy_chart_data,
-                $._newline,
-                $.comment,
-            )),
+            repeat(choice($._xy_stmt, $._newline)),
         ),
 
-        xy_chart_data: $ => /[^\n;]+/,
+        _xy_stmt: $ => choice(
+            $.xy_title,
+            $.xy_x_axis,
+            $.xy_y_axis,
+            $.xy_line,
+            $.xy_bar,
+            $.xy_chart_data,
+        ),
+
+        xy_title: $ => seq(kwd("title"), $._xy_title_text, $._newline),
+        xy_x_axis: $ => seq(kwd("x-axis"), /[^\n;]+/, $._newline),
+        xy_y_axis: $ => seq(kwd("y-axis"), /[^\n;]+/, $._newline),
+        xy_line: $ => seq(kwd("line"), /[^\n;]+/, $._newline),
+        xy_bar: $ => seq(kwd("bar"), /[^\n;]+/, $._newline),
+        xy_chart_data: $ => token(prec(-1, /[^\n]+\n/)),  // Catch-all for scatter and other data types
 
         /// timeline diagram
         diagram_timeline: $ => seq(
             kwd("timeline"),
-            repeat(choice(
-                $.timeline_stmt,
-                $._newline,
-            )),
+            repeat(choice($._timeline_stmt, $._newline)),
         ),
 
-        timeline_stmt: $ => /[^\n;]+/,
+        _timeline_stmt: $ => choice(
+            $.timeline_title,
+            $.timeline_event,
+        ),
+
+        timeline_title: $ => seq(kwd("title"), $._timeline_title_text, $._newline),
+        timeline_event: $ => seq($._timeline_period, ":", $._timeline_event_text, $._newline),
 
         /// zenuml diagram
         diagram_zenuml: $ => seq(
             kwd("zenuml"),
-            repeat(choice(
-                $.zenuml_stmt,
-                $._newline,
-            )),
+            repeat(choice($._zenuml_stmt, $._newline)),
         ),
 
-        zenuml_stmt: $ => /[^\n;]+/,
+        _zenuml_stmt: $ => $.zenuml_message,
+
+        zenuml_message: $ => seq(
+            $._zenuml_actor,
+            "->",
+            $._zenuml_actor,
+            ":",
+            $._zenuml_message,
+            $._newline,
+        ),
 
         /// sankey diagram
         diagram_sankey: $ => seq(
             kwd("sankey-beta"),
-            repeat(choice(
-                $.sankey_stmt,
-                $._newline,
-            )),
+            repeat(choice($._sankey_stmt, $._newline)),
         ),
 
-        sankey_stmt: $ => /[^\n;]+/,
+        _sankey_stmt: $ => choice(
+            $.sankey_header,
+            $.sankey_link,
+        ),
+
+        sankey_header: $ => seq(
+            /[A-Za-z_][A-Za-z0-9_]*/,
+            ",",
+            /[A-Za-z_][A-Za-z0-9_]*/,
+            ",",
+            /[A-Za-z_][A-Za-z0-9_]*/,
+            $._newline,
+        ),
+
+        sankey_link: $ => seq(
+            /[A-Za-z_][A-Za-z0-9_]*/,
+            ",",
+            /[A-Za-z_][A-Za-z0-9_]*/,
+            ",",
+            $._sankey_value,
+            $._newline,
+        ),
 
         /// block diagram
         diagram_block: $ => seq(
             kwd("block-beta"),
-            repeat(choice(
-                $.block_stmt,
-                $._newline,
-            )),
+            repeat(choice($._block_stmt, $._newline)),
         ),
 
-        block_stmt: $ => /[^\n;]+/,
+        _block_stmt: $ => choice(
+            $.block_columns,
+            $.block_element,
+        ),
+
+        block_columns: $ => seq(kwd("columns"), $._block_columns, $._newline),
+        block_element: $ => seq(kwd("block"), $._block_id, $._newline),
 
         /// packet diagram
         diagram_packet: $ => seq(
             kwd("packet-beta"),
-            repeat(choice(
-                $.packet_stmt,
-                $._newline,
-            )),
+            repeat(choice($._packet_stmt, $._newline)),
         ),
 
-        packet_stmt: $ => /[^\n;]+/,
+        _packet_stmt: $ => choice(
+            $.packet_field,
+            $.packet_stmt,
+        ),
+
+        packet_field: $ => prec(1, seq(
+            $._packet_range_start,
+            "-",
+            $._packet_range_end,
+            ":",
+            $._packet_label,
+            $._newline,
+        )),
+
+        packet_stmt: $ => seq(
+            /[0-9]+-[A-Za-z][^:\n]*:/,  // Match ranges like "112-End:"
+            /[^\n]+/,
+            $._newline
+        ),  // For non-standard range ends like "End"
 
         /// kanban diagram
         diagram_kanban: $ => seq(
             kwd("kanban"),
-            repeat(choice(
-                $.kanban_stmt,
-                $._newline,
-            )),
+            repeat(choice($._kanban_stmt, $._newline)),
         ),
 
-        kanban_stmt: $ => /[^\n;]+/,
+        _kanban_stmt: $ => choice(
+            $.kanban_task,    // Try task first (more specific - 8 spaces)
+            $.kanban_column,  // Then column (less specific - 4 spaces)
+        ),
+
+        kanban_column: $ => token(prec(1, seq(/[ ]{4}/, /[^\n]+/, /\n/))),
+        kanban_task: $ => token(prec(2, seq(/[ ]{8}/, /[^\n]+/, /\n/))),
 
         /// architecture diagram
         diagram_architecture: $ => seq(
             kwd("architecture-beta"),
-            repeat(choice(
-                $.architecture_stmt,
-                $._newline,
-            )),
+            repeat(choice($._architecture_stmt, $._newline)),
         ),
 
-        architecture_stmt: $ => /[^\n;]+/,
+        _architecture_stmt: $ => $.architecture_service,
+
+        architecture_service: $ => seq(
+            kwd("service"),
+            $._architecture_service_name,
+            "{",
+            $._newline,
+            optional($.architecture_service_body),
+            "}",
+            $._newline,
+        ),
+
+        architecture_service_body: $ => repeat1(seq(
+            "-",
+            $._architecture_component,
+            $._newline,
+        )),
 
         /// radar chart diagram
         diagram_radar: $ => seq(
             kwd("radar-beta"),
-            repeat(choice(
-                $.radar_stmt,
-                $._newline,
-            )),
+            repeat(choice($._radar_stmt, $._newline)),
         ),
 
-        radar_stmt: $ => /[^\n;]+/,
+        _radar_stmt: $ => choice(
+            $.radar_title,
+            $.radar_metric,
+        ),
+
+        radar_title: $ => prec(2, seq(kwd("title"), optional(field('text', /[^\n;]+/)), $._newline)),
+        radar_metric: $ => prec(1, seq($._radar_metric_name, ":", $._radar_value, $._newline)),
 
         /// treemap diagram
         diagram_treemap: $ => seq(
             kwd("treemap"),
-            repeat(choice(
-                $.treemap_stmt,
-                $._newline,
-            )),
+            repeat(choice($._treemap_stmt, $._newline)),
         ),
 
-        treemap_stmt: $ => /[^\n;]+/,
+        _treemap_stmt: $ => choice(
+            $.treemap_title,
+            $.treemap_item,
+        ),
+
+        treemap_title: $ => prec(2, seq(kwd("title"), optional(field('text', /[^\n;]+/)), $._newline)),
+        treemap_item: $ => prec(1, seq(
+            $._treemap_label,
+            ":",
+            $._treemap_value,
+            $._newline,
+        )),
 
         /// c4 diagram
         diagram_c4: $ => seq(
@@ -1072,24 +1223,70 @@ module.exports = grammar({
                 kwd("C4Dynamic"),
                 kwd("C4Deployment"),
             ),
-            repeat(choice(
-                $.c4_stmt,
-                $._newline,
-            )),
+            repeat(choice($._c4_stmt, $._newline)),
         ),
 
-        c4_stmt: $ => /[^\n;]+/,
+        _c4_stmt: $ => choice(
+            $.c4_title,
+            $.c4_person,
+            $.c4_system,
+            $.c4_rel,
+            $.c4_stmt,  // Generic statement for System_Boundary content
+        ),
+
+        c4_title: $ => seq(kwd("title"), /[^\n;]+/, $._newline),
+        c4_person: $ => seq(kwd("person"), "(", /[^)]+/, ")", $._newline),
+        c4_system: $ => seq(token(prec(1, /[Ss][Yy][Ss][Tt][Ee][Mm]\(/)), /[^)]+/, ")", $._newline),  // Match "System(" not "System_"
+        c4_rel: $ => seq(kwd("rel"), "(", /[^)]+/, ")", $._newline),
+        c4_stmt: $ => token(prec(-1, /[^\n]+\n/)),  // Catch-all with negative precedence
 
         /// requirement diagram
         diagram_requirement: $ => seq(
             kwd("requirementDiagram"),
-            repeat(choice(
-                $.requirement_stmt,
-                $._newline,
-            )),
+            repeat(choice($._requirement_stmt, $._newline)),
         ),
 
-        requirement_stmt: $ => /[^\n;]+/,
+        _requirement_stmt: $ => choice(
+            $.requirement_block,
+            $.requirement_stmt,
+        ),
+
+        requirement_block: $ => seq(
+            choice(
+                kwd("requirement"),
+                kwd("functionalRequirement"),
+                kwd("interfaceRequirement"),
+                kwd("performanceRequirement"),
+                kwd("physicalRequirement"),
+                kwd("designConstraint"),
+            ),
+            $._requirement_id,
+            "{",
+            $._newline,
+            optional($.requirement_block_body),
+            "}",
+            $._newline,
+        ),
+
+        requirement_stmt: $ => token(prec(-1, seq(
+            /[a-zA-Z]+/,              // requirement type
+            /\s+/,
+            /[^\s{]+/,                 // requirement ID
+            /\s*\{\s*/,                // opening brace
+            repeat(choice(            // block content
+                /[^\}]+/,
+                /\s+/
+            )),
+            /\}/,                      // closing brace
+            /\s*/
+        ))),  // Catch-all for unrecognized requirement types like nonFunctionalRequirement
+
+        requirement_block_body: $ => repeat1(seq(
+            /[a-z]+/,
+            ":",
+            $._requirement_text,
+            $._newline,
+        )),
 
         ... tokensFunc
     }

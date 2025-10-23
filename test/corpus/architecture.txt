@@ -16,14 +16,10 @@ architecture-beta
 
 (source_file
   (diagram_architecture
-    (architecture_stmt)
-    (architecture_stmt)
-    (architecture_stmt)
-    (architecture_stmt)
-    (architecture_stmt)
-    (architecture_stmt)
-    (architecture_stmt)
-    (architecture_stmt)))
+    (architecture_service
+      (architecture_service_body))
+    (architecture_service
+      (architecture_service_body))))
 
 ==========================
 Architecture with multiple services
@@ -47,18 +43,12 @@ architecture-beta
 
 (source_file
   (diagram_architecture
-    (architecture_stmt)
-    (architecture_stmt)
-    (architecture_stmt)
-    (architecture_stmt)
-    (architecture_stmt)
-    (architecture_stmt)
-    (architecture_stmt)
-    (architecture_stmt)
-    (architecture_stmt)
-    (architecture_stmt)
-    (architecture_stmt)
-    (architecture_stmt)))
+    (architecture_service
+      (architecture_service_body))
+    (architecture_service
+      (architecture_service_body))
+    (architecture_service
+      (architecture_service_body))))
 
 ==========================
 Architecture with infrastructure
@@ -83,16 +73,50 @@ architecture-beta
 
 (source_file
   (diagram_architecture
-    (architecture_stmt)
-    (architecture_stmt)
-    (architecture_stmt)
-    (architecture_stmt)
-    (architecture_stmt)
-    (architecture_stmt)
-    (architecture_stmt)
-    (architecture_stmt)
-    (architecture_stmt)
-    (architecture_stmt)
-    (architecture_stmt)
-    (architecture_stmt)
-    (architecture_stmt)))
+    (architecture_service
+      (architecture_service_body))
+    (architecture_service
+      (architecture_service_body))
+    (architecture_service
+      (architecture_service_body))))
+
+==========================
+Architecture with single component
+==========================
+
+architecture-beta
+    Service Gateway {
+      - NGINX
+    }
+
+---
+
+(source_file
+  (diagram_architecture
+    (architecture_service
+      (architecture_service_body))))
+
+==========================
+Architecture with many components
+==========================
+
+architecture-beta
+    Service API {
+      - REST
+      - GraphQL
+      - gRPC
+      - WebSockets
+    }
+    Service Cache {
+      - Redis
+      - Memcached
+    }
+
+---
+
+(source_file
+  (diagram_architecture
+    (architecture_service
+      (architecture_service_body))
+    (architecture_service
+      (architecture_service_body))))

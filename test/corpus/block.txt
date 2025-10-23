@@ -15,13 +15,13 @@ block-beta
 
 (source_file
   (diagram_block
-    (block_stmt)
-    (block_stmt)
-    (block_stmt)
-    (block_stmt)
-    (block_stmt)
-    (block_stmt)
-    (block_stmt)))
+    (block_columns)
+    (block_element)
+    (block_element)
+    (block_element)
+    (block_element)
+    (block_element)
+    (block_element)))
 
 ==========================
 Block diagram with architecture
@@ -40,13 +40,13 @@ block-beta
 
 (source_file
   (diagram_block
-    (block_stmt)
-    (block_stmt)
-    (block_stmt)
-    (block_stmt)
-    (block_stmt)
-    (block_stmt)
-    (block_stmt)))
+    (block_columns)
+    (block_element)
+    (block_element)
+    (block_element)
+    (block_element)
+    (block_element)
+    (block_element)))
 
 ==========================
 Block diagram with multiple columns
@@ -69,14 +69,50 @@ block-beta
 
 (source_file
   (diagram_block
-    (block_stmt)
-    (block_stmt)
-    (block_stmt)
-    (block_stmt)
-    (block_stmt)
-    (block_stmt)
-    (block_stmt)
-    (block_stmt)
-    (block_stmt)
-    (block_stmt)
-    (block_stmt)))
+    (block_columns)
+    (block_element)
+    (block_element)
+    (block_element)
+    (block_element)
+    (block_element)
+    (block_element)
+    (block_element)
+    (block_element)
+    (block_element)
+    (block_element)))
+
+==========================
+Block diagram without columns
+==========================
+
+block-beta
+    block app
+    block db
+    block cache
+
+---
+
+(source_file
+  (diagram_block
+    (block_element)
+    (block_element)
+    (block_element)))
+
+==========================
+Block diagram with single column
+==========================
+
+block-beta
+    columns 1
+    block header
+    block content
+    block footer
+
+---
+
+(source_file
+  (diagram_block
+    (block_columns)
+    (block_element)
+    (block_element)
+    (block_element)))

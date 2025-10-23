@@ -102,3 +102,74 @@ gantt
         (gantt_stmt_task
           (gantt_task_text)
           (gantt_task_data))))
+
+==========================
+Gantt without title
+==========================
+gantt
+    dateFormat YYYY-MM-DD
+    section Development
+    Task 1 :2024-01-01, 5d
+    Task 2 :2024-01-06, 3d
+
+---
+
+(source_file
+  (diagram_gantt
+    (gantt_stmt_dateformat
+      (gantt_date_format))
+    (gantt_stmt_section
+      (gantt_section))
+    (gantt_stmt_task
+      (gantt_task_text)
+      (gantt_task_data))
+    (gantt_stmt_task
+      (gantt_task_text)
+      (gantt_task_data))))
+
+==========================
+Gantt with single section
+==========================
+gantt
+    title Minimal Project
+    dateFormat YYYY-MM-DD
+    section Phase 1
+    Setup :2024-01-01, 2d
+
+---
+
+(source_file
+  (diagram_gantt
+    (gantt_stmt_title
+      (gantt_title))
+    (gantt_stmt_dateformat
+      (gantt_date_format))
+    (gantt_stmt_section
+      (gantt_section))
+    (gantt_stmt_task
+      (gantt_task_text)
+      (gantt_task_data))))
+
+==========================
+Gantt without sections
+==========================
+gantt
+    title Simple Timeline
+    dateFormat YYYY-MM-DD
+    Task A :2024-01-01, 5d
+    Task B :2024-01-06, 3d
+
+---
+
+(source_file
+  (diagram_gantt
+    (gantt_stmt_title
+      (gantt_title))
+    (gantt_stmt_dateformat
+      (gantt_date_format))
+    (gantt_stmt_task
+      (gantt_task_text)
+      (gantt_task_data))
+    (gantt_stmt_task
+      (gantt_task_text)
+      (gantt_task_data))))

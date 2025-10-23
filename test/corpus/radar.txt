@@ -15,13 +15,13 @@ radar-beta
 
 (source_file
   (diagram_radar
-    (radar_stmt)
-    (radar_stmt)
-    (radar_stmt)
-    (radar_stmt)
-    (radar_stmt)
-    (radar_stmt)
-    (radar_stmt)))
+    (radar_title)
+    (radar_metric)
+    (radar_metric)
+    (radar_metric)
+    (radar_metric)
+    (radar_metric)
+    (radar_metric)))
 
 ==========================
 Radar chart with team skills
@@ -40,13 +40,13 @@ radar-beta
 
 (source_file
   (diagram_radar
-    (radar_stmt)
-    (radar_stmt)
-    (radar_stmt)
-    (radar_stmt)
-    (radar_stmt)
-    (radar_stmt)
-    (radar_stmt)))
+    (radar_title)
+    (radar_metric)
+    (radar_metric)
+    (radar_metric)
+    (radar_metric)
+    (radar_metric)
+    (radar_metric)))
 
 ==========================
 Radar chart with product features
@@ -66,11 +66,53 @@ radar-beta
 
 (source_file
   (diagram_radar
-    (radar_stmt)
-    (radar_stmt)
-    (radar_stmt)
-    (radar_stmt)
-    (radar_stmt)
-    (radar_stmt)
-    (radar_stmt)
-    (radar_stmt)))
+    (radar_title)
+    (radar_metric)
+    (radar_metric)
+    (radar_metric)
+    (radar_metric)
+    (radar_metric)
+    (radar_metric)
+    (radar_metric)))
+
+==========================
+Radar chart without title
+==========================
+
+radar-beta
+    JavaScript: 9
+    Python: 8
+    Go: 7
+    Rust: 6
+    TypeScript: 9
+
+---
+
+(source_file
+  (diagram_radar
+    (radar_metric)
+    (radar_metric)
+    (radar_metric)
+    (radar_metric)
+    (radar_metric)))
+
+==========================
+Radar chart with numeric metric names
+==========================
+
+radar-beta
+    title Q1 2024 Goals
+    Metric 1: 10
+    Metric 2: 8
+    Metric 3: 9
+    Metric 4: 7
+
+---
+
+(source_file
+  (diagram_radar
+    (radar_title)
+    (radar_metric)
+    (radar_metric)
+    (radar_metric)
+    (radar_metric)))

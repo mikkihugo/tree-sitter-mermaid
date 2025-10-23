@@ -13,11 +13,11 @@ timeline
 
 (source_file
   (diagram_timeline
-    (timeline_stmt)
-    (timeline_stmt)
-    (timeline_stmt)
-    (timeline_stmt)
-    (timeline_stmt)))
+    (timeline_title)
+    (timeline_event)
+    (timeline_event)
+    (timeline_event)
+    (timeline_event)))
 
 ==========================
 Timeline with many events
@@ -35,12 +35,12 @@ timeline
 
 (source_file
   (diagram_timeline
-    (timeline_stmt)
-    (timeline_stmt)
-    (timeline_stmt)
-    (timeline_stmt)
-    (timeline_stmt)
-    (timeline_stmt)))
+    (timeline_title)
+    (timeline_event)
+    (timeline_event)
+    (timeline_event)
+    (timeline_event)
+    (timeline_event)))
 
 ==========================
 Timeline with detailed descriptions
@@ -58,9 +58,45 @@ timeline
 
 (source_file
   (diagram_timeline
-    (timeline_stmt)
-    (timeline_stmt)
-    (timeline_stmt)
-    (timeline_stmt)
-    (timeline_stmt)
-    (timeline_stmt)))
+    (timeline_title)
+    (timeline_event)
+    (timeline_event)
+    (timeline_event)
+    (timeline_event)
+    (timeline_event)))
+
+==========================
+Timeline without title
+==========================
+
+timeline
+    2000 : Dot-com bubble burst
+    2008 : Financial crisis
+    2020 : Global pandemic
+
+---
+
+(source_file
+  (diagram_timeline
+    (timeline_event)
+    (timeline_event)
+    (timeline_event)))
+
+==========================
+Timeline with recent years
+==========================
+
+timeline
+    title Technology Trends
+    2022 : AI boom begins
+    2023 : ChatGPT launched
+    2024 : AI regulation debates
+
+---
+
+(source_file
+  (diagram_timeline
+    (timeline_title)
+    (timeline_event)
+    (timeline_event)
+    (timeline_event)))

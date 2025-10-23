@@ -15,13 +15,13 @@ quadrantChart
 
 (source_file
   (diagram_quadrant_chart
-    (quadrant_chart_data)
-    (quadrant_chart_data)
-    (quadrant_chart_data)
-    (quadrant_chart_data)
-    (quadrant_chart_data)
-    (quadrant_chart_data)
-    (quadrant_chart_data)))
+    (quadrant_title)
+    (quadrant_x_axis)
+    (quadrant_y_axis)
+    (quadrant_1)
+    (quadrant_2)
+    (quadrant_3)
+    (quadrant_4)))
 
 ==========================
 Quadrant chart with custom axis labels
@@ -40,13 +40,13 @@ quadrantChart
 
 (source_file
   (diagram_quadrant_chart
-    (quadrant_chart_data)
-    (quadrant_chart_data)
-    (quadrant_chart_data)
-    (quadrant_chart_data)
-    (quadrant_chart_data)
-    (quadrant_chart_data)
-    (quadrant_chart_data)))
+    (quadrant_title)
+    (quadrant_x_axis)
+    (quadrant_y_axis)
+    (quadrant_1)
+    (quadrant_2)
+    (quadrant_3)
+    (quadrant_4)))
 
 ==========================
 Quadrant chart with no title
@@ -64,9 +64,55 @@ quadrantChart
 
 (source_file
   (diagram_quadrant_chart
-    (quadrant_chart_data)
-    (quadrant_chart_data)
-    (quadrant_chart_data)
-    (quadrant_chart_data)
-    (quadrant_chart_data)
-    (quadrant_chart_data)))
+    (quadrant_x_axis)
+    (quadrant_y_axis)
+    (quadrant_1)
+    (quadrant_2)
+    (quadrant_3)
+    (quadrant_4)))
+
+==========================
+Quadrant chart with minimal labels
+==========================
+
+quadrantChart
+    title Decision Matrix
+    x-axis Low --> High
+    y-axis Low --> High
+    quadrant-1 Do First
+    quadrant-2 Plan
+    quadrant-3 Delegate
+    quadrant-4 Eliminate
+
+---
+
+(source_file
+  (diagram_quadrant_chart
+    (quadrant_title)
+    (quadrant_x_axis)
+    (quadrant_y_axis)
+    (quadrant_1)
+    (quadrant_2)
+    (quadrant_3)
+    (quadrant_4)))
+
+==========================
+Quadrant chart with partial quadrants
+==========================
+
+quadrantChart
+    title Task Prioritization
+    x-axis Urgency --> Importance
+    y-axis Low --> High
+    quadrant-1 Critical and Important
+    quadrant-3 Neither Urgent nor Important
+
+---
+
+(source_file
+  (diagram_quadrant_chart
+    (quadrant_title)
+    (quadrant_x_axis)
+    (quadrant_y_axis)
+    (quadrant_1)
+    (quadrant_3)))

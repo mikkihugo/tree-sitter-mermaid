@@ -12,10 +12,10 @@ sankey-beta
 
 (source_file
   (diagram_sankey
-    (sankey_stmt)
-    (sankey_stmt)
-    (sankey_stmt)
-    (sankey_stmt)))
+    (sankey_header)
+    (sankey_link)
+    (sankey_link)
+    (sankey_link)))
 
 ==========================
 Sankey with multiple flows
@@ -35,14 +35,14 @@ sankey-beta
 
 (source_file
   (diagram_sankey
-    (sankey_stmt)
-    (sankey_stmt)
-    (sankey_stmt)
-    (sankey_stmt)
-    (sankey_stmt)
-    (sankey_stmt)
-    (sankey_stmt)
-    (sankey_stmt)))
+    (sankey_header)
+    (sankey_link)
+    (sankey_link)
+    (sankey_link)
+    (sankey_link)
+    (sankey_link)
+    (sankey_link)
+    (sankey_link)))
 
 ==========================
 Sankey with budget allocation
@@ -62,11 +62,47 @@ sankey-beta
 
 (source_file
   (diagram_sankey
-    (sankey_stmt)
-    (sankey_stmt)
-    (sankey_stmt)
-    (sankey_stmt)
-    (sankey_stmt)
-    (sankey_stmt)
-    (sankey_stmt)
-    (sankey_stmt)))
+    (sankey_header)
+    (sankey_link)
+    (sankey_link)
+    (sankey_link)
+    (sankey_link)
+    (sankey_link)
+    (sankey_link)
+    (sankey_link)))
+
+==========================
+Sankey with simple flow
+==========================
+
+sankey-beta
+    Source,Target,Value
+    Input,Output,100
+
+---
+
+(source_file
+  (diagram_sankey
+    (sankey_header)
+    (sankey_link)))
+
+==========================
+Sankey with large values
+==========================
+
+sankey-beta
+    Source,Target,Value
+    Revenue,Sales,10000
+    Revenue,Services,5000
+    Sales,ProductA,6000
+    Sales,ProductB,4000
+
+---
+
+(source_file
+  (diagram_sankey
+    (sankey_header)
+    (sankey_link)
+    (sankey_link)
+    (sankey_link)
+    (sankey_link)))

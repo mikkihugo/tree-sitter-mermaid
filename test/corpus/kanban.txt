@@ -15,13 +15,13 @@ kanban
 
 (source_file
   (diagram_kanban
-    (kanban_stmt)
-    (kanban_stmt)
-    (kanban_stmt)
-    (kanban_stmt)
-    (kanban_stmt)
-    (kanban_stmt)
-    (kanban_stmt)))
+    (kanban_column)
+    (kanban_task)
+    (kanban_task)
+    (kanban_column)
+    (kanban_task)
+    (kanban_column)
+    (kanban_task)))
 
 ==========================
 Kanban with more tasks
@@ -47,20 +47,20 @@ kanban
 
 (source_file
   (diagram_kanban
-    (kanban_stmt)
-    (kanban_stmt)
-    (kanban_stmt)
-    (kanban_stmt)
-    (kanban_stmt)
-    (kanban_stmt)
-    (kanban_stmt)
-    (kanban_stmt)
-    (kanban_stmt)
-    (kanban_stmt)
-    (kanban_stmt)
-    (kanban_stmt)
-    (kanban_stmt)
-    (kanban_stmt)))
+    (kanban_column)
+    (kanban_task)
+    (kanban_task)
+    (kanban_column)
+    (kanban_task)
+    (kanban_task)
+    (kanban_task)
+    (kanban_column)
+    (kanban_task)
+    (kanban_task)
+    (kanban_column)
+    (kanban_task)
+    (kanban_column)
+    (kanban_task)))
 
 ==========================
 Kanban with sprint tasks
@@ -82,13 +82,65 @@ kanban
 
 (source_file
   (diagram_kanban
-    (kanban_stmt)
-    (kanban_stmt)
-    (kanban_stmt)
-    (kanban_stmt)
-    (kanban_stmt)
-    (kanban_stmt)
-    (kanban_stmt)
-    (kanban_stmt)
-    (kanban_stmt)
-    (kanban_stmt)))
+    (kanban_column)
+    (kanban_task)
+    (kanban_task)
+    (kanban_column)
+    (kanban_task)
+    (kanban_task)
+    (kanban_column)
+    (kanban_task)
+    (kanban_column)
+    (kanban_task)))
+
+==========================
+Kanban with empty columns
+==========================
+
+kanban
+    Backlog
+    To Do
+        Create user stories
+        Set up CI/CD pipeline
+    In Progress
+    Done
+        Initial setup complete
+
+---
+
+(source_file
+  (diagram_kanban
+    (kanban_column)
+    (kanban_column)
+    (kanban_task)
+    (kanban_task)
+    (kanban_column)
+    (kanban_column)
+    (kanban_task)))
+
+==========================
+Kanban with special characters in names
+==========================
+
+kanban
+    To-Do
+        Fix bug #123
+        Update README.md
+    In Progress (WIP: 2)
+        Implement OAuth 2.0
+        Refactor user-service
+    Done!
+        Deploy v1.0.0
+
+---
+
+(source_file
+  (diagram_kanban
+    (kanban_column)
+    (kanban_task)
+    (kanban_task)
+    (kanban_column)
+    (kanban_task)
+    (kanban_task)
+    (kanban_column)
+    (kanban_task)))

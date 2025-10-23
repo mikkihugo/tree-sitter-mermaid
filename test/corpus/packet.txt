@@ -12,10 +12,10 @@ packet-beta
 
 (source_file
   (diagram_packet
-    (packet_stmt)
-    (packet_stmt)
-    (packet_stmt)
-    (packet_stmt)))
+    (packet_field)
+    (packet_field)
+    (packet_field)
+    (packet_field)))
 
 ==========================
 Packet diagram with TCP header
@@ -35,14 +35,14 @@ packet-beta
 
 (source_file
   (diagram_packet
-    (packet_stmt)
-    (packet_stmt)
-    (packet_stmt)
-    (packet_stmt)
-    (packet_stmt)
-    (packet_stmt)
-    (packet_stmt)
-    (packet_stmt)))
+    (packet_field)
+    (packet_field)
+    (packet_field)
+    (packet_field)
+    (packet_field)
+    (packet_field)
+    (packet_field)
+    (packet_field)))
 
 ==========================
 Packet diagram with Ethernet frame
@@ -58,7 +58,45 @@ packet-beta
 
 (source_file
   (diagram_packet
-    (packet_stmt)
-    (packet_stmt)
-    (packet_stmt)
+    (packet_field)
+    (packet_field)
+    (packet_field)
     (packet_stmt)))
+
+==========================
+Packet diagram with minimal fields
+==========================
+
+packet-beta
+    0-7: Header
+    8-15: Data
+
+---
+
+(source_file
+  (diagram_packet
+    (packet_field)
+    (packet_field)))
+
+==========================
+Packet diagram with IP header
+==========================
+
+packet-beta
+    0-3: Version
+    4-7: IHL
+    8-15: Type of Service
+    16-31: Total Length
+    32-47: Identification
+    48-63: Flags and Fragment Offset
+
+---
+
+(source_file
+  (diagram_packet
+    (packet_field)
+    (packet_field)
+    (packet_field)
+    (packet_field)
+    (packet_field)
+    (packet_field)))
