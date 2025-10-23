@@ -111,8 +111,11 @@ Full implementation would require detailed grammar rules similar to the 10 above
 - C4 Diagrams (`C4Context/C4Container/C4Component/C4Dynamic/C4Deployment`)
 - Requirement Diagrams (`requirementDiagram`)
 
-**Test Coverage**: 51/54 tests passing (94%)
-- See IMPLEMENTATION_STATUS.md for detailed implementation roadmap
+**Test Coverage**: 61/64 tests passing (95%)
+- 23/23 Mermaid diagram types supported
+- All 23 diagram types have test corpus files
+- Only known failure: journey diagram (3 tests) due to token conflict
+- See IMPLEMENTATION_STATUS.md for detailed roadmap and contribution guide
 
 ## CI/CD Pipeline
 
