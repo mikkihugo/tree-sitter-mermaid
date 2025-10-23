@@ -1,11 +1,64 @@
+# tree-sitter-mermaid pkg-config file template
+#
+# This file is processed during the build/installation process to generate
+# the actual pkg-config (.pc) file that allows C/C++ projects to easily discover
+# and link against the tree-sitter-mermaid library.
+#
+# The @VARIABLE@ placeholders are replaced during installation with actual values:
+# - @PREFIX@: Installation root directory (e.g., /usr/local)
+# - @LIBDIR@: Library directory (e.g., /usr/local/lib)
+# - @INCLUDEDIR@: Header directory (e.g., /usr/local/include)
+# - @URL@: Project homepage URL
+# - @VERSION@: Library version (e.g., 0.25.10)
+# - @REQUIRES@: Dependencies on other pkg-config packages
+# - @ADDITIONAL_LIBS@: Additional libraries to link (e.g., -lm)
+#
+# USAGE:
+# After installation, C projects can use pkg-config to get compiler/linker flags:
+#
+#   pkg-config --cflags tree-sitter-mermaid    # Get: -I/usr/local/include
+#   pkg-config --libs tree-sitter-mermaid      # Get: -L/usr/local/lib -ltree-sitter-mermaid
+#   pkg-config --variable=libdir tree-sitter-mermaid  # Get: /usr/local/lib
+#
+# INTEGRATION IN BUILD SYSTEMS:
+#
+# GCC/Clang:
+#   CFLAGS := $(shell pkg-config --cflags tree-sitter-mermaid)
+#   LIBS := $(shell pkg-config --libs tree-sitter-mermaid)
+#   gcc $(CFLAGS) main.c -o program $(LIBS)
+#
+# CMake:
+#   find_package(PkgConfig REQUIRED)
+#   pkg_check_modules(TREE_SITTER_MERMAID tree-sitter-mermaid REQUIRED)
+#   target_link_libraries(myapp ${TREE_SITTER_MERMAID_LIBRARIES})
+#
+# Autoconf:
+#   PKG_CHECK_MODULES(TREE_SITTER_MERMAID, tree-sitter-mermaid >= 0.25.10)
+#   AC_SUBST(TREE_SITTER_MERMAID_CFLAGS)
+#   AC_SUBST(TREE_SITTER_MERMAID_LIBS)
+#
+# See Also:
+# - https://www.freedesktop.org/wiki/Software/pkg-config/
+# - https://autotools.io/pkgconfig/
+#
+
 prefix=@PREFIX@
 libdir=@LIBDIR@
 includedir=@INCLUDEDIR@
 
+# Package metadata
 Name: tree-sitter-mermaid
-Description: Mermaid grammar for tree-sitter
+Description: Mermaid grammar for tree-sitter parsing library
 URL: @URL@
 Version: @VERSION@
+
+# Dependencies on other packages (via pkg-config)
+# Typically just requires tree-sitter core library
 Requires: @REQUIRES@
+
+# Linker flags: Library search path and library name
+# @ADDITIONAL_LIBS@ might include -lm (math library) or other system libraries
 Libs: -L${libdir} @ADDITIONAL_LIBS@ -ltree-sitter-mermaid
+
+# Compiler flags: Header search path and any preprocessor definitions
 Cflags: -I${includedir}
