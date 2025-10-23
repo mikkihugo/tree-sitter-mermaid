@@ -1,7 +1,7 @@
 [package]
 name = "tree-sitter-mermaid"
-description = "Mermaid grammar for the tree-sitter parsing library (updated for tree-sitter 0.25)"
-version = "0.1.0"
+description = "Mermaid grammar for the tree-sitter parsing library (tested with tree-sitter 0.25.10)"
+version = "0.1.1"
 keywords = ["incremental", "parsing", "mermaid", "tree-sitter", "diagram"]
 categories = ["parsing", "text-editors", "development-tools"]
 repository = "https://github.com/mikkihugo/tree-sitter-mermaid"
