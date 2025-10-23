@@ -1,0 +1,18 @@
+==========================
+C4 Context Diagram
+==========================
+
+C4Context
+    title System Architecture
+    Person(user, "User", "A user")
+    System(web, "Web App", "The application")
+    Rel(user, web, "Uses")
+
+---
+
+(source_file
+  (diagram_c4
+    (c4_stmt)
+    (c4_stmt)
+    (c4_stmt)
+    (c4_stmt)))

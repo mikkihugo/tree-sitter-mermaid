@@ -1,0 +1,24 @@
+==========================
+Kanban Board
+==========================
+
+kanban
+    To Do
+        Write tests
+        Design API
+    In Progress
+        Implement feature
+    Done
+        Deploy to production
+
+---
+
+(source_file
+  (diagram_kanban
+    (kanban_stmt)
+    (kanban_stmt)
+    (kanban_stmt)
+    (kanban_stmt)
+    (kanban_stmt)
+    (kanban_stmt)
+    (kanban_stmt)))

@@ -1,0 +1,18 @@
+==========================
+Sankey Diagram
+==========================
+
+sankey-beta
+    Source,Target,Value
+    A,B,100
+    B,C,80
+    A,C,50
+
+---
+
+(source_file
+  (diagram_sankey
+    (sankey_stmt)
+    (sankey_stmt)
+    (sankey_stmt)
+    (sankey_stmt)))

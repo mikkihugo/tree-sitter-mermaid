@@ -1,0 +1,24 @@
+==========================
+Simple quadrant chart
+==========================
+
+quadrantChart
+    title Prioritization Matrix
+    x-axis Low --> High
+    y-axis Low --> High
+    quadrant-1 Feature A
+    quadrant-2 Feature B
+    quadrant-3 Feature C
+    quadrant-4 Feature D
+
+---
+
+(source_file
+  (diagram_quadrant_chart
+    (quadrant_chart_data)
+    (quadrant_chart_data)
+    (quadrant_chart_data)
+    (quadrant_chart_data)
+    (quadrant_chart_data)
+    (quadrant_chart_data)
+    (quadrant_chart_data)))

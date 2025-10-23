@@ -1,0 +1,18 @@
+==========================
+XY Chart
+==========================
+
+xychart-beta
+    title Sales Data
+    x-axis [Jan, Feb, Mar, Apr, May]
+    y-axis "Sales" 0 --> 500
+    line [100, 200, 150, 300, 400]
+
+---
+
+(source_file
+  (diagram_xy_chart
+    (xy_chart_data)
+    (xy_chart_data)
+    (xy_chart_data)
+    (xy_chart_data)))
