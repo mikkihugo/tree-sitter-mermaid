@@ -63,6 +63,137 @@ This is a fork of the original [monaqa/tree-sitter-mermaid](https://github.com/m
 
 **Total: 133 tests across 23 diagram types (100% passing) - All diagram types fully implemented!**
 
+## 🎨 Visual Examples
+
+GitHub natively renders Mermaid diagrams! Here are some examples of what this parser supports:
+
+### Flowchart
+```mermaid
+graph TD
+    A[Start] --> B{Decision}
+    B -->|Yes| C[Action 1]
+    B -->|No| D[Action 2]
+    C --> E[End]
+    D --> E
+```
+
+### Sequence Diagram
+```mermaid
+sequenceDiagram
+    Alice->>Bob: Hello Bob!
+    Bob-->>Alice: Hi Alice!
+    Alice->>Bob: How are you?
+    Bob-->>Alice: I'm good, thanks!
+```
+
+### Class Diagram
+```mermaid
+classDiagram
+    class Animal {
+        +String name
+        +int age
+        +makeSound()
+    }
+    class Dog {
+        +String breed
+        +bark()
+    }
+    Animal <|-- Dog
+```
+
+### State Diagram
+```mermaid
+stateDiagram-v2
+    [*] --> Idle
+    Idle --> Processing: Start
+    Processing --> Success: Complete
+    Processing --> Error: Fail
+    Success --> [*]
+    Error --> Idle: Retry
+```
+
+### Gantt Chart
+```mermaid
+gantt
+    title Project Timeline
+    dateFormat  YYYY-MM-DD
+    section Phase 1
+    Design           :a1, 2024-01-01, 30d
+    Development      :a2, after a1, 60d
+    section Phase 2
+    Testing          :a3, after a2, 20d
+    Deployment       :a4, after a3, 10d
+```
+
+### Git Graph
+```mermaid
+gitGraph
+    commit
+    branch develop
+    checkout develop
+    commit
+    commit
+    checkout main
+    merge develop
+    commit
+```
+
+<details>
+<summary>See more diagram types...</summary>
+
+### Pie Chart
+```mermaid
+pie title Pets
+    "Dogs" : 45
+    "Cats" : 30
+    "Birds" : 15
+    "Fish" : 10
+```
+
+### Entity Relationship
+```mermaid
+erDiagram
+    CUSTOMER ||--o{ ORDER : places
+    ORDER ||--|{ LINE-ITEM : contains
+    CUSTOMER {
+        string name
+        string email
+    }
+    ORDER {
+        int orderNumber
+        date orderDate
+    }
+```
+
+### Mind Map
+```mermaid
+mindmap
+  root((Project))
+    Planning
+      Requirements
+      Timeline
+    Development
+      Frontend
+      Backend
+    Testing
+      Unit Tests
+      Integration Tests
+```
+
+### User Journey
+```mermaid
+journey
+    title My workday
+    section Go to work
+      Make coffee: 5: Me
+      Drive: 3: Me
+    section Work
+      Code: 4: Me
+      Meetings: 2: Me
+```
+
+</details>
+
 ## 🚀 Quick Start
 
 ### Rust
