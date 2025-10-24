@@ -69,7 +69,7 @@ GitHub natively renders Mermaid diagrams! Here are some examples of what this pa
 
 ### Flowchart
 ```mermaid
-graph TD
+flowchart TD
     A[Start] --> B{Decision}
     B -->|Yes| C[Action 1]
     B -->|No| D[Action 2]
@@ -204,7 +204,7 @@ use tree_sitter_mermaid::language;
 let mut parser = Parser::new();
 parser.set_language(&language()).expect("Error loading mermaid grammar");
 
-let code = r#"graph TD
+let code = r#"flowchart TD
     A[Start] --> B{Decision}
     B -->|Yes| C[Action 1]
     B -->|No| D[Action 2]"#;
@@ -220,7 +220,7 @@ const Mermaid = require('tree-sitter-mermaid');
 const parser = new Parser();
 parser.setLanguage(Mermaid);
 
-const code = `graph TD
+const code = `flowchart TD
     A[Start] --> B[End]`;
 
 const tree = parser.parse(code);
@@ -234,7 +234,7 @@ from tree_sitter_mermaid import language
 parser = Parser()
 parser.set_language(language())
 
-code = """graph TD
+code = """flowchart TD
     A[Start] --> B[End]"""
 
 tree = parser.parse(code.encode())
