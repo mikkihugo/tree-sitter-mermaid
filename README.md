@@ -192,6 +192,195 @@ journey
       Meetings: 2: Me
 ```
 
+### Quadrant Chart
+```mermaid
+quadrantChart
+    title Reach and engagement of campaigns
+    x-axis Low Reach --> High Reach
+    y-axis Low Engagement --> High Engagement
+    quadrant-1 We should expand
+    quadrant-2 Need to promote
+    quadrant-3 Re-evaluate
+    quadrant-4 May be improved
+    Campaign A: [0.3, 0.6]
+    Campaign B: [0.45, 0.23]
+    Campaign C: [0.57, 0.69]
+    Campaign D: [0.78, 0.34]
+    Campaign E: [0.40, 0.34]
+    Campaign F: [0.35, 0.78]
+```
+
+### XY Chart
+```mermaid
+xychart-beta
+    title "Sales Revenue"
+    x-axis [jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec]
+    y-axis "Revenue (in $)" 4000 --> 11000
+    bar [5000, 6000, 7500, 8200, 9500, 10500, 11000, 10200, 9200, 8500, 7000, 6000]
+    line [5000, 6000, 7500, 8200, 9500, 10500, 11000, 10200, 9200, 8500, 7000, 6000]
+```
+
+### Timeline
+```mermaid
+timeline
+    title History of Social Media Platform
+    2002 : LinkedIn
+    2004 : Facebook
+         : Google
+    2005 : Youtube
+    2006 : Twitter
+```
+
+### ZenUML
+```mermaid
+zenuml
+    title Order Service
+    @Actor Client
+    @Boundary OrderController
+    @EC2 OrderService
+    @Database OrderDB
+    Client.order(item) {
+      OrderController.create(item) {
+        OrderService.save(item) {
+          OrderDB.insert(item)
+        }
+      }
+    }
+```
+
+### Sankey Diagram
+```mermaid
+sankey-beta
+    Agricultural 'waste',Bio-conversion,124.729
+    Bio-conversion,Liquid,0.597
+    Bio-conversion,Losses,26.862
+    Bio-conversion,Solid,280.322
+    Bio-conversion,Gas,81.144
+```
+
+### Block Diagram
+```mermaid
+block-beta
+columns 1
+  db(("DB"))
+  blockArrowId6<["&nbsp;&nbsp;&nbsp;"]>(down)
+  block:ID
+    A
+    B["A wide one in the middle"]
+    C
+  end
+  space
+  D
+  ID --> D
+  C --> D
+  style B fill:#969,stroke:#333,stroke-width:4px
+```
+
+### Packet Diagram
+```mermaid
+packet-beta
+0-15: "Source Port"
+16-31: "Destination Port"
+32-63: "Sequence Number"
+64-95: "Acknowledgment Number"
+96-99: "Data Offset"
+100-105: "Reserved"
+106: "URG"
+107: "ACK"
+108: "PSH"
+109: "RST"
+110: "SYN"
+111: "FIN"
+112-127: "Window"
+128-143: "Checksum"
+144-159: "Urgent Pointer"
+```
+
+### Kanban
+```mermaid
+kanban
+  Todo
+    [Item 1]
+    [Item 2]
+  In Progress
+    [Item 3]
+  Done
+    [Item 4]
+    [Item 5]
+```
+
+### Architecture
+```mermaid
+architecture-beta
+    group api(cloud)[API]
+
+    service db(database)[Database] in api
+    service disk1(disk)[Storage] in api
+    service disk2(disk)[Storage] in api
+    service server(server)[Server] in api
+
+    db:L -- R:server
+    disk1:T -- B:server
+    disk2:T -- B:db
+```
+
+### Radar Chart
+```mermaid
+radar-beta
+    title Skills Assessment
+    "Communication" : 90
+    "Problem Solving" : 85
+    "Technical Skills" : 95
+    "Teamwork" : 80
+    "Leadership" : 75
+    "Creativity" : 88
+```
+
+### Treemap
+```mermaid
+treemap
+    title Company Revenue Distribution
+    "Sales": 42000
+    "Engineering": 35000
+    "Marketing": 18000
+    "Operations": 15000
+    "Support": 12000
+    "HR": 8000
+```
+
+### C4 Context Diagram
+```mermaid
+C4Context
+    title System Context diagram for Internet Banking System
+    Person(customer, "Banking Customer", "A customer of the bank")
+    System(banking_system, "Internet Banking System", "Allows customers to view information about their accounts")
+    System_Ext(mail_system, "E-mail system", "The internal Microsoft Exchange system")
+    System_Ext(mainframe, "Mainframe Banking System", "Stores all the core banking information")
+
+    Rel(customer, banking_system, "Uses")
+    Rel_Back(customer, mail_system, "Sends e-mails to")
+    Rel(banking_system, mail_system, "Sends e-mails", "SMTP")
+    Rel(banking_system, mainframe, "Uses")
+```
+
+### Requirement Diagram
+```mermaid
+requirementDiagram
+
+    requirement test_req {
+    id: 1
+    text: the test text.
+    risk: high
+    verifymethod: test
+    }
+
+    element test_entity {
+    type: simulation
+    }
+
+    test_entity - satisfies -> test_req
+```
+
 </details>
 
 ## 🚀 Quick Start
