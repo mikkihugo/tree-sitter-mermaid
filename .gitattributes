@@ -1,11 +1,10 @@
+# Normalize line endings to LF
 * text eol=lf
 
+# Mark auto-generated files (don't count in language stats)
 src/*.json linguist-generated
 src/parser.c linguist-generated
 src/tree_sitter/* linguist-generated
 
-bindings/** linguist-generated
-binding.gyp linguist-generated
-setup.py linguist-generated
-Makefile linguist-generated
-Package.swift linguist-generated
+# All other files (bindings, build scripts, etc.) are hand-written
+# and should be counted in language statistics
