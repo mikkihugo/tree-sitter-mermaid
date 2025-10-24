@@ -1,0 +1,126 @@
+# =============================================================================
+# 🧜‍♀️ Publish to crates.io - The Little Mermaid Rust Crate
+# =============================================================================
+#
+# Automatically publishes the tree-sitter-little-mermaid crate to crates.io
+# when a new GitHub release is created.
+#
+# TRIGGERS:
+# ---------
+# - Release published (new version tag created on GitHub)
+# - Manual trigger for testing
+#
+# PROCESS:
+# --------
+# 1. Checkout code
+# 2. Set up Rust toolchain (stable)
+# 3. Run tests to verify crate works
+# 4. Publish to crates.io using API token
+#
+# REQUIREMENTS:
+# -------------
+# - CARGO_REGISTRY_TOKEN secret configured in repository settings
+# - crates.io account with publish access to tree-sitter-little-mermaid
+#
+# SETUP:
+# ------
+# 1. Create crates.io account at https://crates.io/
+# 2. Generate API token:
+#    - Go to https://crates.io/settings/tokens
+#    - Click "New Token"
+#    - Name it (e.g., "GitHub Actions - tree-sitter-little-mermaid")
+#    - Copy the token
+# 3. Add token to GitHub repository secrets:
+#    - Go to repository Settings → Secrets and variables → Actions
+#    - Click "New repository secret"
+#    - Name: CARGO_REGISTRY_TOKEN
+#    - Value: <paste your crates.io token>
+#
+# USAGE:
+# ------
+# Create a new release on GitHub:
+#   git tag v0.25.11
+#   git push origin v0.25.11
+#   gh release create v0.25.11 --generate-notes
+#
+# The crate will be automatically published to crates.io!
+
+name: 🧜‍♀️ Publish to crates.io
+
+on:
+  # Trigger on new releases (not drafts)
+  # This allows you to create draft releases without triggering publishing
+  release:
+    types: [released]
+
+  # Manual trigger for testing (use when you want to publish without creating a release)
+  workflow_dispatch:
+
+jobs:
+  build-and-publish:
+    name: Build and publish Rust crate
+    runs-on: ubuntu-latest
+
+    steps:
+    # ==========================================================================
+    # Setup
+    # ==========================================================================
+
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Rust
+      uses: dtolnay/rust-toolchain@stable
+      with:
+        toolchain: stable
+
+    - name: Cache Rust dependencies
+      uses: Swatinem/rust-cache@v2
+
+    # ==========================================================================
+    # Build & Test
+    # ==========================================================================
+
+    - name: Check crate builds
+      run: cargo check --all-features
+
+    - name: Run tests
+      run: cargo test --all-features
+
+    - name: Verify package can be built
+      run: cargo package --allow-dirty
+
+    # ==========================================================================
+    # Publish to crates.io
+    # ==========================================================================
+
+    - name: Publish to crates.io
+      run: cargo publish --token ${{ secrets.CARGO_REGISTRY_TOKEN }}
+      env:
+        CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+
+    # ==========================================================================
+    # Post-publish verification
+    # ==========================================================================
+
+    - name: Verify published crate
+      run: |
+        sleep 10  # Wait for crates.io to update
+        cargo search tree-sitter-little-mermaid | head -5 || echo "Crate not yet visible"
+
+    - name: Post summary
+      run: |
+        echo "## 🧜‍♀️ Crate Published!" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "✅ **tree-sitter-little-mermaid** has been published to crates.io" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Installation" >> $GITHUB_STEP_SUMMARY
+        echo '```toml' >> $GITHUB_STEP_SUMMARY
+        echo '[dependencies]' >> $GITHUB_STEP_SUMMARY
+        echo 'tree-sitter-little-mermaid = "0.25"' >> $GITHUB_STEP_SUMMARY
+        echo '```' >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Links" >> $GITHUB_STEP_SUMMARY
+        echo "- crates.io: https://crates.io/crates/tree-sitter-little-mermaid" >> $GITHUB_STEP_SUMMARY
+        echo "- Docs: https://docs.rs/tree-sitter-little-mermaid" >> $GITHUB_STEP_SUMMARY
+        echo "- GitHub: https://github.com/mikkihugo/tree-sitter-mermaid" >> $GITHUB_STEP_SUMMARY

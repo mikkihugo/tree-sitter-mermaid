@@ -1,7 +1,7 @@
 {
-  "name": "tree-sitter-mermaid",
-  "version": "0.25.10",
-  "description": "Tree-sitter grammar for mermaid.js",
+  "name": "tree-sitter-little-mermaid",
+  "version": "0.9.0",
+  "description": "🧜‍♀️ The Little Mermaid - A complete tree-sitter grammar for Mermaid.js diagrams with 100% test coverage (23/23 types)",
   "main": "bindings/node",
   "types": "bindings/node",
   "scripts": {
@@ -29,7 +29,7 @@
     "node-gyp-build": "^4.8.0"
   },
   "peerDependencies": {
-    "tree-sitter": "^0.21.0"
+    "tree-sitter": "^0.25.0"
   },
   "peerDependenciesMeta": {
     "tree_sitter": {
@@ -37,7 +37,7 @@
     }
   },
   "devDependencies": {
-    "tree-sitter-cli": "^0.22.2",
+    "tree-sitter-cli": "^0.25.0",
     "prebuildify": "^6.0.0"
   },
   "tree-sitter": [

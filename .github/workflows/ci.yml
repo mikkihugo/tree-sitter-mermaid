@@ -1,45 +1,124 @@
+# =============================================================================
+# CI Workflow for tree-sitter-mermaid
+# =============================================================================
+#
+# This workflow runs automated tests and checks on every push, PR, and weekly
+# to ensure the grammar stays compatible with the latest Mermaid specification.
+#
+# JOBS:
+# -----
+# 1. test: Run corpus tests and spec compliance checks (Ubuntu + Node.js)
+# 2. nix-test: Run tests in Nix environment for reproducibility
+#
+# TRIGGERS:
+# ---------
+# - push: Runs on all pushes to master branch
+# - pull_request: Runs on all PRs to master branch
+# - schedule: Runs weekly on Sunday at 00:00 UTC to detect new Mermaid releases
+#
+# WHY NO LANGUAGE BINDINGS TESTS?
+# --------------------------------
+# We only test the grammar (via tree-sitter test) because:
+# - Grammar correctness is thoroughly validated by corpus tests
+# - Language bindings (Python, Rust, Swift, etc.) are thin wrappers
+# - If grammar parsing works, bindings work (they just call the C parser)
+# - No binding-specific logic exists that requires separate testing
+# - Building all bindings would add complexity without value
+#
+# DEPENDENCIES:
+# -------------
+# - Node.js 18: For tree-sitter CLI
+# - tree-sitter-cli: Parser generator and test runner
+# - Nix: For reproducible test environment
+#
+# TEST PROCESS:
+# -------------
+# 1. Checkout code
+# 2. Install tree-sitter CLI
+# 3. Run `make test` (runs tree-sitter test on corpus files)
+# 4. Run `make check-spec` (checks for new diagram types in Mermaid.js)
+#
+# OUTPUTS:
+# --------
+# - Test results visible in GitHub Actions logs
+# - Check fails if any corpus tests fail or spec check fails
+
 name: CI
 
 on:
+  # Run on pushes to master branch
   push:
     branches: [ master ]
+
+  # Run on pull requests targeting master
   pull_request:
     branches: [ master ]
+
+  # Run weekly to detect new Mermaid diagram types
+  # Every Sunday at 00:00 UTC
   schedule:
-    # Check for Mermaid updates weekly
     - cron: '0 0 * * 0'
 
 jobs:
+  # =============================================================================
+  # Main test job: Run corpus tests and spec compliance checks
+  # =============================================================================
   test:
     runs-on: ubuntu-latest
 
     steps:
+    # Checkout the repository
     - uses: actions/checkout@v4
 
+    # Setup Node.js 18 (includes npm)
+    # Node.js is required for tree-sitter CLI
     - name: Setup Node.js
       uses: actions/setup-node@v4
       with:
         node-version: '18'
 
+    # Install tree-sitter CLI globally
+    # This provides the `tree-sitter test` command
     - name: Install tree-sitter CLI
       run: npm install -g tree-sitter-cli
 
+    # Run all corpus tests
+    # Tests are defined in test/corpus/*.txt
+    # Each test contains Mermaid code and expected parse tree
     - name: Run tests
       run: make test
 
+    # Check for new diagram types in latest Mermaid.js
+    # This runs check-mermaid-spec.sh to compare our grammar
+    # against the official Mermaid documentation
+    # If new types are found, it creates a GitHub issue automatically
     - name: Check Mermaid spec
-      run: make check-spec
+      run: ./check-mermaid-spec.sh --create-issue
+      env:
+        GH_TOKEN: ${{ github.token }}
 
+  # =============================================================================
+  # Nix test job: Run tests in reproducible Nix environment
+  # =============================================================================
+  #
+  # This job ensures the project builds and tests correctly in a Nix shell,
+  # providing a reproducible development environment across different machines.
+  #
   nix-test:
     runs-on: ubuntu-latest
 
     steps:
+    # Checkout the repository
     - uses: actions/checkout@v4
 
+    # Install Nix package manager
+    # Nix provides deterministic, reproducible builds
     - name: Install Nix
       uses: cachix/install-nix-action@v25
       with:
         nix_path: nixpkgs=channel:nixos-unstable
 
+    # Run tests inside the Nix shell environment
+    # The shell.nix file defines all dependencies
     - name: Run tests in Nix shell
       run: nix-shell --run "make test"

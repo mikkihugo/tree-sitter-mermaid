@@ -1,0 +1,136 @@
+# =============================================================================
+# 🧜‍♀️ Publish to PyPI - The Little Mermaid Python Package
+# =============================================================================
+#
+# Automatically publishes the ts-little-mermaid Python package to PyPI
+# when a new GitHub release is created.
+#
+# TRIGGERS:
+# ---------
+# - Release published (new version tag created on GitHub)
+#
+# PROCESS:
+# --------
+# 1. Checkout code
+# 2. Set up Python 3.11
+# 3. Install build tools (build, twine)
+# 4. Build source distribution and wheel
+# 5. Publish to PyPI using trusted publishing (OIDC)
+#
+# REQUIREMENTS:
+# -------------
+# - PyPI trusted publishing configured for this repository
+# - GitHub repository set as trusted publisher on PyPI
+# - No API token needed (uses OIDC)
+#
+# SETUP:
+# ------
+# 1. Go to https://pypi.org/manage/account/publishing/
+# 2. Add new trusted publisher:
+#    - PyPI Project Name: tree-sitter-little-mermaid
+#    - Owner: mikkihugo
+#    - Repository name: tree-sitter-mermaid
+#    - Workflow name: publish-pypi.yml
+#    - Environment name: (leave blank)
+#
+# USAGE:
+# ------
+# Create a new release on GitHub:
+#   git tag v0.25.11
+#   git push origin v0.25.11
+#   gh release create v0.25.11 --generate-notes
+#
+# The package will be automatically published to PyPI!
+
+name: 🧜‍♀️ Publish to PyPI
+
+on:
+  # Trigger on new releases (not drafts)
+  # This allows you to create draft releases without triggering publishing
+  release:
+    types: [released]
+
+  # Manual trigger for testing (use when you want to publish without creating a release)
+  workflow_dispatch:
+
+jobs:
+  build-and-publish:
+    name: Build and publish Python package
+    runs-on: ubuntu-latest
+
+    # Required for PyPI trusted publishing (OIDC)
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+    # ==========================================================================
+    # Setup
+    # ==========================================================================
+
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.11'
+
+    - name: Install build dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install build twine
+
+    # ==========================================================================
+    # Build
+    # ==========================================================================
+
+    - name: Build package
+      run: python -m build
+
+    - name: Check built package
+      run: twine check dist/*
+
+    - name: List built files
+      run: |
+        echo "📦 Built packages:"
+        ls -lh dist/
+        echo ""
+        echo "Contents:"
+        tar -tzf dist/*.tar.gz | head -20
+        echo "..."
+
+    # ==========================================================================
+    # Publish to PyPI
+    # ==========================================================================
+
+    - name: Publish to PyPI
+      uses: pypa/gh-action-pypi-publish@release/v1
+      with:
+        # Uses OIDC trusted publishing (no token needed!)
+        print-hash: true
+        verbose: true
+
+    # ==========================================================================
+    # Post-publish verification
+    # ==========================================================================
+
+    - name: Verify published package
+      run: |
+        sleep 30  # Wait for PyPI to update
+        pip index versions tree-sitter-little-mermaid || echo "Package not yet visible"
+
+    - name: Post summary
+      run: |
+        echo "## 🧜‍♀️ Package Published!" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "✅ **tree-sitter-little-mermaid** has been published to PyPI" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Installation" >> $GITHUB_STEP_SUMMARY
+        echo '```bash' >> $GITHUB_STEP_SUMMARY
+        echo 'pip install tree-sitter-little-mermaid' >> $GITHUB_STEP_SUMMARY
+        echo '```' >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Links" >> $GITHUB_STEP_SUMMARY
+        echo "- PyPI: https://pypi.org/project/tree-sitter-little-mermaid/" >> $GITHUB_STEP_SUMMARY
+        echo "- Docs: https://github.com/mikkihugo/tree-sitter-mermaid" >> $GITHUB_STEP_SUMMARY

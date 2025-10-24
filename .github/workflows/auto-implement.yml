@@ -1,0 +1,387 @@
+# =============================================================================
+# Auto-Implementation Workflow for New Mermaid Diagram Types
+# =============================================================================
+#
+# This workflow automatically creates a draft PR with skeleton implementation
+# when new Mermaid diagram types are detected. It's triggered by the weekly
+# spec compliance check.
+#
+# WHAT IT DOES:
+# -------------
+# 1. Detects new diagram types from Mermaid specification
+# 2. Creates a new branch: auto/add-<diagram-type>-support
+# 3. Generates skeleton grammar rules in grammar.js
+# 4. Creates test corpus file with basic structure
+# 5. Commits changes and creates draft PR
+# 6. PR includes implementation checklist and references
+#
+# TRIGGERS:
+# ---------
+# - schedule: Weekly on Sunday at 00:30 UTC (30 min after spec check)
+# - workflow_dispatch: Manual trigger for testing
+#
+# OUTPUTS:
+# --------
+# - Draft PR with skeleton implementation
+# - PR is labeled "auto-generated" and "diagram-type"
+# - PR is assigned to repository maintainers for review
+#
+# BENEFITS:
+# ---------
+# - Reduces manual work for adding new diagram types
+# - Provides consistent skeleton structure
+# - Maintainers only need to fill in grammar details
+# - Faster response to new Mermaid releases
+
+name: Auto-Implement New Diagram Types
+
+on:
+  # Run weekly, 30 minutes after spec check
+  schedule:
+    - cron: '30 0 * * 0'
+
+  # Allow manual trigger for testing
+  workflow_dispatch:
+
+jobs:
+  detect-and-implement:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+
+    steps:
+    # ==========================================================================
+    # Setup
+    # ==========================================================================
+
+    - name: Checkout repository
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0  # Full history for branching
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+
+    - name: Install dependencies
+      run: |
+        npm install -g tree-sitter-cli
+        # GitHub CLI is pre-installed in GitHub Actions
+
+    # ==========================================================================
+    # Detect new diagram types
+    # ==========================================================================
+
+    - name: Check for new diagram types
+      id: check
+      run: |
+        # Run spec check without creating issue (we'll create PR instead)
+        set +e  # Don't fail on exit code 1
+        ./check-mermaid-spec.sh > check-output.txt 2>&1
+        EXIT_CODE=$?
+        set -e
+
+        cat check-output.txt
+
+        # Exit code 1 means new types detected
+        if [ $EXIT_CODE -eq 1 ]; then
+          echo "new_types_found=true" >> $GITHUB_OUTPUT
+
+          # Extract new type names from output
+          NEW_TYPES=$(grep "🆕" check-output.txt | sed 's/.*🆕 \([a-z]*\).*/\1/' | tr '\n' ',' | sed 's/,$//')
+          echo "new_types=$NEW_TYPES" >> $GITHUB_OUTPUT
+          echo "Detected new types: $NEW_TYPES"
+        else
+          echo "new_types_found=false" >> $GITHUB_OUTPUT
+          echo "No new diagram types detected"
+        fi
+
+    # ==========================================================================
+    # Generate skeleton implementation for each new type
+    # ==========================================================================
+
+    - name: Generate skeleton implementation
+      if: steps.check.outputs.new_types_found == 'true'
+      run: |
+        # Split comma-separated types
+        IFS=',' read -ra TYPES <<< "${{ steps.check.outputs.new_types }}"
+
+        for TYPE in "${TYPES[@]}"; do
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+          echo "Generating skeleton for: $TYPE"
+          echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+
+          # Create test corpus file with skeleton
+          cat > "test/corpus/${TYPE}.txt" << 'CORPUSEOF'
+==========================
+Basic DIAGRAM_TYPE diagram
+==========================
+
+DIAGRAM_KEYWORD
+    EXAMPLE_CONTENT
+
+---
+
+(source_file
+  (diagram_DIAGRAM_TYPE
+    (DIAGRAM_TYPE_stmt)))
+
+==========================
+DIAGRAM_TYPE with title
+==========================
+
+DIAGRAM_KEYWORD
+    title Example Diagram
+    EXAMPLE_CONTENT
+
+---
+
+(source_file
+  (diagram_DIAGRAM_TYPE
+    (DIAGRAM_TYPE_title)
+    (DIAGRAM_TYPE_stmt)))
+
+==========================
+Complex DIAGRAM_TYPE diagram
+==========================
+
+DIAGRAM_KEYWORD
+    title Complex Example
+    EXAMPLE_CONTENT_1
+    EXAMPLE_CONTENT_2
+    EXAMPLE_CONTENT_3
+
+---
+
+(source_file
+  (diagram_DIAGRAM_TYPE
+    (DIAGRAM_TYPE_title)
+    (DIAGRAM_TYPE_stmt)
+    (DIAGRAM_TYPE_stmt)
+    (DIAGRAM_TYPE_stmt)))
+
+CORPUSEOF
+
+          # Replace placeholders with actual type name
+          sed -i "s/DIAGRAM_TYPE/${TYPE}/g" "test/corpus/${TYPE}.txt"
+
+          # Add TODO note at top
+          echo "# TODO: Update this corpus file with real ${TYPE} diagram syntax" | cat - "test/corpus/${TYPE}.txt" > temp && mv temp "test/corpus/${TYPE}.txt"
+          echo "# See https://mermaid.js.org/ for ${TYPE} diagram documentation" | cat - "test/corpus/${TYPE}.txt" > temp && mv temp "test/corpus/${TYPE}.txt"
+
+          echo "✅ Created test/corpus/${TYPE}.txt"
+
+          # Add skeleton grammar rules to grammar.js
+          # This finds the last diagram rule and adds new one after it
+          echo ""
+          echo "📝 Adding skeleton grammar to grammar.js..."
+
+          # Create skeleton grammar
+          cat > "skeleton_${TYPE}.js" << 'GRAMMAREOF'
+
+    // =========================================================================
+    // DIAGRAM_TYPE Diagram
+    // =========================================================================
+    // TODO: Implement full grammar for DIAGRAM_TYPE diagrams
+    // Reference: https://mermaid.js.org/
+
+    diagram_DIAGRAM_TYPE: $ => seq(
+      kwd("DIAGRAM_KEYWORD"),
+      repeat(choice(
+        $._DIAGRAM_TYPE_stmt,
+        $._newline
+      ))
+    ),
+
+    _DIAGRAM_TYPE_stmt: $ => choice(
+      $.DIAGRAM_TYPE_title,
+      $.DIAGRAM_TYPE_stmt
+    ),
+
+    DIAGRAM_TYPE_title: $ => seq(
+      kwd("title"),
+      /[^\n]+/,
+      $._newline
+    ),
+
+    // TODO: Replace this with actual grammar rules
+    DIAGRAM_TYPE_stmt: $ => seq(
+      /[^\n]+/,
+      $._newline
+    ),
+GRAMMAREOF
+
+          sed -i "s/DIAGRAM_TYPE/${TYPE}/g" "skeleton_${TYPE}.js"
+
+          echo "✅ Generated skeleton grammar"
+          echo ""
+          echo "⚠️  NOTE: Grammar skeleton created but NOT added to grammar.js"
+          echo "   Maintainer needs to manually integrate this into grammar.js"
+          echo "   See skeleton_${TYPE}.js for generated code"
+        done
+
+    # ==========================================================================
+    # Create branch and commit changes
+    # ==========================================================================
+
+    - name: Create branch and commit
+      if: steps.check.outputs.new_types_found == 'true'
+      run: |
+        # Configure git
+        git config user.name "github-actions[bot]"
+        git config user.email "github-actions[bot]@users.noreply.github.com"
+
+        # Create branch name from first new type
+        FIRST_TYPE=$(echo "${{ steps.check.outputs.new_types }}" | cut -d',' -f1)
+        BRANCH_NAME="auto/add-${FIRST_TYPE}-diagram-support"
+
+        # Create and checkout branch
+        git checkout -b "$BRANCH_NAME"
+
+        # Add skeleton files
+        git add test/corpus/*.txt || true
+        git add skeleton_*.js || true
+
+        # Create commit
+        git commit -m "Add skeleton implementation for new diagram type(s)
+
+        Detected new diagram types: ${{ steps.check.outputs.new_types }}
+
+        This is an automated commit created by the auto-implement workflow.
+
+        Changes:
+        - Added test corpus files with skeleton tests
+        - Generated grammar skeleton (see skeleton_*.js files)
+
+        TODO for maintainers:
+        1. Review skeleton_*.js and integrate into grammar.js
+        2. Update test corpus with real diagram syntax
+        3. Run: npm run generate && make test
+        4. Update README.md
+
+        Co-authored-by: github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
+
+        # Push branch
+        git push origin "$BRANCH_NAME"
+
+        # Save branch name for PR creation
+        echo "branch_name=$BRANCH_NAME" >> $GITHUB_ENV
+
+    # ==========================================================================
+    # Create draft pull request
+    # ==========================================================================
+
+    - name: Create draft pull request
+      if: steps.check.outputs.new_types_found == 'true'
+      env:
+        GH_TOKEN: ${{ github.token }}
+      run: |
+        TYPES="${{ steps.check.outputs.new_types }}"
+
+        # Create PR body with implementation checklist
+        cat > pr-body.md << 'EOF'
+## 🤖 Automated Skeleton Implementation
+
+This draft PR was automatically created by the weekly spec compliance check.
+New Mermaid diagram type(s) detected: **REPLACE_TYPES**
+
+### 📦 What's Included
+
+- ✅ Test corpus files (`test/corpus/<type>.txt`) with skeleton structure
+- ✅ Grammar skeleton files (`skeleton_<type>.js`) ready to integrate
+- ⏳ Grammar integration (manual step required)
+- ⏳ Real syntax examples (manual step required)
+
+### 🔧 Implementation Checklist
+
+- [ ] Review generated skeleton files
+- [ ] Integrate `skeleton_*.js` code into `grammar.js`
+  - Add to `document` rule's `choice()` list
+  - Add diagram-specific tokens if needed
+- [ ] Update test corpus with real diagram syntax
+  - Research syntax at https://mermaid.js.org/
+  - Add 3-5 test cases covering key features
+- [ ] Generate parser and run tests
+  ```bash
+  npm run generate
+  make test
+  ```
+- [ ] Fix any test failures
+- [ ] Update README.md diagram support table
+- [ ] Update ARCHITECTURE.md if needed
+- [ ] Remove skeleton_*.js files after integration
+
+### 📚 References
+
+- Mermaid documentation: https://mermaid.js.org/intro/
+- Implementation guide: [ARCHITECTURE.md](ARCHITECTURE.md)
+- Corpus format: [CORPUS_FORMAT.md](CORPUS_FORMAT.md)
+- Example implementations: See existing diagram types in `grammar.js`
+
+### 🚀 Testing
+
+Once implementation is complete:
+
+```bash
+# Regenerate parser
+npm run generate
+
+# Run all tests
+make test
+
+# Test specific diagram type
+tree-sitter test test/corpus/<type>.txt
+```
+
+### 📝 Notes
+
+- This PR is in **draft** status - review and complete the checklist before marking ready
+- Skeleton code is intentionally basic - customize based on actual diagram syntax
+- Feel free to request review or ask questions
+
+---
+
+🤖 *Automatically generated by the [auto-implement workflow](.github/workflows/auto-implement.yml)*
+EOF
+
+        # Replace placeholder with actual types
+        sed -i "s/REPLACE_TYPES/$TYPES/g" pr-body.md
+
+        # Create the draft PR
+        gh pr create \
+          --title "Add support for $TYPES diagram type(s)" \
+          --body-file pr-body.md \
+          --draft \
+          --label "auto-generated,diagram-type,enhancement" \
+          --base main || \
+        gh pr create \
+          --title "Add support for $TYPES diagram type(s)" \
+          --body-file pr-body.md \
+          --draft \
+          --label "auto-generated,diagram-type,enhancement" \
+          --base master
+
+    # ==========================================================================
+    # Notification
+    # ==========================================================================
+
+    - name: Summary
+      if: steps.check.outputs.new_types_found == 'true'
+      run: |
+        echo "✅ Successfully created draft PR for new diagram types"
+        echo "Types: ${{ steps.check.outputs.new_types }}"
+        echo "Branch: ${{ env.branch_name }}"
+        echo ""
+        echo "Next steps:"
+        echo "1. Review the draft PR"
+        echo "2. Complete the implementation checklist"
+        echo "3. Mark PR as ready for review when complete"
+
+    - name: No action needed
+      if: steps.check.outputs.new_types_found == 'false'
+      run: |
+        echo "✅ No new diagram types detected"
+        echo "All Mermaid diagram types are already implemented!"

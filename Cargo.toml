@@ -1,12 +1,12 @@
 [package]
-name = "tree-sitter-mermaid"
-description = "Mermaid grammar for the tree-sitter parsing library (version 0.25.10 - matches tree-sitter 0.25.10)"
-version = "0.25.10"
-keywords = ["incremental", "parsing", "mermaid", "tree-sitter", "diagram"]
+name = "tree-sitter-little-mermaid"
+description = "🧜‍♀️ The Little Mermaid - Complete Mermaid.js grammar for tree-sitter with 100% test coverage (23/23 diagram types)"
+version = "0.9.0"
+keywords = ["mermaid", "tree-sitter", "parser", "diagram", "grammar"]
 categories = ["parsing", "text-editors", "development-tools"]
 repository = "https://github.com/mikkihugo/tree-sitter-mermaid"
 homepage = "https://github.com/mikkihugo/tree-sitter-mermaid"
-documentation = "https://docs.rs/tree-sitter-mermaid"
+documentation = "https://docs.rs/ts-little-mermaid"
 edition = "2021"
 rust-version = "1.70"
 license = "MIT"

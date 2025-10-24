@@ -116,36 +116,76 @@ class BdistWheel(bdist_wheel):
 
 
 setup(
+    # Package version (read from pyproject.toml above)
     version=version,
+
+    # Python package discovery
+    # Finds all packages under bindings/python/ directory
     packages=find_packages("bindings/python"),
     package_dir={"": "bindings/python"},
+
+    # Additional files to include in package
     package_data={
-        "tree_sitter_mermaid": ["*.pyi", "py.typed"],
-        "tree_sitter_mermaid.queries": ["*.scm"],
+        "tree_sitter_mermaid": [
+            "*.pyi",      # Type stub files for static type checking
+            "py.typed",   # Marker file indicating package supports type checking
+        ],
+        "tree_sitter_mermaid.queries": [
+            "*.scm",      # Tree-sitter query files (syntax highlighting, etc.)
+        ],
     },
-    ext_package="tree_sitter_mermaid",
+
+    # C extension configuration
+    ext_package="tree_sitter_mermaid",  # Extension installed under tree_sitter_mermaid/
     ext_modules=[
         Extension(
+            # Extension module name (_binding.so or _binding.pyd)
+            # Imported as: from tree_sitter_mermaid import _binding
             name="_binding",
+
+            # C source files to compile
             sources=[
-                "bindings/python/tree_sitter_mermaid/binding.c",
-                "src/parser.c",
-                "src/scanner.c",
+                "bindings/python/tree_sitter_mermaid/binding.c",  # Python C API wrapper
+                "src/parser.c",   # Auto-generated parser from grammar.js
+                "src/scanner.c",  # External scanner for context-aware tokenization
             ],
+
+            # Compiler flags
+            # Use C11 standard on Unix-like systems (Linux, macOS)
+            # Windows MSVC has different default behavior, no explicit standard needed
             extra_compile_args=(
                 ["-std=c11"] if system() != 'Windows' else []
             ),
+
+            # Preprocessor macros
             define_macros=[
+                # Enable Python stable ABI (Application Binary Interface)
+                # 0x03080000 = Python 3.8.0 minimum version (hex: 3.8.0.0)
+                # This ensures compatibility across Python 3.8, 3.9, 3.10, 3.11, 3.12+
                 ("Py_LIMITED_API", "0x03080000"),
+
+                # Clean handling of size_t types in Python C API
+                # Recommended for all Python C extensions
                 ("PY_SSIZE_T_CLEAN", None)
             ],
+
+            # Include directories for C compiler
+            # src/ contains parser.h and tree_sitter/parser.h
             include_dirs=["src"],
+
+            # Enable stable ABI compilation mode
+            # When True, setuptools uses limited API subset for forward compatibility
             py_limited_api=True,
         )
     ],
+
+    # Custom build commands
     cmdclass={
-        "build": Build,
-        "bdist_wheel": BdistWheel
+        "build": Build,              # Custom build to copy query files
+        "bdist_wheel": BdistWheel    # Custom wheel builder for stable ABI tags
     },
+
+    # Disable zip packaging (required for C extensions)
+    # C extension modules (.so/.pyd) cannot be loaded from zip files
     zip_safe=False
 )

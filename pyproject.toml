@@ -3,10 +3,10 @@ requires = ["setuptools>=42", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "tree-sitter-mermaid"
-description = "Mermaid grammar for tree-sitter"
-version = "0.25.10"
-keywords = ["incremental", "parsing", "tree-sitter", "mermaid"]
+name = "tree-sitter-little-mermaid"
+description = "🧜‍♀️ The Little Mermaid - Complete Mermaid.js grammar for tree-sitter with 100% test coverage (23/23 types)"
+version = "0.9.0"
+keywords = ["mermaid", "tree-sitter", "parser", "diagram", "grammar"]
 classifiers = [
   "Intended Audience :: Developers",
   "License :: OSI Approved :: MIT License",
@@ -22,7 +22,7 @@ readme = "README.md"
 Homepage = "https://github.com/tree-sitter/tree-sitter-mermaid"
 
 [project.optional-dependencies]
-core = ["tree-sitter~=0.21"]
+core = ["tree-sitter~=0.25"]
 
 [tool.cibuildwheel]
 build = "cp38-*"

@@ -1,0 +1,130 @@
+# =============================================================================
+# 🧜‍♀️ Publish to npm - The Little Mermaid Node.js Package
+# =============================================================================
+#
+# Automatically publishes the tree-sitter-little-mermaid package to npm
+# when a new GitHub release is created.
+#
+# TRIGGERS:
+# ---------
+# - Release published (new version tag created on GitHub)
+# - Manual trigger for testing
+#
+# PROCESS:
+# --------
+# 1. Checkout code
+# 2. Set up Node.js 20
+# 3. Install dependencies
+# 4. Run tests to verify package works
+# 5. Publish to npm using provenance (links package to source repo)
+#
+# REQUIREMENTS:
+# -------------
+# - NPM_TOKEN secret configured in repository settings
+# - npm account with publish access to tree-sitter-little-mermaid
+#
+# SETUP:
+# ------
+# 1. Create npm account at https://www.npmjs.com/
+# 2. Generate automation token:
+#    - Go to https://www.npmjs.com/settings/YOUR_USERNAME/tokens
+#    - Click "Generate New Token" → "Automation"
+#    - Copy the token
+# 3. Add token to GitHub repository secrets:
+#    - Go to repository Settings → Secrets and variables → Actions
+#    - Click "New repository secret"
+#    - Name: NPM_TOKEN
+#    - Value: <paste your npm token>
+#
+# USAGE:
+# ------
+# Create a new release on GitHub:
+#   git tag v0.25.11
+#   git push origin v0.25.11
+#   gh release create v0.25.11 --generate-notes
+#
+# The package will be automatically published to npm!
+
+name: 🧜‍♀️ Publish to npm
+
+on:
+  # Trigger on new releases (not drafts)
+  # This allows you to create draft releases without triggering publishing
+  release:
+    types: [released]
+
+  # Manual trigger for testing (use when you want to publish without creating a release)
+  workflow_dispatch:
+
+jobs:
+  build-and-publish:
+    name: Build and publish to npm
+    runs-on: ubuntu-latest
+
+    # Required for npm provenance (links package to source code)
+    permissions:
+      id-token: write
+      contents: read
+
+    steps:
+    # ==========================================================================
+    # Setup
+    # ==========================================================================
+
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        registry-url: 'https://registry.npmjs.org'
+
+    - name: Install dependencies
+      run: npm install
+
+    # ==========================================================================
+    # Build & Test
+    # ==========================================================================
+
+    - name: Generate parser
+      run: npm run generate
+
+    - name: Run tests
+      run: npm test
+
+    - name: Build bindings
+      run: npm run build
+
+    # ==========================================================================
+    # Publish to npm
+    # ==========================================================================
+
+    - name: Publish to npm
+      run: npm publish --provenance --access public
+      env:
+        NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+    # ==========================================================================
+    # Post-publish verification
+    # ==========================================================================
+
+    - name: Verify published package
+      run: |
+        sleep 10  # Wait for npm to update
+        npm view tree-sitter-little-mermaid version || echo "Package not yet visible"
+
+    - name: Post summary
+      run: |
+        echo "## 🧜‍♀️ Package Published!" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "✅ **tree-sitter-little-mermaid** has been published to npm" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Installation" >> $GITHUB_STEP_SUMMARY
+        echo '```bash' >> $GITHUB_STEP_SUMMARY
+        echo 'npm install tree-sitter-little-mermaid' >> $GITHUB_STEP_SUMMARY
+        echo '```' >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "### Links" >> $GITHUB_STEP_SUMMARY
+        echo "- npm: https://www.npmjs.com/package/tree-sitter-little-mermaid" >> $GITHUB_STEP_SUMMARY
+        echo "- Docs: https://github.com/mikkihugo/tree-sitter-mermaid" >> $GITHUB_STEP_SUMMARY

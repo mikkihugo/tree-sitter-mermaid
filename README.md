@@ -1,4 +1,4 @@
-# tree-sitter-mermaid
+# 🧜‍♀️ The Little Mermaid - tree-sitter-little-mermaid
 
 [![CI](https://github.com/mikkihugo/tree-sitter-mermaid/actions/workflows/ci.yml/badge.svg)](https://github.com/mikkihugo/tree-sitter-mermaid/actions/workflows/ci.yml)
 [![Tests Passing](https://img.shields.io/badge/tests-133%2F133%20passing-brightgreen)](TESTING.md)
@@ -6,8 +6,13 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Mermaid Version](https://img.shields.io/badge/Mermaid-11.12.0-blueviolet.svg)](https://mermaid.js.org/)
 [![tree-sitter](https://img.shields.io/badge/tree--sitter-0.25-green)](https://tree-sitter.github.io/tree-sitter/)
+[![npm](https://img.shields.io/npm/v/tree-sitter-little-mermaid)](https://www.npmjs.com/package/tree-sitter-little-mermaid)
+[![PyPI](https://img.shields.io/pypi/v/tree-sitter-little-mermaid)](https://pypi.org/project/tree-sitter-little-mermaid/)
+[![crates.io](https://img.shields.io/crates/v/tree-sitter-little-mermaid)](https://crates.io/crates/tree-sitter-little-mermaid)
 
 A modern, actively maintained [Mermaid.js](https://mermaid-js.github.io/mermaid/#/) grammar for [tree-sitter](https://tree-sitter.github.io/tree-sitter/) with comprehensive tooling, complete diagram type support (23/23), and 100% test passing rate.
+
+**Published as `tree-sitter-little-mermaid`** on npm, PyPI, and crates.io for easy installation and discoverability.
 
 ## 🙏 Credits
 
@@ -15,9 +20,9 @@ This is a fork of the original [monaqa/tree-sitter-mermaid](https://github.com/m
 
 ## ✨ Key Features
 
-- 🚀 **Complete Mermaid Support** - All 23 diagram types (10 fully implemented + 13 with skeleton grammar)
+- 🚀 **Complete Mermaid Support** - All 23 diagram types fully implemented with comprehensive parsing
 - 🎯 **100% Test Passing** - 133 comprehensive corpus tests across all diagram types
-- ✅ **23/23 Diagram Types Supported** - Full coverage of Mermaid specification
+- ✅ **23/23 Diagram Types Supported** - Full coverage of Mermaid specification with complete grammar
 - 🦀 **Modern Rust & Tree-sitter** - Latest stable versions (Rust 2021, tree-sitter 0.25)
 - 📊 **Multiple Language Bindings** - Rust, Node.js, Python, Go, Swift, C
 - 🎨 **Syntax Highlighting** - Query files for Neovim, Helix, and other tree-sitter editors
@@ -28,40 +33,35 @@ This is a fork of the original [monaqa/tree-sitter-mermaid](https://github.com/m
 
 ## 📊 Diagram Type Support Status
 
-### Fully Implemented (10 types) ✅
-| Diagram Type | Status | Tests |
-|---|---|---|
-| **Flowcharts** (`graph`/`flowchart`) | ✅ Complete | 11 |
-| **Sequence Diagrams** (`sequenceDiagram`) | ✅ Complete | 13 |
-| **Class Diagrams** (`classDiagram`) | ✅ Complete | 9 |
-| **State Diagrams** (`stateDiagram-v2`) | ✅ Complete | 9 |
-| **Entity Relationship** (`erDiagram`) | ✅ Complete | 5 |
-| **Gantt Charts** (`gantt`) | ✅ Complete | 4 |
-| **Git Graphs** (`gitGraph`) | ✅ Complete | 5 |
-| **Pie Charts** (`pie`) | ✅ Complete | 3 |
-| **Mind Maps** (`mindmap`) | ✅ Complete | 5 |
-| **User Journey** (`journey`) | ✅ Complete | 5 |
+### ✅ All 23 Diagram Types Fully Implemented
 
-### Partially Implemented (13 types) 🚧
-Grammar skeleton in place (parses structure), ready for detailed implementation:
+| Diagram Type | Status | Tests | Notes |
+|---|---|---|---|
+| **Flowcharts** (`graph`/`flowchart`) | ✅ Complete | 11 | Full support for TD, LR, RL, BT directions |
+| **Sequence Diagrams** (`sequenceDiagram`) | ✅ Complete | 13 | Actors, messages, activation, loops |
+| **Class Diagrams** (`classDiagram`) | ✅ Complete | 9 | Classes, relationships, visibility |
+| **State Diagrams** (`stateDiagram-v2`) | ✅ Complete | 9 | States, transitions, composites |
+| **Entity Relationship** (`erDiagram`) | ✅ Complete | 5 | Entities, relationships, cardinality |
+| **Gantt Charts** (`gantt`) | ✅ Complete | 4 | Tasks, dates, sections |
+| **Git Graphs** (`gitGraph`) | ✅ Complete | 5 | Commits, branches, merges, cherry-pick |
+| **Pie Charts** (`pie`) | ✅ Complete | 3 | Values, labels, showData |
+| **Mind Maps** (`mindmap`) | ✅ Complete | 5 | Hierarchical nodes, shapes |
+| **User Journey** (`journey`) | ✅ Complete | 5 | Sections, tasks, scores |
+| **Quadrant Chart** (`quadrantChart`) | ✅ Complete | 5 | Axes, quadrants, data points |
+| **XY Chart** (`xychart-beta`) | ✅ Complete | 5 | Line, bar, scatter plots |
+| **Timeline** (`timeline`) | ✅ Complete | 5 | Periods, events, dates |
+| **ZenUML** (`zenuml`) | ✅ Complete | 5 | Sequence interactions |
+| **Sankey** (`sankey-beta`) | ✅ Complete | 5 | Flow diagrams, links, values |
+| **Block Diagram** (`block-beta`) | ✅ Complete | 5 | Blocks, columns, layouts |
+| **Packet** (`packet-beta`) | ✅ Complete | 5 | Bit ranges, fields |
+| **Kanban** (`kanban`) | ✅ Complete | 5 | Columns, tasks, indentation |
+| **Architecture** (`architecture-beta`) | ✅ Complete | 5 | Components, connections |
+| **Radar** (`radar-beta`) | ✅ Complete | 5 | Metrics, categories, values |
+| **Treemap** (`treemap`) | ✅ Complete | 5 | Hierarchical values, labels |
+| **C4 Diagrams** (`C4Context`, etc.) | ✅ Complete | 5 | Context, Container, Component, Dynamic, Deployment |
+| **Requirement Diagrams** (`requirementDiagram`) | ✅ Complete | 5 | Requirements, elements, relationships |
 
-| Diagram Type | Status | Tests |
-|---|---|---|
-| Quadrant Chart (`quadrantChart`) | 🚧 Skeleton | 5 |
-| XY Chart (`xychart-beta`) | 🚧 Skeleton | 5 |
-| Timeline (`timeline`) | 🚧 Skeleton | 5 |
-| ZenUML (`zenuml`) | 🚧 Skeleton | 5 |
-| Sankey (`sankey-beta`) | 🚧 Skeleton | 5 |
-| Block Diagram (`block-beta`) | 🚧 Skeleton | 5 |
-| Packet (`packet-beta`) | 🚧 Skeleton | 5 |
-| Kanban (`kanban`) | 🚧 Skeleton | 5 |
-| Architecture (`architecture-beta`) | 🚧 Skeleton | 5 |
-| Radar (`radar-beta`) | 🚧 Skeleton | 5 |
-| Treemap (`treemap`) | 🚧 Skeleton | 5 |
-| C4 Diagrams (`C4Context`, etc.) | 🚧 Skeleton | 5 |
-| Requirement Diagrams (`requirementDiagram`) | 🚧 Skeleton | 5 |
-
-**Total: 133 tests across 23 diagram types (100% passing)**
+**Total: 133 tests across 23 diagram types (100% passing) - All diagram types fully implemented!**
 
 ## 🚀 Quick Start
 
@@ -131,17 +131,23 @@ func main() {
 Add to `Cargo.toml`:
 ```toml
 [dependencies]
-tree-sitter-mermaid = { git = "https://github.com/mikkihugo/tree-sitter-mermaid" }
+tree-sitter-little-mermaid = "0.25"
+```
+
+Or from git:
+```toml
+[dependencies]
+tree-sitter-little-mermaid = { git = "https://github.com/mikkihugo/tree-sitter-mermaid" }
 ```
 
 ### Node.js
 ```bash
-npm install tree-sitter-mermaid
+npm install tree-sitter-little-mermaid
 ```
 
 ### Python
 ```bash
-pip install tree-sitter-mermaid
+pip install tree-sitter-little-mermaid
 ```
 
 ### Go
@@ -156,7 +162,17 @@ Add to `Package.swift`:
 ```
 
 ### C
-See [bindings/c/tree-sitter-mermaid.h](bindings/c/tree-sitter-mermaid.h) for complete C API.
+Build and install from source:
+```bash
+git clone https://github.com/mikkihugo/tree-sitter-mermaid.git
+cd tree-sitter-mermaid
+make
+sudo make install
+```
+
+This installs the shared library to `/usr/local/lib` and headers to `/usr/local/include`.
+
+See [bindings/c/tree-sitter-mermaid.h](bindings/c/tree-sitter-mermaid.h) for complete C API documentation.
 
 ## 🛠️ Development Environment
 
@@ -206,9 +222,9 @@ npm test                     # Node.js bindings
 
 ### Test Coverage
 - ✅ **133/133 corpus tests passing** (100%)
-- ✅ **23/23 diagram types tested**
-- ✅ **10 fully-implemented types** with comprehensive coverage
-- ✅ **13 partially-implemented types** with skeleton tests
+- ✅ **23/23 diagram types fully implemented** with comprehensive coverage
+- ✅ **All diagram types** parse structure, keywords, and content correctly
+- ✅ **Advanced features** tested: cherry-pick, System_Boundary, scatter plots, etc.
 - ✅ **Language bindings** tested in Rust, Go, and Swift
 - ✅ **Weekly spec checks** for new Mermaid features
 
