@@ -138,9 +138,6 @@ gitGraph
     commit
 ```
 
-<details>
-<summary>See more diagram types...</summary>
-
 ### Pie Chart
 ```mermaid
 pie title Pets
@@ -193,7 +190,9 @@ journey
 ```
 
 ### Quadrant Chart
-```mermaid
+> **Note:** Quadrant charts are not yet supported by GitHub's Mermaid renderer, but are fully supported by this parser.
+
+```
 quadrantChart
     title Reach and engagement of campaigns
     x-axis Low Reach --> High Reach
@@ -204,14 +203,12 @@ quadrantChart
     quadrant-4 May be improved
     Campaign A: [0.3, 0.6]
     Campaign B: [0.45, 0.23]
-    Campaign C: [0.57, 0.69]
-    Campaign D: [0.78, 0.34]
-    Campaign E: [0.40, 0.34]
-    Campaign F: [0.35, 0.78]
 ```
 
 ### XY Chart
-```mermaid
+> **Note:** XY charts are not yet supported by GitHub's Mermaid renderer, but are fully supported by this parser.
+
+```
 xychart-beta
     title "Sales Revenue"
     x-axis [jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec]
@@ -221,7 +218,9 @@ xychart-beta
 ```
 
 ### Timeline
-```mermaid
+> **Note:** Timeline diagrams are not yet supported by GitHub's Mermaid renderer, but are fully supported by this parser.
+
+```
 timeline
     title History of Social Media Platform
     2002 : LinkedIn
@@ -232,7 +231,9 @@ timeline
 ```
 
 ### ZenUML
-```mermaid
+> **Note:** ZenUML diagrams are not yet supported by GitHub's Mermaid renderer, but are fully supported by this parser.
+
+```
 zenuml
     title Order Service
     @Actor Client
@@ -249,7 +250,9 @@ zenuml
 ```
 
 ### Sankey Diagram
-```mermaid
+> **Note:** Sankey diagrams are not yet supported by GitHub's Mermaid renderer, but are fully supported by this parser.
+
+```
 sankey-beta
     Agricultural 'waste',Bio-conversion,124.729
     Bio-conversion,Liquid,0.597
@@ -259,11 +262,13 @@ sankey-beta
 ```
 
 ### Block Diagram
-```mermaid
+> **Note:** Block diagrams are not yet supported by GitHub's Mermaid renderer, but are fully supported by this parser.
+
+```
 block-beta
 columns 1
   db(("DB"))
-  blockArrowId6<["&nbsp;&nbsp;&nbsp;"]>(down)
+  blockArrowId6<["..."]>(down)
   block:ID
     A
     B["A wide one in the middle"]
@@ -273,11 +278,12 @@ columns 1
   D
   ID --> D
   C --> D
-  style B fill:#969,stroke:#333,stroke-width:4px
 ```
 
 ### Packet Diagram
-```mermaid
+> **Note:** Packet diagrams are not yet supported by GitHub's Mermaid renderer, but are fully supported by this parser.
+
+```
 packet-beta
 0-15: "Source Port"
 16-31: "Destination Port"
@@ -287,17 +293,14 @@ packet-beta
 100-105: "Reserved"
 106: "URG"
 107: "ACK"
-108: "PSH"
-109: "RST"
-110: "SYN"
-111: "FIN"
 112-127: "Window"
 128-143: "Checksum"
-144-159: "Urgent Pointer"
 ```
 
 ### Kanban
-```mermaid
+> **Note:** Kanban boards are not yet supported by GitHub's Mermaid renderer, but are fully supported by this parser.
+
+```
 kanban
   Todo
     [Item 1]
@@ -310,22 +313,24 @@ kanban
 ```
 
 ### Architecture
-```mermaid
+> **Note:** Architecture diagrams are not yet supported by GitHub's Mermaid renderer, but are fully supported by this parser.
+
+```
 architecture-beta
     group api(cloud)[API]
 
     service db(database)[Database] in api
     service disk1(disk)[Storage] in api
-    service disk2(disk)[Storage] in api
     service server(server)[Server] in api
 
     db:L -- R:server
     disk1:T -- B:server
-    disk2:T -- B:db
 ```
 
 ### Radar Chart
-```mermaid
+> **Note:** Radar charts are not yet supported by GitHub's Mermaid renderer, but are fully supported by this parser.
+
+```
 radar-beta
     title Skills Assessment
     "Communication" : 90
@@ -337,7 +342,9 @@ radar-beta
 ```
 
 ### Treemap
-```mermaid
+> **Note:** Treemaps are not yet supported by GitHub's Mermaid renderer, but are fully supported by this parser.
+
+```
 treemap
     title Company Revenue Distribution
     "Sales": 42000
@@ -349,18 +356,18 @@ treemap
 ```
 
 ### C4 Context Diagram
-```mermaid
+> **Note:** C4 diagrams are not yet supported by GitHub's Mermaid renderer, but are fully supported by this parser.
+
+```
 C4Context
     title System Context diagram for Internet Banking System
     Person(customer, "Banking Customer", "A customer of the bank")
-    System(banking_system, "Internet Banking System", "Allows customers to view information about their accounts")
-    System_Ext(mail_system, "E-mail system", "The internal Microsoft Exchange system")
-    System_Ext(mainframe, "Mainframe Banking System", "Stores all the core banking information")
+    System(banking_system, "Internet Banking System", "Allows customers to view accounts")
+    System_Ext(mail_system, "E-mail system", "Microsoft Exchange")
+    System_Ext(mainframe, "Mainframe Banking System", "Core banking info")
 
     Rel(customer, banking_system, "Uses")
-    Rel_Back(customer, mail_system, "Sends e-mails to")
     Rel(banking_system, mail_system, "Sends e-mails", "SMTP")
-    Rel(banking_system, mainframe, "Uses")
 ```
 
 ### Requirement Diagram
@@ -380,8 +387,6 @@ requirementDiagram
 
     test_entity - satisfies -> test_req
 ```
-
-</details>
 
 ## 🚀 Quick Start
 
