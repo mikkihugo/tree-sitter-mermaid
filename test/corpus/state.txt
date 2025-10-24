@@ -39,7 +39,6 @@ stateDiagram-v2
       (state_arrow)
       (state_name))))
 
-
 ==========================
 States
 ==========================
@@ -402,9 +401,6 @@ stateDiagram
       (state_name)
       (state_arrow)
       (state_name))))
-
-==========================
-Minimal state diagram
 
 ==========================
 Minimal state diagram

@@ -1,0 +1,15 @@
+{
+  "grammars": [{
+    "name": "mermaid",
+    "scope": "source.mermaid",
+    "file-types": ["mmd", "mermaid"],
+    "path": "."
+  }],
+  "metadata": {
+    "name": "tree-sitter-little-mermaid",
+    "version": "0.9.0",
+    "license": "MIT",
+    "author": "Mikki Hugo",
+    "description": "🧜‍♀️ The Little Mermaid - Complete Mermaid.js grammar for tree-sitter"
+  }
+}
