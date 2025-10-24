@@ -1,65 +1,36 @@
-# Publishing Guide for tree-sitter-mermaid
+# Publishing Guide for 🧜‍♀️ The Little Mermaid (tree-sitter-little-mermaid)
 
-This document explains how to publish tree-sitter-mermaid to package registries (npm, PyPI, crates.io, Swift Package Manager).
+This document explains how to publish tree-sitter-little-mermaid to package registries (npm, PyPI, crates.io, Swift Package Manager).
 
 ## 📦 Package Registry Status
 
 | Registry | Package Name | Status | Owner | Notes |
 |----------|--------------|--------|-------|-------|
-| **npm** | `tree-sitter-mermaid` | ✅ Taken | monaqa/tree-sitter-mermaid | Original repo owns this |
-| **PyPI** | `tree-sitter-mermaid` | ❌ Available | - | Ready to publish! |
-| **crates.io** | `tree-sitter-mermaid` | ✅ Taken | monaqa/tree-sitter-mermaid | Original repo owns this |
+| **npm** | `tree-sitter-little-mermaid` | ✅ Available | - | Ready to publish! |
+| **PyPI** | `tree-sitter-little-mermaid` | ✅ Available | - | Ready to publish! |
+| **crates.io** | `tree-sitter-little-mermaid` | ✅ Available | - | Ready to publish! |
 | **Swift PM** | N/A | ✅ Ready | - | Git-based, no registry |
 
-## 🚀 Publishing Options
+## 🚀 Automated Publishing (Recommended)
 
-### Option 1: Publish PyPI Only (Recommended for now)
+All three package registries (npm, PyPI, crates.io) are configured with automated GitHub Actions workflows!
 
-Since PyPI is available, you can immediately publish the Python package:
+**One-time setup:**
+1. Create accounts on npm, PyPI, and crates.io
+2. Configure secrets (see setup sections below)
+3. Create a GitHub release
 
+**Then every release is automatic!**
 ```bash
-# Install build tools
-pip install build twine
-
-# Build the package
-python -m build
-
-# Upload to PyPI (requires PyPI account and API token)
-python -m twine upload dist/*
+gh release create v0.9.1 --generate-notes
 ```
 
-### Option 2: Scoped npm Package
+This will automatically publish to:
+- ✅ npm
+- ✅ PyPI (via OIDC - no token needed!)
+- ✅ crates.io
 
-Publish under your GitHub username as a scoped package:
-
-**Change package.json name to:**
-```json
-{
-  "name": "@mikkihugo/tree-sitter-mermaid",
-  "version": "0.25.10"
-}
-```
-
-**Then publish:**
-```bash
-npm login
-npm publish --access public
-```
-
-Users would install with:
-```bash
-npm install @mikkihugo/tree-sitter-mermaid
-```
-
-### Option 3: Contact Original Maintainer
-
-Reach out to monaqa (original maintainer) to:
-- Request npm/crates.io package ownership transfer
-- Propose collaboration
-- Explain your improvements (100% test coverage, 23/23 types, modern tooling)
-
-GitHub: https://github.com/monaqa
-Original repo: https://github.com/monaqa/tree-sitter-mermaid
+See workflows in `.github/workflows/publish-*.yml`
 
 ## 📋 Pre-Publishing Checklist
 
@@ -109,7 +80,7 @@ twine check dist/*
 twine upload --repository testpypi dist/*
 
 # Test install from TestPyPI
-pip install --index-url https://test.pypi.org/simple/ tree-sitter-mermaid
+pip install --index-url https://test.pypi.org/simple/ tree-sitter-little-mermaid
 
 # If everything works, upload to real PyPI
 twine upload dist/*
@@ -117,93 +88,72 @@ twine upload dist/*
 
 ### Automated PyPI Publishing (GitHub Actions)
 
-Add this workflow: `.github/workflows/publish-pypi.yml`
+**✅ Already configured!** See `.github/workflows/publish-pypi.yml`
 
-```yaml
-name: Publish to PyPI
+Uses **OIDC trusted publishing** (no API token needed). Setup:
 
-on:
-  release:
-    types: [published]
-
-jobs:
-  publish:
-    runs-on: ubuntu-latest
-    permissions:
-      id-token: write  # For trusted publishing
-
-    steps:
-    - uses: actions/checkout@v4
-
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.11'
-
-    - name: Install build tools
-      run: |
-        python -m pip install --upgrade pip
-        pip install build twine
-
-    - name: Build package
-      run: python -m build
-
-    - name: Publish to PyPI
-      uses: pypa/gh-action-pypi-publish@release/v1
-      with:
-        password: ${{ secrets.PYPI_API_TOKEN }}
-```
+1. Go to https://pypi.org/manage/account/publishing/
+2. Add trusted publisher:
+   - PyPI Project Name: `tree-sitter-little-mermaid`
+   - Owner: `mikkihugo`
+   - Repository: `tree-sitter-mermaid`
+   - Workflow: `publish-pypi.yml`
+3. Done! Release triggers automatically publish
 
 ## 🦀 Publishing to crates.io
 
-**⚠️ Name is taken** - Options:
+**✅ Already configured!** See `.github/workflows/publish-crates.yml`
 
-1. **Request ownership** from monaqa
-2. **Use different name**: `tree-sitter-mermaid-complete` or `ts-mermaid`
-3. **Wait** for response from original maintainer
+### Setup
 
-If you get ownership:
+1. Create account at https://crates.io/ (sign in with GitHub)
+2. Generate API token: https://crates.io/settings/tokens
+3. Add to GitHub repository secrets:
+   - Name: `CARGO_REGISTRY_TOKEN`
+   - Value: <your token>
+
+Then releases automatically publish!
+
+### Manual Publishing
 
 ```bash
 # Login to crates.io
 cargo login <your-api-token>
 
-# Publish
-cargo publish
-
 # Dry run first (recommended)
 cargo publish --dry-run
+
+# Publish
+cargo publish
 ```
 
 ## 📦 Publishing to npm
 
-**⚠️ Name is taken** - Options:
+**✅ Already configured!** See `.github/workflows/publish-npm.yml`
 
-### Option A: Scoped Package (Recommended)
+### Setup
 
-1. **Update package.json**:
-   ```json
-   {
-     "name": "@mikkihugo/tree-sitter-mermaid"
-   }
-   ```
+1. Create account at https://www.npmjs.com/
+2. Generate automation token: https://www.npmjs.com/settings/YOUR_USERNAME/tokens
+3. Add to GitHub repository secrets:
+   - Name: `NPM_TOKEN`
+   - Value: <your token>
 
-2. **Publish**:
-   ```bash
-   npm login
-   npm publish --access public
-   ```
+Then releases automatically publish!
 
-### Option B: Request Transfer
+### Manual Publishing
 
-Contact monaqa to request npm package transfer.
+```bash
+npm login
+npm publish --access public
+```
 
 ## 🍎 Swift Package Manager
 
 **No action needed!** Swift packages are Git-based. Users can install directly:
 
 ```swift
-.package(url: "https://github.com/mikkihugo/tree-sitter-mermaid.git", from: "0.25.10")
+.package(url: "https://github.com/mikkihugo/tree-sitter-mermaid.git", from: "0.9.0")
 ```
 
 The package is already configured in `Package.swift`.
@@ -214,7 +164,7 @@ When releasing a new version, update ALL these files:
 
 ```bash
 # Automated version bump script
-NEW_VERSION="0.25.11"
+NEW_VERSION="0.9.1"
 
 # Update all version fields
 sed -i "s/version = \"[0-9.]*\"/version = \"$NEW_VERSION\"/" Cargo.toml
@@ -241,13 +191,11 @@ git push origin main --tags
    npm run build
    python -m build
    ```
-5. **Create Git tag**: `git tag v0.25.11`
-6. **Push to GitHub**: `git push origin main --tags`
-7. **Create GitHub Release** with release notes
-8. **Publish to registries**:
-   - PyPI: `twine upload dist/*`
-   - npm (scoped): `npm publish --access public`
-   - crates.io (if available): `cargo publish`
+5. **Create GitHub Release** (automatically publishes):
+   ```bash
+   gh release create v0.9.1 --generate-notes
+   ```
+6. **Workflows automatically publish** to npm, PyPI, and crates.io!
 
 ## 🤖 Automated Publishing Workflow
 
@@ -267,17 +215,19 @@ git push origin main --tags
 
 As of October 2024:
 
+- ✅ **Package renamed**: `tree-sitter-little-mermaid` (available on all registries!)
 - ✅ **Swift PM**: Ready (Git-based, working)
-- ⏳ **PyPI**: Ready to publish (name available)
-- ⏳ **npm**: Need scoped package or ownership transfer
-- ⏳ **crates.io**: Need ownership transfer or new name
+- ✅ **PyPI**: Ready to publish (automated workflow configured)
+- ✅ **npm**: Ready to publish (automated workflow configured)
+- ✅ **crates.io**: Ready to publish (automated workflow configured)
 
 ## 🎯 Recommended Next Steps
 
-1. **Publish to PyPI immediately** (name available!)
-2. **Contact monaqa** about npm/crates.io ownership
-3. **Use scoped npm** (@mikkihugo/tree-sitter-mermaid) as backup
-4. **Set up automated PyPI publishing** via GitHub Actions
+1. **Create accounts** on npm, PyPI, and crates.io
+2. **Configure secrets** (NPM_TOKEN, CARGO_REGISTRY_TOKEN)
+3. **Set up PyPI trusted publisher** (no token needed!)
+4. **Create first release**: `gh release create v0.9.0 --generate-notes`
+5. **Automated workflows** will publish to all three registries! 🚀
 
 ---
 
