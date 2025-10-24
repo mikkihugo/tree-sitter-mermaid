@@ -65,7 +65,9 @@ This is a fork of the original [monaqa/tree-sitter-mermaid](https://github.com/m
 
 ## 🎨 Visual Examples
 
-GitHub natively renders Mermaid diagrams! Here are some examples of what this parser supports:
+GitHub natively renders Mermaid diagrams! Here are examples of all 23 diagram types supported by this parser.
+
+> **Note:** GitHub's Mermaid renderer currently supports 11 of the 23 diagram types (Flowchart, Sequence, Class, State, ER, Gantt, Pie, Git Graph, Mind Map, User Journey, and Requirement). The remaining 12 types (Quadrant, XY Chart, Timeline, ZenUML, Sankey, Block, Packet, Kanban, Architecture, Radar, Treemap, C4) are shown as code blocks below. **All 23 types are fully supported by this tree-sitter parser** and can be parsed, highlighted, and processed in editors like Neovim and Helix.
 
 ### Flowchart
 ```mermaid
@@ -190,8 +192,6 @@ journey
 ```
 
 ### Quadrant Chart
-> **Note:** Quadrant charts are not yet supported by GitHub's Mermaid renderer, but are fully supported by this parser.
-
 ```
 quadrantChart
     title Reach and engagement of campaigns
@@ -206,8 +206,6 @@ quadrantChart
 ```
 
 ### XY Chart
-> **Note:** XY charts are not yet supported by GitHub's Mermaid renderer, but are fully supported by this parser.
-
 ```
 xychart-beta
     title "Sales Revenue"
@@ -218,8 +216,6 @@ xychart-beta
 ```
 
 ### Timeline
-> **Note:** Timeline diagrams are not yet supported by GitHub's Mermaid renderer, but are fully supported by this parser.
-
 ```
 timeline
     title History of Social Media Platform
@@ -231,8 +227,6 @@ timeline
 ```
 
 ### ZenUML
-> **Note:** ZenUML diagrams are not yet supported by GitHub's Mermaid renderer, but are fully supported by this parser.
-
 ```
 zenuml
     title Order Service
@@ -250,8 +244,6 @@ zenuml
 ```
 
 ### Sankey Diagram
-> **Note:** Sankey diagrams are not yet supported by GitHub's Mermaid renderer, but are fully supported by this parser.
-
 ```
 sankey-beta
     Agricultural 'waste',Bio-conversion,124.729
@@ -262,8 +254,6 @@ sankey-beta
 ```
 
 ### Block Diagram
-> **Note:** Block diagrams are not yet supported by GitHub's Mermaid renderer, but are fully supported by this parser.
-
 ```
 block-beta
 columns 1
@@ -281,8 +271,6 @@ columns 1
 ```
 
 ### Packet Diagram
-> **Note:** Packet diagrams are not yet supported by GitHub's Mermaid renderer, but are fully supported by this parser.
-
 ```
 packet-beta
 0-15: "Source Port"
@@ -298,8 +286,6 @@ packet-beta
 ```
 
 ### Kanban
-> **Note:** Kanban boards are not yet supported by GitHub's Mermaid renderer, but are fully supported by this parser.
-
 ```
 kanban
   Todo
@@ -313,8 +299,6 @@ kanban
 ```
 
 ### Architecture
-> **Note:** Architecture diagrams are not yet supported by GitHub's Mermaid renderer, but are fully supported by this parser.
-
 ```
 architecture-beta
     group api(cloud)[API]
@@ -328,8 +312,6 @@ architecture-beta
 ```
 
 ### Radar Chart
-> **Note:** Radar charts are not yet supported by GitHub's Mermaid renderer, but are fully supported by this parser.
-
 ```
 radar-beta
     title Skills Assessment
@@ -342,8 +324,6 @@ radar-beta
 ```
 
 ### Treemap
-> **Note:** Treemaps are not yet supported by GitHub's Mermaid renderer, but are fully supported by this parser.
-
 ```
 treemap
     title Company Revenue Distribution
@@ -356,8 +336,6 @@ treemap
 ```
 
 ### C4 Context Diagram
-> **Note:** C4 diagrams are not yet supported by GitHub's Mermaid renderer, but are fully supported by this parser.
-
 ```
 C4Context
     title System Context diagram for Internet Banking System
