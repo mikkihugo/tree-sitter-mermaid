@@ -1,4 +1,5 @@
 [
+ ; Diagram type keywords
  "sequenceDiagram"
  "classDiagram"
  "classDiagram-v2"
@@ -7,21 +8,40 @@
  "gantt"
  "pie"
  "flowchart"
- "erdiagram"
+ "graph"
+ "erDiagram"
+ "gitGraph"
+ "journey"
+ "mindmap"
+ "timeline"
+ "quadrantChart"
+ "xychart-beta"
+ "zenuml"
+ "sankey-beta"
+ "block-beta"
+ "packet-beta"
+ "kanban"
+ "architecture-beta"
+ "radar-beta"
+ "treemap"
+ "requirementDiagram"
+ "C4Context"
+ "C4Container"
+ "C4Component"
+ "C4Dynamic"
+ "C4Deployment"
 
+ ; Sequence diagram keywords
  "participant"
  "as"
  "activate"
  "deactivate"
- "note "
+ "note"
  "over"
  "link"
  "links"
- ; "left of"
- ; "right of"
  "properties"
  "details"
- "title"
  "loop"
  "rect"
  "opt"
@@ -34,20 +54,43 @@
  (note_placement_left)
  (note_placement_right)
 
+ ; Class diagram keywords
  "class"
+ "namespace"
 
- "state "
+ ; State diagram keywords
+ "state"
 
- "dateformat"
- "inclusiveenddates"
- "topaxis"
- "axisformat"
+ ; Gantt chart keywords
+ "dateFormat"
+ "inclusiveEndDates"
+ "topAxis"
+ "axisFormat"
  "includes"
  "excludes"
- "todaymarker"
- "title"
+ "todayMarker"
  "section"
 
+ ; Git graph keywords
+ "commit"
+ "branch"
+ "checkout"
+ "merge"
+ "cherry-pick"
+ "reset"
+
+ ; User journey keywords
+ "journey"
+ "section"
+
+ ; Mind map keywords
+ "root"
+
+ ; Timeline keywords
+ "period"
+
+ ; Common keywords
+ "title"
  "direction"
  "subgraph"
 
@@ -175,3 +218,31 @@
  ] @keyword
 
 (er_attribute_comment) @string
+
+; Git graph
+[
+ (gitgraph_commit_id)
+ (gitgraph_branch_name)
+] @field
+
+[
+ (gitgraph_commit_tag)
+ (gitgraph_commit_type)
+] @type
+
+; Journey
+(journey_task_name) @field
+(journey_task_score) @number
+
+; Mindmap
+(mindmap_node_id) @field
+
+; Timeline
+(timeline_event) @field
+
+; Quadrant chart
+(quadrant_point) @field
+
+; Numbers and strings (generic)
+(pie_value) @number
+(gantt_task_data) @string
