@@ -163,6 +163,6 @@ This security policy may be updated from time to time. Check back periodically f
 
 ---
 
-**Last Updated**: November 2024
+**Last Updated**: November 2025
 
 Thank you for helping keep tree-sitter-little-mermaid secure! 🔒
