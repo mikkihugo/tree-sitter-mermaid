@@ -20,7 +20,7 @@
 //
 // USAGE:
 // Add to your Package.swift dependencies:
-//   .package(url: "https://github.com/Singularity/singularity-parser-mermaid.git", from: "0.9.1")
+//   .package(url: "https://github.com/Singularity-ng/singularity-parser-mermaid.git", from: "0.9.1")
 //
 // Then import in your Swift code:
 //   import TreeSitterMermaid

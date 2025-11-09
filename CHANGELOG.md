@@ -94,5 +94,5 @@ For earlier version history, please refer to the original repository.
 
 ---
 
-[0.9.1]: https://github.com/Singularity/singularity-parser-mermaid/releases/tag/v0.9.1
-[0.9.0]: https://github.com/Singularity/singularity-parser-mermaid/releases/tag/v0.9.0
+[0.9.1]: https://github.com/Singularity-ng/singularity-parser-mermaid/releases/tag/v0.9.1
+[0.9.0]: https://github.com/Singularity-ng/singularity-parser-mermaid/releases/tag/v0.9.0

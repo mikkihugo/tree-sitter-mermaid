@@ -1,0 +1,75 @@
+# =============================================================================
+# Docker Compose Configuration for tree-sitter-mermaid Development
+# =============================================================================
+#
+# This file provides easy-to-use commands for development with Docker.
+#
+# USAGE:
+#   docker-compose run dev                    # Start interactive shell
+#   docker-compose run dev make test          # Run tests
+#   docker-compose run dev make check-spec    # Check Mermaid spec
+#   docker-compose run dev bash               # Open bash shell
+#
+# FEATURES:
+# - Mounts current directory to /workspace
+# - Preserves file permissions with user mapping
+# - Caches dependencies for faster builds
+# - Easy command execution without complex docker run syntax
+
+services:
+  # Development environment service
+  dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: tree-sitter-mermaid-dev:latest
+    container_name: tree-sitter-mermaid-dev
+    
+    # Mount the current directory into the container
+    volumes:
+      - .:/workspace
+      # Cache directories for faster rebuilds
+      - node_modules:/workspace/node_modules
+      - cargo_cache:/usr/local/cargo/registry
+      - cargo_git:/usr/local/cargo/git
+    
+    # Keep container running for interactive use
+    stdin_open: true
+    tty: true
+    
+    # Set working directory
+    working_dir: /workspace
+    
+    # Run as current user to preserve file permissions
+    # Override with: docker-compose run --user root dev
+    user: "${UID:-1000}:${GID:-1000}"
+    
+    # Environment variables
+    environment:
+      - HOME=/tmp
+      - CARGO_HOME=/usr/local/cargo
+      - PATH=/usr/local/cargo/bin:/usr/local/go/bin:/usr/local/bin:/usr/bin:/bin
+
+  # CI testing service (runs tests and exits)
+  ci:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: tree-sitter-mermaid-dev:latest
+    volumes:
+      - .:/workspace
+    working_dir: /workspace
+    command: >
+      bash -c "
+        echo '=== Running CI Tests ===' &&
+        npm install &&
+        make test &&
+        ./check-mermaid-spec.sh &&
+        echo '=== All CI Checks Passed! ==='
+      "
+
+# Named volumes for caching
+volumes:
+  node_modules:
+  cargo_cache:
+  cargo_git:

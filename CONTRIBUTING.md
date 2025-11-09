@@ -37,9 +37,47 @@ This project adheres to a [Code of Conduct](CODE_OF_CONDUCT.md). By participatin
 
 ## Development Environment
 
-### Option 1: Nix (Recommended - Fully Reproducible)
+Choose the environment that works best for you. All options provide the same development tools.
 
-The easiest way to get started with a reproducible environment:
+### Option 1: Docker (Recommended - Consistent Everywhere)
+
+Docker provides a consistent, containerized environment that works on any platform:
+
+```bash
+# Build the development container
+docker build -t tree-sitter-mermaid-dev .
+
+# Run interactively
+docker run -it -v $(pwd):/workspace tree-sitter-mermaid-dev
+
+# Or use Docker Compose (easier)
+docker-compose run dev              # Interactive shell
+docker-compose run dev make test    # Run tests
+docker-compose run dev bash         # Open bash
+
+# VS Code Remote Containers
+# Install "Dev Containers" extension, then:
+# Command Palette → "Dev Containers: Reopen in Container"
+```
+
+**Why Docker?**
+- ✅ Works on Windows, macOS, Linux
+- ✅ Same environment as CI pipeline
+- ✅ No conflicts with system packages
+- ✅ Zero configuration after `docker build`
+- ✅ Matches GitHub Codespaces environment
+
+### Option 2: GitHub Codespaces (Cloud Development)
+
+Develop in your browser or VS Code with zero local setup:
+
+1. Go to the repository on GitHub
+2. Click **Code** → **Codespaces** → **Create codespace**
+3. Start coding immediately with all tools pre-installed
+
+### Option 3: Nix (Reproducible & Declarative)
+
+Nix provides deterministic, reproducible builds:
 
 ```bash
 # Install Nix (one-time setup)
@@ -55,7 +93,7 @@ direnv allow         # in the repo root
 
 This automatically provides all required toolchains: C/C++ compiler, Python, Node.js, Rust, Go, Swift, tree-sitter CLI, pkg-config, and Make.
 
-### Option 2: Homebrew (macOS)
+### Option 4: Homebrew (macOS)
 
 ```bash
 # Install all dependencies at once
@@ -65,7 +103,7 @@ brew bundle
 brew install tree-sitter node python rust go swift
 ```
 
-### Option 3: Manual Installation
+### Option 5: Manual Installation
 
 Install the following tools:
 - **tree-sitter CLI**: `npm install -g tree-sitter-cli`
@@ -82,7 +120,7 @@ Install the following tools:
 ### Reporting Bugs
 
 Before submitting a bug report:
-- Check the [existing issues](https://github.com/Singularity/singularity-parser-mermaid/issues) to avoid duplicates
+- Check the [existing issues](https://github.com/Singularity-ng/singularity-parser-mermaid/issues) to avoid duplicates
 - Test with the latest version of the parser
 
 When reporting a bug, please include:
