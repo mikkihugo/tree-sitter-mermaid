@@ -29,7 +29,7 @@
 #   - Node.js (for generating parser from grammar.js)
 
 # Version number (synchronized with package.json and Cargo.toml)
-VERSION := 0.9.0
+VERSION := 0.9.1
 
 # Library name used for output files
 LANGUAGE_NAME := tree-sitter-mermaid

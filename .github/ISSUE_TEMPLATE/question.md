@@ -28,7 +28,7 @@ Describe what you've already tried or where you've looked for an answer:
 ```
 
 ## Environment (if applicable)
-- **tree-sitter-little-mermaid version**: [e.g., 0.9.0]
+- **tree-sitter-mermaid version**: [e.g., 0.9.1]
 - **Language binding**: [e.g., Rust, Node.js, Python]
 - **Operating System**: [e.g., Ubuntu 22.04, macOS 14]
 

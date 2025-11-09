@@ -27,7 +27,7 @@
 //! This example tests 3 common diagram types, but tree-sitter-mermaid supports
 //! all 23 Mermaid diagram types. See the README for a complete list.
 
-use tree_sitter_little_mermaid::language;
+use tree_sitter_mermaid::language;
 
 fn main() {
     // Sample Mermaid diagrams demonstrating different diagram types
