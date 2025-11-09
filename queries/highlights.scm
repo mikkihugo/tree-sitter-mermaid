@@ -208,8 +208,7 @@
 (arg_directive) @string
 
 ; Special directive markers
-"%%{" @punctuation.special
-"}%%" @punctuation.special
+; Note: %%{ and }%% are part of the directive structure, not separate nodes
 
 ; ============================================================================
 ; Identifiers and Names
@@ -496,11 +495,7 @@
 (class_visibility_protected) @attribute
 (class_visibility_internal) @attribute
 
-; Visibility symbols
-"+" @attribute
-"-" @attribute
-"#" @attribute
-"~" @attribute
+; Visibility symbols are captured via their node types above (class_visibility_*)
 
 ; ============================================================================
 ; Annotations and Attributes
