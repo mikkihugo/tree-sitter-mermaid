@@ -1,6 +1,7 @@
 # 🧜‍♀️ The Little Mermaid - tree-sitter-little-mermaid
 
 [![CI](https://github.com/mikkihugo/tree-sitter-mermaid/actions/workflows/ci.yml/badge.svg)](https://github.com/mikkihugo/tree-sitter-mermaid/actions/workflows/ci.yml)
+[![Production Ready](https://img.shields.io/badge/status-production%20ready-brightgreen)](PRODUCTION_READINESS.md)
 [![Tests Passing](https://img.shields.io/badge/tests-133%2F133%20passing-brightgreen)](TESTING.md)
 [![Diagram Coverage](https://img.shields.io/badge/coverage-23%2F23%20types-brightgreen)](ARCHITECTURE.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
@@ -13,6 +14,8 @@
 A modern, actively maintained [Mermaid.js](https://mermaid-js.github.io/mermaid/#/) grammar for [tree-sitter](https://tree-sitter.github.io/tree-sitter/) with comprehensive tooling, complete diagram type support (23/23), and 100% test passing rate.
 
 **Published as `tree-sitter-little-mermaid`** on npm, PyPI, and crates.io for easy installation and discoverability.
+
+> **✅ Production Ready**: This parser is production-ready and suitable for use in production environments. See our comprehensive [Production Readiness Assessment](PRODUCTION_READINESS.md) for detailed evaluation (Score: 89/100).
 
 ## 🙏 Credits
 
@@ -543,15 +546,27 @@ See [TESTING.md](TESTING.md) for comprehensive testing guide.
 
 | Document | Purpose |
 |---|---|
+| [README.md](README.md) | Overview, quick start, examples, installation |
+| [PRODUCTION_READINESS.md](PRODUCTION_READINESS.md) | Comprehensive production readiness assessment |
 | [ARCHITECTURE.md](ARCHITECTURE.md) | System design, grammar structure, parser internals |
 | [TESTING.md](TESTING.md) | Testing infrastructure, how to write tests, CI/CD details |
-| [CORPUS_FORMAT.md](CORPUS_FORMAT.md) | Test corpus format, writing test cases |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | Contribution guidelines, development workflow |
+| [CHANGELOG.md](CHANGELOG.md) | Version history and release notes |
+| [SECURITY.md](SECURITY.md) | Security policy and vulnerability reporting |
+| [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) | Community standards and expectations |
+| [PUBLISHING.md](PUBLISHING.md) | Package publishing process and distribution |
 | [CLAUDE.md](CLAUDE.md) | AI assistant guidelines, development workflow |
 | [grammar.js](grammar.js) | Grammar definition with inline documentation |
 
 ## 🤝 Contributing
 
-We welcome contributions! Here's how to add or improve diagram type support:
+We welcome contributions! Please read our [Contributing Guide](CONTRIBUTING.md) for detailed information on how to contribute.
+
+### Quick Start for Contributors
+1. Read the [Contributing Guide](CONTRIBUTING.md)
+2. Check the [Code of Conduct](CODE_OF_CONDUCT.md)
+3. Look for issues labeled `good-first-issue`
+4. Follow the development workflow in the contributing guide
 
 ### Adding Support for a New Diagram Type
 1. **Research** the diagram syntax in [Mermaid documentation](https://mermaid.js.org/)
