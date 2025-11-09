@@ -72,7 +72,7 @@
 //
 package tree_sitter_mermaid
 
-// #cgo CFLAGS: -std=c11 -fPIC
+// #cgo CFLAGS: -std=c11 -fPIC -I../../src
 // #include "../../src/parser.c"
 // #include "../../src/scanner.c"
 import "C"

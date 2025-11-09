@@ -1,4 +1,4 @@
-module github.com/Singularity/singularity-parser-mermaid
+module github.com/Singularity-ng/singularity-parser-mermaid/bindings/go
 
 go 1.22
 

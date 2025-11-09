@@ -1,0 +1,729 @@
+Metadata-Version: 2.4
+Name: tree-sitter-mermaid
+Version: 0.9.1
+Summary: 🚀 Singularity tree-sitter-mermaid - Complete Mermaid.js grammar for tree-sitter with 100% test coverage (23/23 types)
+License: MIT
+Project-URL: Homepage, https://github.com/Singularity-ng/singularity-parser-mermaid
+Keywords: mermaid,tree-sitter,parser,diagram,grammar
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Topic :: Software Development :: Compilers
+Classifier: Topic :: Text Processing :: Linguistic
+Classifier: Typing :: Typed
+Requires-Python: >=3.8
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Provides-Extra: core
+Requires-Dist: tree-sitter~=0.25; extra == "core"
+Dynamic: license-file
+
+# 🚀 Singularity TreeSitter Mermaid - tree-sitter-mermaid
+
+[![CI](https://github.com/Singularity-ng/singularity-parser-mermaid/actions/workflows/ci.yml/badge.svg)](https://github.com/Singularity-ng/singularity-parser-mermaid/actions/workflows/ci.yml)
+[![Production Ready](https://img.shields.io/badge/status-production%20ready-brightgreen)](PRODUCTION_READINESS.md)
+[![Tests Passing](https://img.shields.io/badge/tests-133%2F133%20passing-brightgreen)](TESTING.md)
+[![Diagram Coverage](https://img.shields.io/badge/coverage-23%2F23%20types-brightgreen)](ARCHITECTURE.md)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
+[![Mermaid Version](https://img.shields.io/badge/Mermaid-11.12.0-blueviolet.svg)](https://mermaid.js.org/)
+[![tree-sitter](https://img.shields.io/badge/tree--sitter-0.25-green)](https://tree-sitter.github.io/tree-sitter/)
+[![npm](https://img.shields.io/npm/v/tree-sitter-mermaid)](https://www.npmjs.com/package/tree-sitter-mermaid)
+[![PyPI](https://img.shields.io/pypi/v/tree-sitter-mermaid)](https://pypi.org/project/tree-sitter-mermaid/)
+[![crates.io](https://img.shields.io/crates/v/tree-sitter-mermaid)](https://crates.io/crates/tree-sitter-mermaid)
+
+A modern, actively maintained [Mermaid.js](https://mermaid-js.github.io/mermaid/#/) grammar for [tree-sitter](https://tree-sitter.github.io/tree-sitter/) with comprehensive tooling, complete diagram type support (23/23), and 100% test passing rate.
+
+**Published as `tree-sitter-mermaid`** on npm, PyPI, and crates.io for easy installation and discoverability.
+
+> **✅ Production Ready**: This parser is production-ready and suitable for use in production environments. See our comprehensive [Production Readiness Assessment](PRODUCTION_READINESS.md) for detailed evaluation (Score: 89/100).
+
+## 🙏 Credits
+
+This is a fork of the original [monaqa/tree-sitter-mermaid](https://github.com/monaqa/tree-sitter-mermaid) by [Mogami Shinichi](https://github.com/monaqa). We extend our deepest gratitude to the original maintainer for their foundational work that made this project possible.
+
+Singularity maintains this distribution, led by [Mikael Hugo](https://github.com/mikkihugo), to provide an actively supported parser with modern tooling and cross-language bindings.
+
+## ✨ Key Features
+
+- 🚀 **Complete Mermaid Support** - All 23 diagram types fully implemented with comprehensive parsing
+- 🎯 **100% Test Passing** - 133 comprehensive corpus tests across all diagram types
+- ✅ **23/23 Diagram Types Supported** - Full coverage of Mermaid specification with complete grammar
+- 🦀 **Modern Rust & Tree-sitter** - Latest stable versions (Rust 2021, tree-sitter 0.25)
+- 📊 **Multiple Language Bindings** - Rust, Node.js, Python, Go, Swift, C
+- 🎨 **Syntax Highlighting** - Query files for Neovim, Helix, and other tree-sitter editors
+- 🧪 **Automated Testing** - Corpus-based test suite with full spec coverage
+- 🔄 **Spec Compliance** - Weekly automated checks for Mermaid updates
+- 🛠️ **Development Tooling** - Nix, Homebrew, Make, and CI/CD support
+- 📚 **Well Documented** - Complete API docs, architecture guide, testing guide, examples
+
+## 📊 Diagram Type Support Status
+
+### ✅ All 23 Diagram Types Fully Implemented
+
+| Diagram Type | Status | Tests | Notes |
+|---|---|---|---|
+| **Flowcharts** (`graph`/`flowchart`) | ✅ Complete | 11 | Full support for TD, LR, RL, BT directions |
+| **Sequence Diagrams** (`sequenceDiagram`) | ✅ Complete | 13 | Actors, messages, activation, loops |
+| **Class Diagrams** (`classDiagram`) | ✅ Complete | 9 | Classes, relationships, visibility |
+| **State Diagrams** (`stateDiagram-v2`) | ✅ Complete | 9 | States, transitions, composites |
+| **Entity Relationship** (`erDiagram`) | ✅ Complete | 5 | Entities, relationships, cardinality |
+| **Gantt Charts** (`gantt`) | ✅ Complete | 4 | Tasks, dates, sections |
+| **Git Graphs** (`gitGraph`) | ✅ Complete | 5 | Commits, branches, merges, cherry-pick |
+| **Pie Charts** (`pie`) | ✅ Complete | 3 | Values, labels, showData |
+| **Mind Maps** (`mindmap`) | ✅ Complete | 5 | Hierarchical nodes, shapes |
+| **User Journey** (`journey`) | ✅ Complete | 5 | Sections, tasks, scores |
+| **Quadrant Chart** (`quadrantChart`) | ✅ Complete | 5 | Axes, quadrants, data points |
+| **XY Chart** (`xychart-beta`) | ✅ Complete | 5 | Line, bar, scatter plots |
+| **Timeline** (`timeline`) | ✅ Complete | 5 | Periods, events, dates |
+| **ZenUML** (`zenuml`) | ✅ Complete | 5 | Sequence interactions |
+| **Sankey** (`sankey-beta`) | ✅ Complete | 5 | Flow diagrams, links, values |
+| **Block Diagram** (`block-beta`) | ✅ Complete | 5 | Blocks, columns, layouts |
+| **Packet** (`packet-beta`) | ✅ Complete | 5 | Bit ranges, fields |
+| **Kanban** (`kanban`) | ✅ Complete | 5 | Columns, tasks, indentation |
+| **Architecture** (`architecture-beta`) | ✅ Complete | 5 | Components, connections |
+| **Radar** (`radar-beta`) | ✅ Complete | 5 | Metrics, categories, values |
+| **Treemap** (`treemap`) | ✅ Complete | 5 | Hierarchical values, labels |
+| **C4 Diagrams** (`C4Context`, etc.) | ✅ Complete | 5 | Context, Container, Component, Dynamic, Deployment |
+| **Requirement Diagrams** (`requirementDiagram`) | ✅ Complete | 5 | Requirements, elements, relationships |
+
+**Total: 133 tests across 23 diagram types (100% passing) - All diagram types fully implemented!**
+
+## 🎨 Visual Examples
+
+GitHub natively renders Mermaid diagrams! Here are examples of all 23 diagram types supported by this parser.
+
+> **Note:** GitHub's Mermaid renderer currently supports 11 of the 23 diagram types (Flowchart, Sequence, Class, State, ER, Gantt, Pie, Git Graph, Mind Map, User Journey, and Requirement). The remaining 12 types (Quadrant, XY Chart, Timeline, ZenUML, Sankey, Block, Packet, Kanban, Architecture, Radar, Treemap, C4) are shown as code blocks below. **All 23 types are fully supported by this tree-sitter parser** and can be parsed, highlighted, and processed in editors like Neovim and Helix.
+
+### Flowchart
+```mermaid
+flowchart TD
+    A[Start] --> B{Decision}
+    B -->|Yes| C[Action 1]
+    B -->|No| D[Action 2]
+    C --> E[End]
+    D --> E
+```
+
+### Sequence Diagram
+```mermaid
+sequenceDiagram
+    Alice->>Bob: Hello Bob!
+    Bob-->>Alice: Hi Alice!
+    Alice->>Bob: How are you?
+    Bob-->>Alice: I'm good, thanks!
+```
+
+### Class Diagram
+```mermaid
+classDiagram
+    class Animal {
+        +String name
+        +int age
+        +makeSound()
+    }
+    class Dog {
+        +String breed
+        +bark()
+    }
+    Animal <|-- Dog
+```
+
+### State Diagram
+```mermaid
+stateDiagram-v2
+    [*] --> Idle
+    Idle --> Processing: Start
+    Processing --> Success: Complete
+    Processing --> Error: Fail
+    Success --> [*]
+    Error --> Idle: Retry
+```
+
+### Gantt Chart
+```mermaid
+gantt
+    title Project Timeline
+    dateFormat  YYYY-MM-DD
+    section Phase 1
+    Design           :a1, 2024-01-01, 30d
+    Development      :a2, after a1, 60d
+    section Phase 2
+    Testing          :a3, after a2, 20d
+    Deployment       :a4, after a3, 10d
+```
+
+### Git Graph
+```mermaid
+gitGraph
+    commit
+    branch develop
+    checkout develop
+    commit
+    commit
+    checkout main
+    merge develop
+    commit
+```
+
+### Pie Chart
+```mermaid
+pie title Pets
+    "Dogs" : 45
+    "Cats" : 30
+    "Birds" : 15
+    "Fish" : 10
+```
+
+### Entity Relationship
+```mermaid
+erDiagram
+    CUSTOMER ||--o{ ORDER : places
+    ORDER ||--|{ LINE-ITEM : contains
+    CUSTOMER {
+        string name
+        string email
+    }
+    ORDER {
+        int orderNumber
+        date orderDate
+    }
+```
+
+### Mind Map
+```mermaid
+mindmap
+  root((Project))
+    Planning
+      Requirements
+      Timeline
+    Development
+      Frontend
+      Backend
+    Testing
+      Unit Tests
+      Integration Tests
+```
+
+### User Journey
+```mermaid
+journey
+    title My workday
+    section Go to work
+      Make coffee: 5: Me
+      Drive: 3: Me
+    section Work
+      Code: 4: Me
+      Meetings: 2: Me
+```
+
+### Quadrant Chart
+```
+quadrantChart
+    title Reach and engagement of campaigns
+    x-axis Low Reach --> High Reach
+    y-axis Low Engagement --> High Engagement
+    quadrant-1 We should expand
+    quadrant-2 Need to promote
+    quadrant-3 Re-evaluate
+    quadrant-4 May be improved
+    Campaign A: [0.3, 0.6]
+    Campaign B: [0.45, 0.23]
+```
+
+### XY Chart
+```
+xychart-beta
+    title "Sales Revenue"
+    x-axis [jan, feb, mar, apr, may, jun, jul, aug, sep, oct, nov, dec]
+    y-axis "Revenue (in $)" 4000 --> 11000
+    bar [5000, 6000, 7500, 8200, 9500, 10500, 11000, 10200, 9200, 8500, 7000, 6000]
+    line [5000, 6000, 7500, 8200, 9500, 10500, 11000, 10200, 9200, 8500, 7000, 6000]
+```
+
+### Timeline
+```
+timeline
+    title History of Social Media Platform
+    2002 : LinkedIn
+    2004 : Facebook
+         : Google
+    2005 : Youtube
+    2006 : Twitter
+```
+
+### ZenUML
+```
+zenuml
+    title Order Service
+    @Actor Client
+    @Boundary OrderController
+    @EC2 OrderService
+    @Database OrderDB
+    Client.order(item) {
+      OrderController.create(item) {
+        OrderService.save(item) {
+          OrderDB.insert(item)
+        }
+      }
+    }
+```
+
+### Sankey Diagram
+```
+sankey-beta
+    Agricultural 'waste',Bio-conversion,124.729
+    Bio-conversion,Liquid,0.597
+    Bio-conversion,Losses,26.862
+    Bio-conversion,Solid,280.322
+    Bio-conversion,Gas,81.144
+```
+
+### Block Diagram
+```
+block-beta
+columns 1
+  db(("DB"))
+  blockArrowId6<["..."]>(down)
+  block:ID
+    A
+    B["A wide one in the middle"]
+    C
+  end
+  space
+  D
+  ID --> D
+  C --> D
+```
+
+### Packet Diagram
+```
+packet-beta
+0-15: "Source Port"
+16-31: "Destination Port"
+32-63: "Sequence Number"
+64-95: "Acknowledgment Number"
+96-99: "Data Offset"
+100-105: "Reserved"
+106: "URG"
+107: "ACK"
+112-127: "Window"
+128-143: "Checksum"
+```
+
+### Kanban
+```
+kanban
+  Todo
+    [Item 1]
+    [Item 2]
+  In Progress
+    [Item 3]
+  Done
+    [Item 4]
+    [Item 5]
+```
+
+### Architecture
+```
+architecture-beta
+    group api(cloud)[API]
+
+    service db(database)[Database] in api
+    service disk1(disk)[Storage] in api
+    service server(server)[Server] in api
+
+    db:L -- R:server
+    disk1:T -- B:server
+```
+
+### Radar Chart
+```
+radar-beta
+    title Skills Assessment
+    "Communication" : 90
+    "Problem Solving" : 85
+    "Technical Skills" : 95
+    "Teamwork" : 80
+    "Leadership" : 75
+    "Creativity" : 88
+```
+
+### Treemap
+```
+treemap
+    title Company Revenue Distribution
+    "Sales": 42000
+    "Engineering": 35000
+    "Marketing": 18000
+    "Operations": 15000
+    "Support": 12000
+    "HR": 8000
+```
+
+### C4 Context Diagram
+```
+C4Context
+    title System Context diagram for Internet Banking System
+    Person(customer, "Banking Customer", "A customer of the bank")
+    System(banking_system, "Internet Banking System", "Allows customers to view accounts")
+    System_Ext(mail_system, "E-mail system", "Microsoft Exchange")
+    System_Ext(mainframe, "Mainframe Banking System", "Core banking info")
+
+    Rel(customer, banking_system, "Uses")
+    Rel(banking_system, mail_system, "Sends e-mails", "SMTP")
+```
+
+### Requirement Diagram
+```mermaid
+requirementDiagram
+
+    requirement test_req {
+    id: 1
+    text: the test text.
+    risk: high
+    verifymethod: test
+    }
+
+    element test_entity {
+    type: simulation
+    }
+
+    test_entity - satisfies -> test_req
+```
+
+## 🚀 Quick Start
+
+### Rust
+```rust
+use tree_sitter::Parser;
+use tree_sitter_mermaid::language;
+
+let mut parser = Parser::new();
+parser.set_language(&language()).expect("Error loading mermaid grammar");
+
+let code = r#"flowchart TD
+    A[Start] --> B{Decision}
+    B -->|Yes| C[Action 1]
+    B -->|No| D[Action 2]"#;
+
+let tree = parser.parse(code, None).unwrap();
+```
+
+### Node.js
+```javascript
+const Parser = require('tree-sitter');
+const Mermaid = require('tree-sitter-mermaid');
+
+const parser = new Parser();
+parser.setLanguage(Mermaid);
+
+const code = `flowchart TD
+    A[Start] --> B[End]`;
+
+const tree = parser.parse(code);
+```
+
+### Python
+```python
+from tree_sitter import Language, Parser
+from tree_sitter_mermaid import language
+
+parser = Parser()
+parser.set_language(language())
+
+code = """flowchart TD
+    A[Start] --> B[End]"""
+
+tree = parser.parse(code.encode())
+```
+
+### Go
+```go
+package main
+
+import (
+    sitter "github.com/tree-sitter/go-tree-sitter"
+    mermaid "github.com/Singularity-ng/singularity-parser-mermaid/bindings/go"
+)
+
+func main() {
+    parser := sitter.NewParser()
+    parser.SetLanguage(sitter.NewLanguage(mermaid.Language()))
+    // ... parse Mermaid code
+}
+```
+
+## 📦 Installation
+
+### Rust
+Add to `Cargo.toml`:
+```toml
+[dependencies]
+tree-sitter-mermaid = "0.25"
+```
+
+Or from git:
+```toml
+[dependencies]
+tree-sitter-mermaid = { git = "https://github.com/Singularity-ng/singularity-parser-mermaid" }
+```
+
+### Node.js
+```bash
+npm install tree-sitter-mermaid
+```
+
+### Python
+```bash
+pip install tree-sitter-mermaid
+```
+
+### Go
+```bash
+go get github.com/Singularity-ng/singularity-parser-mermaid
+```
+
+### Swift
+Add to `Package.swift`:
+```swift
+.package(url: "https://github.com/Singularity-ng/singularity-parser-mermaid.git", from: "0.9.1")
+```
+
+### C
+Build and install from source:
+```bash
+git clone https://github.com/Singularity-ng/singularity-parser-mermaid.git
+cd tree-sitter-mermaid
+make
+sudo make install
+```
+
+This installs the shared library to `/usr/local/lib` and headers to `/usr/local/include`.
+
+See [bindings/c/tree-sitter-mermaid.h](bindings/c/tree-sitter-mermaid.h) for complete C API documentation.
+
+## 🛠️ Development Environment
+
+Choose the development environment that works best for you:
+
+### Option 1: Docker (Recommended - Consistent & Cross-Platform)
+Use Docker for a consistent, containerized development environment that works everywhere:
+
+```sh
+# Build the development container
+docker build -t tree-sitter-mermaid-dev .
+
+# Run interactively (with current directory mounted)
+docker run -it -v $(pwd):/workspace tree-sitter-mermaid-dev
+
+# Or use Docker Compose for easier commands
+docker-compose run dev              # Interactive shell
+docker-compose run dev make test    # Run tests
+docker-compose run dev make all     # Build libraries
+
+# Or use in VS Code with Remote Containers extension
+# Just open the project and select "Reopen in Container"
+```
+
+**Included tools:** Node.js 20, Python 3.11, Rust, Go 1.21, Swift 5.9, GCC, Make, Git, GitHub CLI, tree-sitter CLI, pkg-config, node-gyp
+
+### Option 2: GitHub Codespaces (Cloud Development)
+Develop directly in your browser or VS Code with zero local setup:
+
+1. Click the **Code** button on GitHub
+2. Select **Codespaces** tab
+3. Click **Create codespace on main**
+
+Codespaces uses the same Docker container as local development for consistency.
+
+### Option 3: Nix (Reproducible & Declarative)
+For a completely reproducible development environment across all platforms:
+
+```sh
+# Install Nix (one-time setup)
+curl -L https://nixos.org/nix/install | sh
+
+# Enter the development environment
+nix-shell
+
+# Optional: Automatic activation with direnv
+brew install direnv  # or your OS package manager
+direnv allow         # in the repo root
+```
+
+This automatically provides all required toolchains: C/C++ compiler, Python, Node.js, Rust, Go, Swift, tree-sitter CLI, pkg-config, and Make.
+
+### Option 4: Homebrew (macOS Only)
+If you prefer traditional package management on macOS:
+
+```sh
+# Install all dependencies at once
+brew bundle
+
+# Or install manually:
+brew install tree-sitter node python rust go swift
+```
+
+### Option 5: Manual Installation
+Install tools individually on any platform:
+
+```sh
+# Install tree-sitter CLI
+npm install -g tree-sitter-cli
+
+# Install other tools via your package manager:
+# - Node.js 18+ (https://nodejs.org/)
+# - Python 3.8+ (https://www.python.org/)
+# - Rust (https://rustup.rs/)
+# - Go 1.20+ (https://go.dev/)
+# - Swift 5.0+ (https://swift.org/)
+# - GCC/Clang, Make, Git
+```
+
+## 🧪 Testing & Quality Assurance
+
+This project includes comprehensive testing infrastructure to maintain 100% compatibility with Mermaid's specification.
+
+### Quick Test Commands
+```bash
+# Run all tests (133 corpus tests + CI checks)
+make test                    # Full test suite
+make check-spec              # Mermaid spec compliance
+
+# Language-specific tests
+cargo test                   # Rust bindings
+go test ./bindings/go/...    # Go bindings
+npm test                     # Node.js bindings
+```
+
+### Test Coverage
+- ✅ **133/133 corpus tests passing** (100%)
+- ✅ **23/23 diagram types fully implemented** with comprehensive coverage
+- ✅ **All diagram types** parse structure, keywords, and content correctly
+- ✅ **Advanced features** tested: cherry-pick, System_Boundary, scatter plots, etc.
+- ✅ **Language bindings** tested in Rust, Go, and Swift
+- ✅ **Weekly spec checks** for new Mermaid features
+
+### CI/CD Pipeline
+- **Automated tests** on every push and pull request
+- **Multiple environments**: Docker container, Native Ubuntu, and Nix
+- **Parallel jobs**: Validates grammar works consistently across environments
+- **Weekly spec checks** to detect new Mermaid features
+- **Cross-platform support** via GitHub Actions
+- **Local CI reproduction**: `docker-compose run ci` runs same tests locally
+
+See [TESTING.md](TESTING.md) for comprehensive testing guide.
+
+## 📚 Documentation
+
+| Document | Purpose |
+|---|---|
+| [README.md](README.md) | Overview, quick start, examples, installation |
+| [PRODUCTION_READINESS.md](PRODUCTION_READINESS.md) | Comprehensive production readiness assessment |
+| [ARCHITECTURE.md](ARCHITECTURE.md) | System design, grammar structure, parser internals |
+| [TESTING.md](TESTING.md) | Testing infrastructure, how to write tests, CI/CD details |
+| [CONTRIBUTING.md](CONTRIBUTING.md) | Contribution guidelines, development workflow |
+| [CHANGELOG.md](CHANGELOG.md) | Version history and release notes |
+| [SECURITY.md](SECURITY.md) | Security policy and vulnerability reporting |
+| [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) | Community standards and expectations |
+| [PUBLISHING.md](PUBLISHING.md) | Package publishing process and distribution |
+| [CLAUDE.md](CLAUDE.md) | AI assistant guidelines, development workflow |
+| [grammar.js](grammar.js) | Grammar definition with inline documentation |
+
+## 🤝 Contributing
+
+We welcome contributions! Please read our [Contributing Guide](CONTRIBUTING.md) for detailed information on how to contribute.
+
+### Quick Start for Contributors
+1. Read the [Contributing Guide](CONTRIBUTING.md)
+2. Check the [Code of Conduct](CODE_OF_CONDUCT.md)
+3. Look for issues labeled `good-first-issue`
+4. Follow the development workflow in the contributing guide
+
+### Adding Support for a New Diagram Type
+1. **Research** the diagram syntax in [Mermaid documentation](https://mermaid.js.org/)
+2. **Add test cases** to `test/corpus/typename.txt` (see existing files for format)
+3. **Implement grammar rules** in `grammar.js` following established patterns
+4. **Run tests**: `make test` — must pass before submitting PR
+5. **Update documentation** in README, ARCHITECTURE.md, and TESTING.md
+6. **Run spec check**: `make check-spec` to ensure compliance
+
+### Development Workflow
+```bash
+# Set up environment
+nix-shell  # or brew bundle
+
+# Create your feature branch
+git checkout -b feature/my-diagram-type
+
+# Make changes and test
+make test
+make check-spec
+
+# Build all language bindings
+make all
+
+# Commit and push
+git add .
+git commit -m "Add support for XYZ diagram type"
+git push origin feature/my-diagram-type
+```
+
+### Code Quality Requirements
+- ✅ All tests must pass (`make test`)
+- ✅ New diagram types need corpus tests with 3-5 test cases
+- ✅ CI pipeline must pass on all platforms
+- ✅ Documentation must be updated
+- ✅ Code must be properly commented (see existing grammar rules for style)
+
+## 📖 Project Structure
+
+```
+tree-sitter-mermaid/
+├── grammar.js              # Grammar definition (tree-sitter DSL)
+├── src/
+│   ├── parser.c           # Generated parser (auto-updated by `npm run generate`)
+│   ├── scanner.c          # External C scanner for context-aware tokens
+│   └── node-types.json    # Auto-generated node type definitions
+├── bindings/               # Language bindings
+│   ├── c/                 # C API
+│   ├── node/              # Node.js bindings
+│   ├── python/            # Python bindings
+│   ├── rust/              # Rust crate
+│   ├── go/                # Go bindings
+│   └── swift/             # Swift package
+├── test/corpus/            # Test cases (133 tests, 100% passing)
+│   ├── flow.txt           # Flowchart tests (11 cases)
+│   ├── sequence.txt       # Sequence diagram tests (13 cases)
+│   ├── class.txt          # Class diagram tests (9 cases)
+│   └── ... (20+ more test files)
+├── queries/                # Syntax highlighting queries
+│   ├── highlights.scm      # For Neovim, Helix
+│   └── ...
+├── Makefile                # Build and test targets
+├── package.json            # Node.js configuration
+├── Cargo.toml              # Rust configuration
+└── shell.nix               # Nix development environment
+```
+
+## 🔗 Related Projects
+
+- [tree-sitter](https://tree-sitter.github.io/tree-sitter/) - Parsing toolkit
+- [Mermaid.js](https://mermaid.js.org/) - Diagramming language
+- [Original tree-sitter-mermaid](https://github.com/monaqa/tree-sitter-mermaid) - Original project
+
+## 📄 License
+
+MIT - See [LICENSE](LICENSE) for details.
+
+## 🌟 Repository Stats
+
+- **Diagram Types**: 23/23 supported (100%)
+- **Test Coverage**: 133/133 passing (100%)
+- **Language Bindings**: 6 (Rust, Node.js, Python, Go, Swift, C)
+- **Documentation**: Comprehensive (Architecture, Testing, API guides)
+- **Last Updated**: October 2024
+- **Maintenance Status**: Actively maintained
+
+---
+
+**Built with ❤️ for the Mermaid and tree-sitter communities**

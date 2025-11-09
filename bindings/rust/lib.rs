@@ -35,7 +35,7 @@
 //! use tree_sitter_mermaid::language;
 //!
 //! let mermaid_code = r#"
-//! graph TD
+//! flowchart TD
 //!     A[Start] --> B{Decision}
 //!     B -->|Yes| C[Action 1]
 //!     B -->|No| D[Action 2]
@@ -181,7 +181,7 @@ mod tests {
     fn test_can_load_grammar() {
         let mut parser = tree_sitter::Parser::new();
         parser
-            .set_language(super::language())
+            .set_language(&super::language())
             .expect("Error loading mermaid language");
     }
 }

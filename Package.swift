@@ -33,9 +33,8 @@
 import PackageDescription
 
 let package = Package(
-    // Package name and version
+    // Package name (version is determined by git tags)
     name: "SingularityTreeSitterMermaid",
-    version: "0.9.1",
 
     // Minimum supported platforms
     platforms: [.macOS(.v10_13), .iOS(.v11)],
@@ -80,8 +79,9 @@ let package = Package(
                     ".gitmodules",       // Git submodules
                 ],
 
-                // C source files to compile into the Swift module
+                // Swift and C source files
                 sources: [
+                    "bindings/swift/TreeSitterMermaid/TreeSitterMermaid.swift",  // Swift bindings
                     "src/parser.c",      // Auto-generated parser from grammar.js
                     "src/scanner.c",     // External scanner for class diagram 'o' token
                 ],
