@@ -11,7 +11,7 @@ We release patches for security vulnerabilities in the following versions:
 
 ## Reporting a Vulnerability
 
-The tree-sitter-little-mermaid team takes security bugs seriously. We appreciate your efforts to responsibly disclose your findings, and will make every effort to acknowledge your contributions.
+The Singularity tree-sitter-mermaid team takes security bugs seriously. We appreciate your efforts to responsibly disclose your findings, and will make every effort to acknowledge your contributions.
 
 ### How to Report a Security Vulnerability
 
@@ -22,7 +22,7 @@ Instead, please report security vulnerabilities by emailing the maintainers:
 - **Subject**: [SECURITY] Brief description of the issue
 
 If you prefer, you can also use GitHub's private vulnerability reporting feature:
-1. Go to the repository's [Security tab](https://github.com/mikkihugo/tree-sitter-mermaid/security)
+1. Go to the repository's [Security tab](https://github.com/Singularity/singularity-parser-mermaid/security)
 2. Click "Report a vulnerability"
 3. Fill out the form with details
 
@@ -78,7 +78,7 @@ When a security vulnerability is confirmed:
 
 ### Known Limitations
 
-As a parser, tree-sitter-little-mermaid:
+As a parser, tree-sitter-mermaid:
 - **Does not execute code** - It only parses diagram syntax into a parse tree
 - **Does not render diagrams** - Rendering is handled by Mermaid.js
 - **May consume resources** - Very large or deeply nested diagrams may use significant CPU/memory
@@ -165,4 +165,4 @@ This security policy may be updated from time to time. Check back periodically f
 
 **Last Updated**: November 2025
 
-Thank you for helping keep tree-sitter-little-mermaid secure! 🔒
+Thank you for helping keep tree-sitter-mermaid secure! 🔒

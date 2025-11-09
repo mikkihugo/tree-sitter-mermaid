@@ -29,7 +29,7 @@ If possible, include the parse tree output from `tree-sitter parse`:
 ```
 
 ## Environment
-- **tree-sitter-little-mermaid version**: [e.g., 0.9.0]
+- **tree-sitter-mermaid version**: [e.g., 0.9.1]
 - **tree-sitter version**: [e.g., 0.25.0]
 - **Language binding**: [e.g., Rust, Node.js, Python, etc.]
 - **Operating System**: [e.g., Ubuntu 22.04, macOS 14, Windows 11]

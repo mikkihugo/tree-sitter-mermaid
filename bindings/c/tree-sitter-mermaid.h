@@ -121,7 +121,7 @@
  *
  * - Tree-sitter C API: https://tree-sitter.github.io/tree-sitter/using-parsers
  * - Mermaid syntax: https://mermaid.js.org/
- * - Project repository: https://github.com/mikkihugo/tree-sitter-mermaid
+ * - Project repository: https://github.com/Singularity/singularity-parser-mermaid
  */
 
 #ifndef TREE_SITTER_MERMAID_H_

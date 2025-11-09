@@ -1,25 +1,27 @@
-# 🧜‍♀️ The Little Mermaid - tree-sitter-little-mermaid
+# 🚀 Singularity TreeSitter Mermaid - tree-sitter-mermaid
 
-[![CI](https://github.com/mikkihugo/tree-sitter-mermaid/actions/workflows/ci.yml/badge.svg)](https://github.com/mikkihugo/tree-sitter-mermaid/actions/workflows/ci.yml)
+[![CI](https://github.com/Singularity/singularity-parser-mermaid/actions/workflows/ci.yml/badge.svg)](https://github.com/Singularity/singularity-parser-mermaid/actions/workflows/ci.yml)
 [![Production Ready](https://img.shields.io/badge/status-production%20ready-brightgreen)](PRODUCTION_READINESS.md)
 [![Tests Passing](https://img.shields.io/badge/tests-133%2F133%20passing-brightgreen)](TESTING.md)
 [![Diagram Coverage](https://img.shields.io/badge/coverage-23%2F23%20types-brightgreen)](ARCHITECTURE.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Mermaid Version](https://img.shields.io/badge/Mermaid-11.12.0-blueviolet.svg)](https://mermaid.js.org/)
 [![tree-sitter](https://img.shields.io/badge/tree--sitter-0.25-green)](https://tree-sitter.github.io/tree-sitter/)
-[![npm](https://img.shields.io/npm/v/tree-sitter-little-mermaid)](https://www.npmjs.com/package/tree-sitter-little-mermaid)
-[![PyPI](https://img.shields.io/pypi/v/tree-sitter-little-mermaid)](https://pypi.org/project/tree-sitter-little-mermaid/)
-[![crates.io](https://img.shields.io/crates/v/tree-sitter-little-mermaid)](https://crates.io/crates/tree-sitter-little-mermaid)
+[![npm](https://img.shields.io/npm/v/tree-sitter-mermaid)](https://www.npmjs.com/package/tree-sitter-mermaid)
+[![PyPI](https://img.shields.io/pypi/v/tree-sitter-mermaid)](https://pypi.org/project/tree-sitter-mermaid/)
+[![crates.io](https://img.shields.io/crates/v/tree-sitter-mermaid)](https://crates.io/crates/tree-sitter-mermaid)
 
 A modern, actively maintained [Mermaid.js](https://mermaid-js.github.io/mermaid/#/) grammar for [tree-sitter](https://tree-sitter.github.io/tree-sitter/) with comprehensive tooling, complete diagram type support (23/23), and 100% test passing rate.
 
-**Published as `tree-sitter-little-mermaid`** on npm, PyPI, and crates.io for easy installation and discoverability.
+**Published as `tree-sitter-mermaid`** on npm, PyPI, and crates.io for easy installation and discoverability.
 
 > **✅ Production Ready**: This parser is production-ready and suitable for use in production environments. See our comprehensive [Production Readiness Assessment](PRODUCTION_READINESS.md) for detailed evaluation (Score: 89/100).
 
 ## 🙏 Credits
 
 This is a fork of the original [monaqa/tree-sitter-mermaid](https://github.com/monaqa/tree-sitter-mermaid) by [Mogami Shinichi](https://github.com/monaqa). We extend our deepest gratitude to the original maintainer for their foundational work that made this project possible.
+
+Singularity maintains this distribution, led by [Mikael Hugo](https://github.com/mikkihugo), to provide an actively supported parser with modern tooling and cross-language bindings.
 
 ## ✨ Key Features
 
@@ -421,7 +423,7 @@ package main
 
 import (
     sitter "github.com/tree-sitter/go-tree-sitter"
-    mermaid "github.com/mikkihugo/tree-sitter-mermaid/bindings/go"
+    mermaid "github.com/Singularity/singularity-parser-mermaid/bindings/go"
 )
 
 func main() {
@@ -437,40 +439,40 @@ func main() {
 Add to `Cargo.toml`:
 ```toml
 [dependencies]
-tree-sitter-little-mermaid = "0.25"
+tree-sitter-mermaid = "0.25"
 ```
 
 Or from git:
 ```toml
 [dependencies]
-tree-sitter-little-mermaid = { git = "https://github.com/mikkihugo/tree-sitter-mermaid" }
+tree-sitter-mermaid = { git = "https://github.com/Singularity/singularity-parser-mermaid" }
 ```
 
 ### Node.js
 ```bash
-npm install tree-sitter-little-mermaid
+npm install tree-sitter-mermaid
 ```
 
 ### Python
 ```bash
-pip install tree-sitter-little-mermaid
+pip install tree-sitter-mermaid
 ```
 
 ### Go
 ```bash
-go get github.com/mikkihugo/tree-sitter-mermaid
+go get github.com/Singularity/singularity-parser-mermaid
 ```
 
 ### Swift
 Add to `Package.swift`:
 ```swift
-.package(url: "https://github.com/mikkihugo/tree-sitter-mermaid.git", from: "0.25.0")
+.package(url: "https://github.com/Singularity/singularity-parser-mermaid.git", from: "0.9.1")
 ```
 
 ### C
 Build and install from source:
 ```bash
-git clone https://github.com/mikkihugo/tree-sitter-mermaid.git
+git clone https://github.com/Singularity/singularity-parser-mermaid.git
 cd tree-sitter-mermaid
 make
 sudo make install

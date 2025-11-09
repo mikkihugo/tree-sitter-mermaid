@@ -1,4 +1,4 @@
-//! # 🧜‍♀️ The Little Mermaid - Mermaid.js grammar for tree-sitter
+//! # 🚀 Singularity TreeSitter Mermaid - Mermaid.js grammar for tree-sitter
 //!
 //! This crate provides Mermaid language support for the [tree-sitter][] parsing library.
 //!
@@ -21,7 +21,7 @@
 //!
 //! ```toml
 //! [dependencies]
-//! tree-sitter-little-mermaid = "0.9"
+//! tree-sitter-mermaid = "0.9"
 //! tree-sitter = "~0.25"
 //! ```
 //!
@@ -32,7 +32,7 @@
 //!
 //! ```rust
 //! use tree_sitter::Parser;
-//! use tree_sitter_little_mermaid::language;
+//! use tree_sitter_mermaid::language;
 //!
 //! let mermaid_code = r#"
 //! graph TD
@@ -83,7 +83,7 @@
 //! ### Accessing Syntax Highlighting Queries
 //!
 //! ```rust
-//! use tree_sitter_little_mermaid::HIGHLIGHTS_QUERY;
+//! use tree_sitter_mermaid::HIGHLIGHTS_QUERY;
 //!
 //! // Use the highlights query for syntax highlighting
 //! println!("Highlights query: {}", HIGHLIGHTS_QUERY);
@@ -92,7 +92,7 @@
 //! ### Accessing Node Types
 //!
 //! ```rust
-//! use tree_sitter_little_mermaid::NODE_TYPES;
+//! use tree_sitter_mermaid::NODE_TYPES;
 //!
 //! // Get the node types JSON for introspection
 //! let node_types: serde_json::Value = serde_json::from_str(NODE_TYPES).unwrap();
@@ -105,12 +105,12 @@
 //!
 //! ## Examples
 //!
-//! See the [basic_usage example](https://github.com/mikkihugo/tree-sitter-mermaid/blob/main/examples/basic_usage.rs)
+//! See the [basic_usage example](https://github.com/Singularity/singularity-parser-mermaid/blob/main/examples/basic_usage.rs)
 //! for a complete demonstration of parsing different diagram types.
 //!
 //! ## Links
 //!
-//! - [GitHub Repository](https://github.com/mikkihugo/tree-sitter-mermaid)
+//! - [GitHub Repository](https://github.com/Singularity/singularity-parser-mermaid)
 //! - [Mermaid.js Documentation](https://mermaid.js.org/)
 //! - [tree-sitter Documentation](https://tree-sitter.github.io/tree-sitter/)
 //!
@@ -122,7 +122,7 @@
 use tree_sitter::Language;
 
 extern "C" {
-    fn tree_sitter_little_mermaid() -> Language;
+    fn tree_sitter_mermaid() -> Language;
 }
 
 /// Get the tree-sitter [Language][] for this grammar.
@@ -131,7 +131,7 @@ extern "C" {
 ///
 /// ```rust
 /// use tree_sitter::Parser;
-/// use tree_sitter_little_mermaid::language;
+/// use tree_sitter_mermaid::language;
 ///
 /// let mut parser = Parser::new();
 /// parser.set_language(&language()).expect("Error loading mermaid grammar");
@@ -139,7 +139,7 @@ extern "C" {
 ///
 /// [Language]: https://docs.rs/tree-sitter/*/tree_sitter/struct.Language.html
 pub fn language() -> Language {
-    unsafe { tree_sitter_little_mermaid() }
+    unsafe { tree_sitter_mermaid() }
 }
 
 /// The content of the [`node-types.json`][] file for this grammar.
@@ -150,7 +150,7 @@ pub fn language() -> Language {
 /// # Example
 ///
 /// ```rust
-/// use tree_sitter_little_mermaid::NODE_TYPES;
+/// use tree_sitter_mermaid::NODE_TYPES;
 ///
 /// // Parse the node types JSON
 /// let node_types: serde_json::Value = serde_json::from_str(NODE_TYPES).unwrap();
@@ -168,7 +168,7 @@ pub const NODE_TYPES: &'static str = include_str!("../../src/node-types.json");
 /// # Example
 ///
 /// ```rust
-/// use tree_sitter_little_mermaid::HIGHLIGHTS_QUERY;
+/// use tree_sitter_mermaid::HIGHLIGHTS_QUERY;
 ///
 /// // Use with tree-sitter highlighting
 /// println!("Highlights query:\n{}", HIGHLIGHTS_QUERY);

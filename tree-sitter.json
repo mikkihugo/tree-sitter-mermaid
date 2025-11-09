@@ -6,10 +6,10 @@
     "path": "."
   }],
   "metadata": {
-    "name": "tree-sitter-little-mermaid",
-    "version": "0.9.0",
+    "name": "tree-sitter-mermaid",
+    "version": "0.9.1",
     "license": "MIT",
-    "author": "Mikki Hugo",
-    "description": "🧜‍♀️ The Little Mermaid - Complete Mermaid.js grammar for tree-sitter"
+    "author": "Mikael Hugo",
+    "description": "🚀 Singularity tree-sitter-mermaid - Complete Mermaid.js grammar for tree-sitter"
   }
 }

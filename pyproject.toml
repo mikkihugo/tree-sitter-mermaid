@@ -3,9 +3,9 @@ requires = ["setuptools>=42", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "tree-sitter-little-mermaid"
-description = "🧜‍♀️ The Little Mermaid - Complete Mermaid.js grammar for tree-sitter with 100% test coverage (23/23 types)"
-version = "0.9.0"
+name = "tree-sitter-mermaid"
+description = "🚀 Singularity tree-sitter-mermaid - Complete Mermaid.js grammar for tree-sitter with 100% test coverage (23/23 types)"
+version = "0.9.1"
 keywords = ["mermaid", "tree-sitter", "parser", "diagram", "grammar"]
 classifiers = [
   "Intended Audience :: Developers",
@@ -19,7 +19,7 @@ license.text = "MIT"
 readme = "README.md"
 
 [project.urls]
-Homepage = "https://github.com/tree-sitter/tree-sitter-mermaid"
+Homepage = "https://github.com/Singularity/singularity-parser-mermaid"
 
 [project.optional-dependencies]
 core = ["tree-sitter~=0.25"]

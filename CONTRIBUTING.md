@@ -1,6 +1,6 @@
-# Contributing to 🧜‍♀️ The Little Mermaid
+# Contributing to Singularity TreeSitter Mermaid
 
-Thank you for your interest in contributing to tree-sitter-little-mermaid! We welcome contributions of all kinds, from bug reports to new features.
+Thank you for your interest in contributing to Singularity's tree-sitter-mermaid! We welcome contributions of all kinds, from bug reports to new features.
 
 ## Table of Contents
 
@@ -25,8 +25,8 @@ This project adheres to a [Code of Conduct](CODE_OF_CONDUCT.md). By participatin
 1. **Fork the repository** on GitHub
 2. **Clone your fork** locally:
    ```bash
-   git clone https://github.com/YOUR_USERNAME/tree-sitter-mermaid.git
-   cd tree-sitter-mermaid
+   git clone https://github.com/YOUR_USERNAME/singularity-parser-mermaid.git
+   cd singularity-parser-mermaid
    ```
 3. **Set up the development environment** (see below)
 4. **Create a feature branch**: `git checkout -b feature/my-new-feature`
@@ -82,7 +82,7 @@ Install the following tools:
 ### Reporting Bugs
 
 Before submitting a bug report:
-- Check the [existing issues](https://github.com/mikkihugo/tree-sitter-mermaid/issues) to avoid duplicates
+- Check the [existing issues](https://github.com/Singularity/singularity-parser-mermaid/issues) to avoid duplicates
 - Test with the latest version of the parser
 
 When reporting a bug, please include:
@@ -298,6 +298,6 @@ If you have questions about contributing, feel free to:
 
 ---
 
-**Thank you for contributing to tree-sitter-little-mermaid!** 🧜‍♀️
+**Thank you for contributing to Singularity tree-sitter-mermaid!** 🚀
 
 Your contributions help make Mermaid diagram parsing better for everyone in the tree-sitter and Mermaid communities.

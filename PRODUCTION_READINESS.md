@@ -2,11 +2,11 @@
 
 ## Executive Summary
 
-**tree-sitter-little-mermaid** is a comprehensive, battle-tested parser for Mermaid.js diagrams built on the tree-sitter parsing framework. This document provides a thorough assessment of the project's production readiness.
+**Singularity tree-sitter-mermaid** is a comprehensive, battle-tested parser for Mermaid.js diagrams built on the tree-sitter parsing framework. This document provides a thorough assessment of the project's production readiness.
 
 ### Overall Status: **PRODUCTION READY** ✅
 
-**Version**: 0.9.0  
+**Version**: 0.9.1
 **Last Assessment**: November 2025  
 **Confidence Level**: High
 
@@ -255,7 +255,7 @@ Security is good with solid practices in place. A formal audit and enhanced auto
 - ✅ **License**: MIT - permissive and clear
 
 #### Governance
-- Clear maintainer (mikkihugo)
+- Clear maintainer (Mikael Hugo / Singularity)
 - Fork of original project with proper attribution
 - Open contribution model
 - Responsive to issues and PRs (based on recent activity)
@@ -290,7 +290,7 @@ Community infrastructure is good with essential elements in place. Enhanced temp
 - Fork of established project (monaqa/tree-sitter-mermaid)
 
 #### Version Stability
-- Version 0.9.0 - approaching 1.0
+- Version 0.9.1 - approaching 1.0
 - Semantic versioning followed
 - Clear changelog documentation
 - Stable API surface
@@ -385,7 +385,7 @@ Performance is good, leveraging tree-sitter's optimized implementation. Formal b
 ### Sustainability Factors
 
 **Positive**:
-- Active maintainer (mikkihugo)
+- Active maintainer (Mikael Hugo / Singularity)
 - Fork with clear ownership
 - Automated testing and publishing
 - Growing ecosystem (23/23 diagram types)
@@ -443,7 +443,7 @@ Maintenance is active and sustainable. Adding co-maintainers would improve long-
 - ✅ Windows (tree-sitter supports it)
 
 #### Language Bindings
-- ✅ Rust (tree-sitter-little-mermaid crate)
+- ✅ Rust (tree-sitter-mermaid crate)
 - ✅ Node.js (npm package)
 - ✅ Python (PyPI package)
 - ✅ Go (Go module)
@@ -589,7 +589,7 @@ Compatibility is perfect. All 23 diagram types supported, multiple platforms and
 
 ### Final Assessment: **PRODUCTION READY** ✅
 
-tree-sitter-little-mermaid is **production-ready** and suitable for use in production environments. The project demonstrates:
+tree-sitter-mermaid is **production-ready** and suitable for use in production environments. The project demonstrates:
 
 ✅ **Exceptional Code Quality**: Complete, well-tested implementation  
 ✅ **Perfect Test Coverage**: 100% of tests passing, all diagram types covered  
@@ -612,7 +612,7 @@ The project can be confidently used in:
 
 ### Version Recommendation
 
-- **Current (0.9.0)**: Ready for production use
+- **Current (0.9.1)**: Ready for production use
 - **1.0.0**: Recommend after completing immediate actions (issue templates, security contact, migration guide)
 
 ### Key Strengths
@@ -641,7 +641,7 @@ The project can be confidently used in:
 This production readiness assessment was completed on **November 8, 2025**.
 
 **Assessment Conducted By**: Automated analysis based on repository inspection  
-**Version Assessed**: 0.9.0  
+**Version Assessed**: 0.9.1
 **Next Review**: After 1.0.0 release or in 6 months  
 
 **Status**: ✅ **APPROVED FOR PRODUCTION USE**
@@ -649,4 +649,4 @@ This production readiness assessment was completed on **November 8, 2025**.
 ---
 
 **Questions about this assessment?**  
-Open an issue or discussion on the [GitHub repository](https://github.com/mikkihugo/tree-sitter-mermaid).
+Open an issue or discussion on the [GitHub repository](https://github.com/Singularity/singularity-parser-mermaid).

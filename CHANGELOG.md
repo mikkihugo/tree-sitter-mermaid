@@ -1,9 +1,16 @@
 # Changelog
 
-All notable changes to tree-sitter-little-mermaid will be documented in this file.
+All notable changes to tree-sitter-mermaid will be documented in this file.
 
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [0.9.1] - 2025-11-XX
+
+### Changed
+- Rebranded project as **Singularity TreeSitter Mermaid** across packages and documentation
+- Updated repository links and publishing metadata to the Singularity organization
+- Bumped package versions to 0.9.1 across all bindings
 
 ## [0.9.0] - 2025-11-XX
 
@@ -43,7 +50,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Automated publishing workflows for npm, PyPI, and crates.io
 
 ### Changed
-- Package renamed from `tree-sitter-mermaid` to `tree-sitter-little-mermaid` for better discoverability
+- Initial Singularity fork prepared for modern tree-sitter 0.25.x
 - Updated to tree-sitter 0.25.x for latest features and improvements
 - Rust edition 2021 for modern Rust features
 
@@ -60,7 +67,7 @@ For earlier version history, please refer to the original repository.
 
 ### Credits
 - Original author: [Mogami Shinichi](https://github.com/monaqa)
-- Fork maintainer: [mikkihugo](https://github.com/mikkihugo)
+- Fork maintainer: [Mikael Hugo](https://github.com/mikkihugo)
 
 ---
 
@@ -87,4 +94,5 @@ For earlier version history, please refer to the original repository.
 
 ---
 
-[0.9.0]: https://github.com/mikkihugo/tree-sitter-mermaid/releases/tag/v0.9.0
+[0.9.1]: https://github.com/Singularity/singularity-parser-mermaid/releases/tag/v0.9.1
+[0.9.0]: https://github.com/Singularity/singularity-parser-mermaid/releases/tag/v0.9.0

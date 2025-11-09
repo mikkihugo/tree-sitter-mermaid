@@ -2,7 +2,7 @@
 # 🧜‍♀️ Publish to npm - The Little Mermaid Node.js Package
 # =============================================================================
 #
-# Automatically publishes the tree-sitter-little-mermaid package to npm
+# Automatically publishes the tree-sitter-mermaid package to npm
 # when a new GitHub release is created.
 #
 # TRIGGERS:
@@ -21,7 +21,7 @@
 # REQUIREMENTS:
 # -------------
 # - NPM_TOKEN secret configured in repository settings
-# - npm account with publish access to tree-sitter-little-mermaid
+# - npm account with publish access to tree-sitter-mermaid
 #
 # SETUP:
 # ------
@@ -112,19 +112,19 @@ jobs:
     - name: Verify published package
       run: |
         sleep 10  # Wait for npm to update
-        npm view tree-sitter-little-mermaid version || echo "Package not yet visible"
+        npm view tree-sitter-mermaid version || echo "Package not yet visible"
 
     - name: Post summary
       run: |
         echo "## 🧜‍♀️ Package Published!" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
-        echo "✅ **tree-sitter-little-mermaid** has been published to npm" >> $GITHUB_STEP_SUMMARY
+        echo "✅ **tree-sitter-mermaid** has been published to npm" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "### Installation" >> $GITHUB_STEP_SUMMARY
         echo '```bash' >> $GITHUB_STEP_SUMMARY
-        echo 'npm install tree-sitter-little-mermaid' >> $GITHUB_STEP_SUMMARY
+        echo 'npm install tree-sitter-mermaid' >> $GITHUB_STEP_SUMMARY
         echo '```' >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "### Links" >> $GITHUB_STEP_SUMMARY
-        echo "- npm: https://www.npmjs.com/package/tree-sitter-little-mermaid" >> $GITHUB_STEP_SUMMARY
-        echo "- Docs: https://github.com/mikkihugo/tree-sitter-mermaid" >> $GITHUB_STEP_SUMMARY
+        echo "- npm: https://www.npmjs.com/package/tree-sitter-mermaid" >> $GITHUB_STEP_SUMMARY
+        echo "- Docs: https://github.com/Singularity/singularity-parser-mermaid" >> $GITHUB_STEP_SUMMARY

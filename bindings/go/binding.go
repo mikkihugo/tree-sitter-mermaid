@@ -31,7 +31,7 @@
 //	import (
 //		"fmt"
 //		sitter "github.com/tree-sitter/go-tree-sitter"
-//		mermaid "github.com/mikkihugo/tree-sitter-mermaid/bindings/go"
+//		mermaid "github.com/Singularity/singularity-parser-mermaid/bindings/go"
 //	)
 //
 //	func main() {

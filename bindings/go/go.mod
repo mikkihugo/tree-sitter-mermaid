@@ -1,4 +1,4 @@
-module github.com/tree-sitter/tree-sitter-mermaid
+module github.com/Singularity/singularity-parser-mermaid
 
 go 1.22
 

@@ -1,8 +1,8 @@
 // swift-tools-version:5.3
 //
-// Package.swift - Swift Package Manager configuration for TreeSitterMermaid
+// Package.swift - Swift Package Manager configuration for Singularity TreeSitterMermaid
 //
-// This file defines the Swift package for tree-sitter-mermaid, which provides
+// This file defines the Swift package for Singularity tree-sitter-mermaid, which provides
 // Swift bindings for parsing Mermaid diagram syntax using tree-sitter.
 //
 // PACKAGE STRUCTURE:
@@ -20,7 +20,7 @@
 //
 // USAGE:
 // Add to your Package.swift dependencies:
-//   .package(url: "https://github.com/mikkihugo/tree-sitter-mermaid.git", from: "0.25.10")
+//   .package(url: "https://github.com/Singularity/singularity-parser-mermaid.git", from: "0.9.1")
 //
 // Then import in your Swift code:
 //   import TreeSitterMermaid
@@ -34,8 +34,8 @@ import PackageDescription
 
 let package = Package(
     // Package name and version
-    name: "TheLittleMermaid",
-    version: "0.9.0",
+    name: "SingularityTreeSitterMermaid",
+    version: "0.9.1",
 
     // Minimum supported platforms
     platforms: [.macOS(.v10_13), .iOS(.v11)],
