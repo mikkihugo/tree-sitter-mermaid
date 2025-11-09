@@ -16,8 +16,6 @@
 # - Caches dependencies for faster builds
 # - Easy command execution without complex docker run syntax
 
-version: '3.8'
-
 services:
   # Development environment service
   dev:
