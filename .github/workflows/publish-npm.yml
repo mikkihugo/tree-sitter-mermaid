@@ -127,4 +127,4 @@ jobs:
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "### Links" >> $GITHUB_STEP_SUMMARY
         echo "- npm: https://www.npmjs.com/package/tree-sitter-mermaid" >> $GITHUB_STEP_SUMMARY
-        echo "- Docs: https://github.com/Singularity/singularity-parser-mermaid" >> $GITHUB_STEP_SUMMARY
+        echo "- Docs: https://github.com/Singularity-ng/singularity-parser-mermaid" >> $GITHUB_STEP_SUMMARY

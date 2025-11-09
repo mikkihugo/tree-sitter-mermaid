@@ -123,4 +123,4 @@ jobs:
         echo "### Links" >> $GITHUB_STEP_SUMMARY
         echo "- crates.io: https://crates.io/crates/tree-sitter-mermaid" >> $GITHUB_STEP_SUMMARY
         echo "- Docs: https://docs.rs/tree-sitter-mermaid" >> $GITHUB_STEP_SUMMARY
-        echo "- GitHub: https://github.com/Singularity/singularity-parser-mermaid" >> $GITHUB_STEP_SUMMARY
+        echo "- GitHub: https://github.com/Singularity-ng/singularity-parser-mermaid" >> $GITHUB_STEP_SUMMARY

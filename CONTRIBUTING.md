@@ -82,7 +82,7 @@ Install the following tools:
 ### Reporting Bugs
 
 Before submitting a bug report:
-- Check the [existing issues](https://github.com/Singularity/singularity-parser-mermaid/issues) to avoid duplicates
+- Check the [existing issues](https://github.com/Singularity-ng/singularity-parser-mermaid/issues) to avoid duplicates
 - Test with the latest version of the parser
 
 When reporting a bug, please include:

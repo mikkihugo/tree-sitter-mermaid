@@ -1,0 +1,81 @@
+# =============================================================================
+# .dockerignore - Exclude files from Docker build context
+# =============================================================================
+#
+# This file speeds up Docker builds by excluding unnecessary files from the
+# build context sent to the Docker daemon.
+
+# Git files
+.git
+.gitignore
+.gitattributes
+
+# Build artifacts
+build/
+dist/
+*.o
+*.a
+*.so
+*.dylib
+*.dll
+*.pc
+lib*.a
+lib*.so*
+lib*.dylib
+src/parser.c
+src/node-types.json
+src/grammar.json
+
+# Node.js
+node_modules/
+npm-debug.log
+yarn-error.log
+package-lock.json
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+dist/
+build/
+*.egg
+
+# Rust
+target/
+Cargo.lock
+**/*.rs.bk
+
+# Go
+*.test
+*.out
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Test and temporary files
+test/
+examples/
+.tmp/
+tmp/
+
+# Documentation (not needed in container)
+*.md
+docs/
+
+# CI files
+.github/
+
+# Environment files
+.env
+.env.local
+.envrc
+
+# Nix
+.nix-*
+shell.nix

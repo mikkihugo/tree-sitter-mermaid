@@ -1,6 +1,6 @@
 # 🚀 Singularity TreeSitter Mermaid - tree-sitter-mermaid
 
-[![CI](https://github.com/Singularity/singularity-parser-mermaid/actions/workflows/ci.yml/badge.svg)](https://github.com/Singularity/singularity-parser-mermaid/actions/workflows/ci.yml)
+[![CI](https://github.com/Singularity-ng/singularity-parser-mermaid/actions/workflows/ci.yml/badge.svg)](https://github.com/Singularity-ng/singularity-parser-mermaid/actions/workflows/ci.yml)
 [![Production Ready](https://img.shields.io/badge/status-production%20ready-brightgreen)](PRODUCTION_READINESS.md)
 [![Tests Passing](https://img.shields.io/badge/tests-133%2F133%20passing-brightgreen)](TESTING.md)
 [![Diagram Coverage](https://img.shields.io/badge/coverage-23%2F23%20types-brightgreen)](ARCHITECTURE.md)
@@ -423,7 +423,7 @@ package main
 
 import (
     sitter "github.com/tree-sitter/go-tree-sitter"
-    mermaid "github.com/Singularity/singularity-parser-mermaid/bindings/go"
+    mermaid "github.com/Singularity-ng/singularity-parser-mermaid/bindings/go"
 )
 
 func main() {
@@ -445,7 +445,7 @@ tree-sitter-mermaid = "0.25"
 Or from git:
 ```toml
 [dependencies]
-tree-sitter-mermaid = { git = "https://github.com/Singularity/singularity-parser-mermaid" }
+tree-sitter-mermaid = { git = "https://github.com/Singularity-ng/singularity-parser-mermaid" }
 ```
 
 ### Node.js
@@ -460,19 +460,19 @@ pip install tree-sitter-mermaid
 
 ### Go
 ```bash
-go get github.com/Singularity/singularity-parser-mermaid
+go get github.com/Singularity-ng/singularity-parser-mermaid
 ```
 
 ### Swift
 Add to `Package.swift`:
 ```swift
-.package(url: "https://github.com/Singularity/singularity-parser-mermaid.git", from: "0.9.1")
+.package(url: "https://github.com/Singularity-ng/singularity-parser-mermaid.git", from: "0.9.1")
 ```
 
 ### C
 Build and install from source:
 ```bash
-git clone https://github.com/Singularity/singularity-parser-mermaid.git
+git clone https://github.com/Singularity-ng/singularity-parser-mermaid.git
 cd tree-sitter-mermaid
 make
 sudo make install

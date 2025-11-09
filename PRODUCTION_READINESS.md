@@ -649,4 +649,4 @@ This production readiness assessment was completed on **November 8, 2025**.
 ---
 
 **Questions about this assessment?**  
-Open an issue or discussion on the [GitHub repository](https://github.com/Singularity/singularity-parser-mermaid).
+Open an issue or discussion on the [GitHub repository](https://github.com/Singularity-ng/singularity-parser-mermaid).

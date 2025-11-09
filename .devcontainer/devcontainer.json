@@ -1,0 +1,132 @@
+{
+  // =============================================================================
+  // Dev Container Configuration for tree-sitter-mermaid
+  // =============================================================================
+  //
+  // This configuration enables development in:
+  // - VS Code Remote Containers
+  // - GitHub Codespaces
+  // - Any devcontainer-compatible environment
+  //
+  // FEATURES:
+  // - Pre-installed development tools (Node.js, Python, Rust, Go, Swift, etc.)
+  // - Automatic extension installation (tree-sitter, language support)
+  // - Integrated terminal with all tools available
+  // - Port forwarding for development servers
+  // - Git configuration and GitHub CLI integration
+  //
+  // USAGE IN VS CODE:
+  // 1. Install "Dev Containers" extension
+  // 2. Open Command Palette (Cmd/Ctrl+Shift+P)
+  // 3. Select "Dev Containers: Reopen in Container"
+  //
+  // USAGE IN GITHUB CODESPACES:
+  // 1. Click "Code" button on GitHub repository
+  // 2. Select "Codespaces" tab
+  // 3. Click "Create codespace on main"
+
+  "name": "tree-sitter-mermaid Development",
+  
+  // Use the Dockerfile in the parent directory
+  "build": {
+    "dockerfile": "../Dockerfile",
+    "context": ".."
+  },
+
+  // Or use a pre-built image (uncomment to use)
+  // "image": "ghcr.io/singularity-ng/singularity-parser-mermaid-dev:latest",
+
+  // Features to add on top of the base image
+  "features": {
+    // Additional GitHub CLI features
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+
+  // Set environment variables
+  "containerEnv": {
+    "CARGO_HOME": "/usr/local/cargo",
+    "RUSTUP_HOME": "/usr/local/rustup"
+  },
+
+  // Configure tool-specific properties
+  "customizations": {
+    "vscode": {
+      // VS Code settings
+      "settings": {
+        "terminal.integrated.defaultProfile.linux": "bash",
+        "files.eol": "\n",
+        "editor.formatOnSave": true,
+        "editor.tabSize": 2,
+        "files.trimTrailingWhitespace": true,
+        "files.insertFinalNewline": true
+      },
+      
+      // VS Code extensions to install
+      "extensions": [
+        // tree-sitter syntax highlighting
+        "tree-sitter.tree-sitter-graph",
+        
+        // Language support
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "rust-lang.rust-analyzer",
+        "golang.go",
+        "swift-server.vscode-swift",
+        
+        // JavaScript/TypeScript
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        
+        // General development
+        "editorconfig.editorconfig",
+        "github.copilot",
+        "github.copilot-chat",
+        "eamodio.gitlens",
+        
+        // Markdown
+        "yzhang.markdown-all-in-one",
+        "davidanson.vscode-markdownlint"
+      ]
+    }
+  },
+
+  // Ports to forward (if you add development servers later)
+  "forwardPorts": [],
+
+  // Post-create command to run after container is created
+  "postCreateCommand": "npm install && echo 'Dev container ready! Run make test to verify setup.'",
+
+  // Post-start command (runs every time container starts)
+  "postStartCommand": "git config --global --add safe.directory /workspace",
+
+  // Commands to run after attaching to the container
+  "postAttachCommand": {
+    "welcome": "echo '=== tree-sitter-mermaid Dev Container ===' && echo 'Tools installed:' && echo '  Node.js:' $(node --version) && echo '  Python:' $(python --version) && echo '  Rust:' $(rustc --version) && echo '  Go:' $(go version) && echo '  Swift:' $(swift --version | head -n1) && echo '' && echo 'Quick commands:' && echo '  make test          - Run all tests' && echo '  make check-spec    - Check Mermaid spec' && echo '  make all           - Build libraries' && echo ''"
+  },
+
+  // Mount the local filesystem
+  "mounts": [
+    // Mount the repository
+    "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached",
+    
+    // Cache node_modules for better performance
+    "source=tree-sitter-mermaid-node-modules,target=/workspace/node_modules,type=volume",
+    
+    // Cache cargo registry for faster Rust builds
+    "source=tree-sitter-mermaid-cargo-registry,target=/usr/local/cargo/registry,type=volume",
+    "source=tree-sitter-mermaid-cargo-git,target=/usr/local/cargo/git,type=volume"
+  ],
+
+  // Run as non-root user (vscode user, UID 1000)
+  "remoteUser": "root",
+
+  // Workspace folder inside container
+  "workspaceFolder": "/workspace",
+
+  // Allow running as root (needed for some operations)
+  "runArgs": [
+    "--cap-add=SYS_PTRACE",
+    "--security-opt",
+    "seccomp=unconfined"
+  ]
+}

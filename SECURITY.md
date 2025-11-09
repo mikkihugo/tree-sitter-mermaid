@@ -22,7 +22,7 @@ Instead, please report security vulnerabilities by emailing the maintainers:
 - **Subject**: [SECURITY] Brief description of the issue
 
 If you prefer, you can also use GitHub's private vulnerability reporting feature:
-1. Go to the repository's [Security tab](https://github.com/Singularity/singularity-parser-mermaid/security)
+1. Go to the repository's [Security tab](https://github.com/Singularity-ng/singularity-parser-mermaid/security)
 2. Click "Report a vulnerability"
 3. Fill out the form with details
 

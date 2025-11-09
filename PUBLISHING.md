@@ -153,7 +153,7 @@ npm publish --access public
 **No action needed!** Swift packages are Git-based. Users can install directly:
 
 ```swift
-.package(url: "https://github.com/Singularity/singularity-parser-mermaid.git", from: "0.9.1")
+.package(url: "https://github.com/Singularity-ng/singularity-parser-mermaid.git", from: "0.9.1")
 ```
 
 The package is already configured in `Package.swift`.
