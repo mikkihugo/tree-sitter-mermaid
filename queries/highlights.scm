@@ -207,10 +207,6 @@
 (type_directive) @keyword.directive
 (arg_directive) @string
 
-; Special directive markers
-"%%{" @punctuation.special
-"}%%" @punctuation.special
-
 ; ============================================================================
 ; Identifiers and Names
 ; ============================================================================
@@ -496,12 +492,6 @@
 (class_visibility_protected) @attribute
 (class_visibility_internal) @attribute
 
-; Visibility symbols
-"+" @attribute
-"-" @attribute
-"#" @attribute
-"~" @attribute
-
 ; ============================================================================
 ; Annotations and Attributes
 ; ============================================================================
@@ -512,9 +502,6 @@
 ; ER diagram key types
 (er_attribute_key_type_pk) @attribute
 (er_attribute_key_type_fk) @attribute
-"pk" @attribute
-"fk" @attribute
-
 ; State placement
 (state_note_placement) @attribute
 

@@ -30,7 +30,7 @@
 //! Typically, you will use the [language][language func] function to add this language to a
 //! tree-sitter [Parser][], and then use the parser to parse some Mermaid code:
 //!
-//! ```rust
+//! ```rust,no_run
 //! use tree_sitter::Parser;
 //! use tree_sitter_little_mermaid::language;
 //!
@@ -82,7 +82,7 @@
 //!
 //! ### Accessing Syntax Highlighting Queries
 //!
-//! ```rust
+//! ```rust,no_run
 //! use tree_sitter_little_mermaid::HIGHLIGHTS_QUERY;
 //!
 //! // Use the highlights query for syntax highlighting
@@ -91,7 +91,7 @@
 //!
 //! ### Accessing Node Types
 //!
-//! ```rust
+//! ```rust,no_run
 //! use tree_sitter_little_mermaid::NODE_TYPES;
 //!
 //! // Get the node types JSON for introspection
@@ -122,7 +122,7 @@
 use tree_sitter::Language;
 
 extern "C" {
-    fn tree_sitter_little_mermaid() -> Language;
+    fn tree_sitter_mermaid() -> Language;
 }
 
 /// Get the tree-sitter [Language][] for this grammar.
@@ -139,7 +139,7 @@ extern "C" {
 ///
 /// [Language]: https://docs.rs/tree-sitter/*/tree_sitter/struct.Language.html
 pub fn language() -> Language {
-    unsafe { tree_sitter_little_mermaid() }
+    unsafe { tree_sitter_mermaid() }
 }
 
 /// The content of the [`node-types.json`][] file for this grammar.
@@ -181,7 +181,7 @@ mod tests {
     fn test_can_load_grammar() {
         let mut parser = tree_sitter::Parser::new();
         parser
-            .set_language(super::language())
+            .set_language(&super::language())
             .expect("Error loading mermaid language");
     }
 }

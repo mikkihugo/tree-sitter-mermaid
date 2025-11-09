@@ -213,7 +213,7 @@ git push origin main --tags
 
 ## 📊 Current Status
 
-As of October 2024:
+As of November 9, 2025:
 
 - ✅ **Package renamed**: `tree-sitter-little-mermaid` (available on all registries!)
 - ✅ **Swift PM**: Ready (Git-based, working)

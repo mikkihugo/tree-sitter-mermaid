@@ -40,3 +40,6 @@ mermaid-examples/
 # Node.js
 node_modules/
 package-lock.json
+
+# Python packaging artifacts
+*.egg-info/

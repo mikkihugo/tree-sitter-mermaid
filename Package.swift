@@ -33,9 +33,8 @@
 import PackageDescription
 
 let package = Package(
-    // Package name and version
+    // Package name
     name: "TheLittleMermaid",
-    version: "0.9.0",
 
     // Minimum supported platforms
     platforms: [.macOS(.v10_13), .iOS(.v11)],
