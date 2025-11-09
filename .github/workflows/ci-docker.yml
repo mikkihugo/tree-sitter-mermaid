@@ -1,0 +1,212 @@
+# =============================================================================
+# CI Workflow for tree-sitter-mermaid with Docker Support
+# =============================================================================
+#
+# This workflow runs automated tests and checks with multiple environment options:
+# 1. Docker container (recommended for CI, matches local dev environment)
+# 2. Native Ubuntu with Node.js (faster, GitHub-hosted)
+# 3. Nix environment (reproducible)
+#
+# JOBS:
+# -----
+# 1. test-docker: Run tests in Docker container (matches local dev environment)
+# 2. test-native: Run tests natively on Ubuntu with Node.js setup
+# 3. nix-test: Run tests in Nix environment for reproducibility
+#
+# TRIGGERS:
+# ---------
+# - push: Runs on all pushes to master branch
+# - pull_request: Runs on all PRs to master branch
+# - schedule: Runs weekly on Sunday at 00:00 UTC to detect new Mermaid releases
+#
+# WHY DOCKER IN CI?
+# -----------------
+# - Consistent environment between local development and CI
+# - Pre-installed tools reduce setup time
+# - Same Dockerfile used for dev, CI, and Codespaces
+# - Easy to debug CI issues locally: `docker-compose run ci`
+#
+# WHY ALSO NATIVE UBUNTU?
+# ------------------------
+# - Faster execution (no container overhead)
+# - Uses GitHub's cached tool installations
+# - Validates grammar works in different environments
+#
+# DEPENDENCIES (Docker):
+# ----------------------
+# - All tools pre-installed in Dockerfile
+# - Node.js 20, Python 3.11, Rust, Go 1.21, Swift 5.9
+# - tree-sitter-cli, GCC, Make, Git, GitHub CLI
+#
+# DEPENDENCIES (Native):
+# ----------------------
+# - Node.js 18: For tree-sitter CLI
+# - tree-sitter-cli: Parser generator and test runner
+#
+# TEST PROCESS:
+# -------------
+# 1. Checkout code
+# 2. Set up environment (Docker build OR Node.js install)
+# 3. Run `make test` (runs tree-sitter test on corpus files)
+# 4. Run `./check-mermaid-spec.sh` (checks for new diagram types)
+#
+# OUTPUTS:
+# --------
+# - Test results visible in GitHub Actions logs
+# - Check fails if any corpus tests fail or spec check fails
+
+name: CI
+
+on:
+  # Run on pushes to master branch
+  push:
+    branches: [ master ]
+
+  # Run on pull requests targeting master
+  pull_request:
+    branches: [ master ]
+
+  # Run weekly to detect new Mermaid diagram types
+  # Every Sunday at 00:00 UTC
+  schedule:
+    - cron: '0 0 * * 0'
+
+  # Allow manual workflow dispatch for testing
+  workflow_dispatch:
+
+jobs:
+  # =============================================================================
+  # Docker-based test job: Run tests in containerized environment
+  # =============================================================================
+  #
+  # This job uses the same Docker container that developers use locally,
+  # ensuring consistency between local development and CI environments.
+  #
+  test-docker:
+    name: Test in Docker Container
+    runs-on: ubuntu-latest
+
+    steps:
+    # Checkout the repository
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    # Build the Docker image from Dockerfile
+    # This image includes all development tools pre-installed
+    - name: Build Docker image
+      run: docker build -t tree-sitter-mermaid-dev .
+
+    # Run tests inside the Docker container
+    # This matches the local development environment
+    - name: Run tests in container
+      run: docker run -v $(pwd):/workspace tree-sitter-mermaid-dev bash -c "cd /workspace && npm install && make test"
+
+    # Check for new diagram types in latest Mermaid.js
+    # Runs inside container to use same environment
+    - name: Check Mermaid spec in container
+      run: docker run -v $(pwd):/workspace tree-sitter-mermaid-dev bash -c "cd /workspace && ./check-mermaid-spec.sh --create-issue"
+      env:
+        GH_TOKEN: ${{ github.token }}
+
+  # =============================================================================
+  # Native Ubuntu test job: Run tests directly on GitHub runner
+  # =============================================================================
+  #
+  # This job runs tests natively on Ubuntu for faster execution.
+  # It validates that the grammar works in different environments.
+  #
+  test-native:
+    name: Test on Native Ubuntu
+    runs-on: ubuntu-latest
+
+    steps:
+    # Checkout the repository
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    # Setup Node.js 18 (includes npm)
+    # Node.js is required for tree-sitter CLI
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '18'
+        cache: 'npm'
+
+    # Install tree-sitter CLI globally
+    # This provides the `tree-sitter test` command
+    - name: Install tree-sitter CLI
+      run: npm install -g tree-sitter-cli
+
+    # Install project dependencies
+    - name: Install dependencies
+      run: npm install
+
+    # Run all corpus tests
+    # Tests are defined in test/corpus/*.txt
+    # Each test contains Mermaid code and expected parse tree
+    - name: Run tests
+      run: make test
+
+    # Check for new diagram types in latest Mermaid.js
+    # This runs check-mermaid-spec.sh to compare our grammar
+    # against the official Mermaid documentation
+    - name: Check Mermaid spec
+      run: ./check-mermaid-spec.sh --create-issue
+      env:
+        GH_TOKEN: ${{ github.token }}
+
+  # =============================================================================
+  # Nix test job: Run tests in reproducible Nix environment
+  # =============================================================================
+  #
+  # This job ensures the project builds and tests correctly in a Nix shell,
+  # providing a reproducible development environment across different machines.
+  #
+  nix-test:
+    name: Test in Nix Environment
+    runs-on: ubuntu-latest
+
+    steps:
+    # Checkout the repository
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    # Install Nix package manager
+    # Nix provides deterministic, reproducible builds
+    - name: Install Nix
+      uses: cachix/install-nix-action@v25
+      with:
+        nix_path: nixpkgs=channel:nixos-unstable
+
+    # Run tests inside the Nix shell environment
+    # The shell.nix file defines all dependencies
+    - name: Run tests in Nix shell
+      run: nix-shell --run "npm install && make test"
+
+  # =============================================================================
+  # Summary job: Aggregate results from all test jobs
+  # =============================================================================
+  #
+  # This job waits for all test jobs to complete and provides a single
+  # status check that can be used as a required check for PRs.
+  #
+  test-summary:
+    name: Test Summary
+    runs-on: ubuntu-latest
+    needs: [test-docker, test-native, nix-test]
+    if: always()
+
+    steps:
+    - name: Check test results
+      run: |
+        echo "## Test Results Summary" >> $GITHUB_STEP_SUMMARY
+        echo "" >> $GITHUB_STEP_SUMMARY
+        echo "| Environment | Status |" >> $GITHUB_STEP_SUMMARY
+        echo "|-------------|--------|" >> $GITHUB_STEP_SUMMARY
+        echo "| Docker | ${{ needs.test-docker.result }} |" >> $GITHUB_STEP_SUMMARY
+        echo "| Native Ubuntu | ${{ needs.test-native.result }} |" >> $GITHUB_STEP_SUMMARY
+        echo "| Nix | ${{ needs.test-nix.result }} |" >> $GITHUB_STEP_SUMMARY
+
+    - name: Fail if any test failed
+      if: contains(needs.*.result, 'failure')
+      run: exit 1

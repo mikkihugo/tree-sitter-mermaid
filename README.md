@@ -484,7 +484,39 @@ See [bindings/c/tree-sitter-mermaid.h](bindings/c/tree-sitter-mermaid.h) for com
 
 ## 🛠️ Development Environment
 
-### Option 1: Nix (Recommended - Fully Reproducible)
+Choose the development environment that works best for you:
+
+### Option 1: Docker (Recommended - Consistent & Cross-Platform)
+Use Docker for a consistent, containerized development environment that works everywhere:
+
+```sh
+# Build the development container
+docker build -t tree-sitter-mermaid-dev .
+
+# Run interactively (with current directory mounted)
+docker run -it -v $(pwd):/workspace tree-sitter-mermaid-dev
+
+# Or use Docker Compose for easier commands
+docker-compose run dev              # Interactive shell
+docker-compose run dev make test    # Run tests
+docker-compose run dev make all     # Build libraries
+
+# Or use in VS Code with Remote Containers extension
+# Just open the project and select "Reopen in Container"
+```
+
+**Included tools:** Node.js 20, Python 3.11, Rust, Go 1.21, Swift 5.9, GCC, Make, Git, GitHub CLI, tree-sitter CLI, pkg-config, node-gyp
+
+### Option 2: GitHub Codespaces (Cloud Development)
+Develop directly in your browser or VS Code with zero local setup:
+
+1. Click the **Code** button on GitHub
+2. Select **Codespaces** tab
+3. Click **Create codespace on main**
+
+Codespaces uses the same Docker container as local development for consistency.
+
+### Option 3: Nix (Reproducible & Declarative)
 For a completely reproducible development environment across all platforms:
 
 ```sh
@@ -501,7 +533,7 @@ direnv allow         # in the repo root
 
 This automatically provides all required toolchains: C/C++ compiler, Python, Node.js, Rust, Go, Swift, tree-sitter CLI, pkg-config, and Make.
 
-### Option 2: Homebrew (macOS Only)
+### Option 4: Homebrew (macOS Only)
 If you prefer traditional package management on macOS:
 
 ```sh
@@ -510,6 +542,22 @@ brew bundle
 
 # Or install manually:
 brew install tree-sitter node python rust go swift
+```
+
+### Option 5: Manual Installation
+Install tools individually on any platform:
+
+```sh
+# Install tree-sitter CLI
+npm install -g tree-sitter-cli
+
+# Install other tools via your package manager:
+# - Node.js 18+ (https://nodejs.org/)
+# - Python 3.8+ (https://www.python.org/)
+# - Rust (https://rustup.rs/)
+# - Go 1.20+ (https://go.dev/)
+# - Swift 5.0+ (https://swift.org/)
+# - GCC/Clang, Make, Git
 ```
 
 ## 🧪 Testing & Quality Assurance
@@ -538,9 +586,11 @@ npm test                     # Node.js bindings
 
 ### CI/CD Pipeline
 - **Automated tests** on every push and pull request
-- **Parallel jobs**: Ubuntu (Node.js 18) + Nix environment
+- **Multiple environments**: Docker container, Native Ubuntu, and Nix
+- **Parallel jobs**: Validates grammar works consistently across environments
 - **Weekly spec checks** to detect new Mermaid features
 - **Cross-platform support** via GitHub Actions
+- **Local CI reproduction**: `docker-compose run ci` runs same tests locally
 
 See [TESTING.md](TESTING.md) for comprehensive testing guide.
 

@@ -35,10 +35,35 @@ Available corpus test files: `class.txt`, `er.txt`, `flow.txt`, `gantt.txt`, `mi
 
 ### Setup Environments
 ```bash
+# Docker (Recommended - Consistent, cross-platform)
+docker build -t tree-sitter-mermaid-dev .
+docker run -it -v $(pwd):/workspace tree-sitter-mermaid-dev
+docker-compose run dev              # Or use compose
+docker-compose run dev make test    # Run tests in container
+
+# Nix (Reproducible functional package manager)
 nix-shell          # Enter Nix development environment (reproducible, includes all tools)
 direnv allow       # Auto-activate nix-shell when entering repo (requires direnv install)
+
+# Homebrew (macOS package manager)
 brew bundle        # Install macOS dependencies via Homebrew
+
+# GitHub Codespaces (Cloud development)
+# Click Code → Codespaces → Create codespace on GitHub
 ```
+
+### Why Use Docker?
+- ✅ **Consistent environment**: Same tools/versions locally and in CI
+- ✅ **Cross-platform**: Works on Windows, macOS, Linux
+- ✅ **Reproducible**: `docker build` gives identical environment every time
+- ✅ **CI matching**: Same Dockerfile used in GitHub Actions
+- ✅ **Quick setup**: No manual tool installation
+- ✅ **Isolation**: No conflicts with system packages
+
+All development tools are pre-installed in the Docker image:
+- Node.js 20, Python 3.11, Rust, Go 1.21, Swift 5.9
+- tree-sitter CLI, GCC, Make, Git, GitHub CLI
+- pkg-config, node-gyp, setuptools, wheel
 
 ## Architecture
 
@@ -176,7 +201,11 @@ The `Makefile` handles compilation of C library. Node bindings use `node-gyp-bui
 | `test/corpus/*.txt` | Corpus tests for each diagram type |
 | `src/parser.c` | Generated C parser (auto-generated, DO NOT edit) |
 | `check-mermaid-spec.sh` | Script to detect new Mermaid diagram types |
-| `.github/workflows/ci.yml` | GitHub Actions test pipeline |
+| `.github/workflows/ci.yml` | Original GitHub Actions test pipeline |
+| `.github/workflows/ci-docker.yml` | Docker-based CI pipeline (recommended) |
+| `Dockerfile` | Docker development environment definition |
+| `docker-compose.yml` | Docker Compose configuration for easy dev commands |
+| `.devcontainer/devcontainer.json` | VS Code Remote Containers & Codespaces config |
 | `shell.nix` | Nix environment declaration |
 
 ## Common Tasks
@@ -200,6 +229,39 @@ make check-spec          # Identifies unimplemented diagram types
 ```
 
 This script fetches the latest Mermaid documentation and lists missing grammar implementations.
+
+### Working with Docker
+
+**Build and run tests:**
+```bash
+# Build the container (one-time, or after Dockerfile changes)
+docker build -t tree-sitter-mermaid-dev .
+
+# Run tests in container
+docker run -v $(pwd):/workspace tree-sitter-mermaid-dev make test
+
+# Interactive development
+docker run -it -v $(pwd):/workspace tree-sitter-mermaid-dev bash
+
+# Using Docker Compose (recommended)
+docker-compose run dev              # Interactive shell
+docker-compose run dev make test    # Run tests
+docker-compose run ci               # Run full CI suite locally
+```
+
+**Reproduce CI failures locally:**
+```bash
+# Run the same tests as GitHub Actions
+docker-compose run ci
+
+# Or manually:
+docker run -v $(pwd):/workspace tree-sitter-mermaid-dev bash -c "npm install && make test && ./check-mermaid-spec.sh"
+```
+
+**DevContainer (VS Code):**
+- Install "Dev Containers" extension in VS Code
+- Command Palette → "Dev Containers: Reopen in Container"
+- All tools automatically available in integrated terminal
 
 ## Build & Release Notes
 
