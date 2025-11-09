@@ -250,7 +250,7 @@ Security is good with solid practices in place. A formal audit and enhanced auto
 #### Available
 - ✅ **Contributing Guide**: Clear contribution process
 - ✅ **Code of Conduct**: Community standards defined
-- ✅ **Issue Templates**: (Need to verify)
+- ✅ **Issue Templates**: Bug, feature, docs, question templates
 - ✅ **Discussion Forums**: GitHub Discussions available
 - ✅ **License**: MIT - permissive and clear
 
