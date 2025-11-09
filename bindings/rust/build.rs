@@ -24,13 +24,14 @@ fn main() {
 
     // Configure the C compiler
     let mut c_config = cc::Build::new();
-    c_config.include(&src_dir);
+    c_config.include(src_dir);
 
     // Compiler flags for compatibility and warnings
     // These flags suppress warnings that are common in auto-generated parser code
     c_config
         .flag_if_supported("-Wno-unused-parameter")      // Parser has unused params
         .flag_if_supported("-Wno-unused-but-set-variable") // Auto-generated code artifacts
+        .flag_if_supported("-Wno-unused-function")        // Scanner has unused helper functions
         .flag_if_supported("-Wno-trigraphs");             // Avoid trigraph interpretation
 
     // Windows MSVC specific flag for UTF-8 source handling

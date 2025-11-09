@@ -1,4 +1,4 @@
-//! # 🚀 Singularity TreeSitter Mermaid - Mermaid.js grammar for tree-sitter
+//! # 🚀 Singularity `TreeSitter` Mermaid - Mermaid.js grammar for tree-sitter
 //!
 //! This crate provides Mermaid language support for the [tree-sitter][] parsing library.
 //!
@@ -74,7 +74,7 @@
 //! - **Architecture**: `architecture-beta` - System architecture
 //! - **Radar**: `radar-beta` - Multidimensional data
 //! - **Treemap**: `treemap` - Hierarchical data
-//! - **ZenUML**: `zenuml` - Sequence interactions
+//! - **`ZenUML`**: `zenuml` - Sequence interactions
 //! - **C4 Diagrams**: `C4Context`, `C4Container`, etc. - System architecture
 //! - **Requirement Diagrams**: `requirementDiagram` - Requirements modeling
 //!
@@ -158,7 +158,7 @@ pub fn language() -> Language {
 /// ```
 ///
 /// [`node-types.json`]: https://tree-sitter.github.io/tree-sitter/using-parsers#static-node-types
-pub const NODE_TYPES: &'static str = include_str!("../../src/node-types.json");
+pub const NODE_TYPES: &str = include_str!("../../src/node-types.json");
 
 /// The syntax highlighting query for Mermaid.
 ///
@@ -173,7 +173,7 @@ pub const NODE_TYPES: &'static str = include_str!("../../src/node-types.json");
 /// // Use with tree-sitter highlighting
 /// println!("Highlights query:\n{}", HIGHLIGHTS_QUERY);
 /// ```
-pub const HIGHLIGHTS_QUERY: &'static str = include_str!("../../queries/highlights.scm");
+pub const HIGHLIGHTS_QUERY: &str = include_str!("../../queries/highlights.scm");
 
 #[cfg(test)]
 mod tests {

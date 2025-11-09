@@ -1,4 +1,4 @@
-import TreeSitter
+import SwiftTreeSitter
 
 /// Tree-sitter language support for Mermaid diagrams
 ///
@@ -77,7 +77,7 @@ public class TreeSitterMermaid {
     /// let parser = Parser()
     /// parser.setLanguage(TreeSitterMermaid.language)
     /// ```
-    public static let language = Language(language: tree_sitter_mermaid())
+    public static let language = Language(language: OpaquePointer(tree_sitter_mermaid()))
 }
 
 /// C function declaration for the tree-sitter language
@@ -89,4 +89,5 @@ public class TreeSitterMermaid {
 /// - Returns: Opaque pointer to the tree-sitter Language object for Mermaid
 /// - Note: This is a C function and should not be called directly from Swift
 ///         Use `TreeSitterMermaid.language` instead
-func tree_sitter_mermaid() -> OpaquePointer!
+@_silgen_name("tree_sitter_mermaid")
+func tree_sitter_mermaid() -> UnsafeRawPointer

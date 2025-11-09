@@ -50,57 +50,80 @@ let package = Package(
     ],
 
     targets: [
-        .target(name: "TreeSitterMermaid",
-                dependencies: [.product(name: "SwiftTreeSitter", package: "swift-tree-sitter")],
-                path: ".",
-                // Exclude non-Swift binding files from the package
-                // Exclude non-Swift binding files and build configuration
-                exclude: [
-                    "Cargo.toml",        // Rust build config
-                    "Makefile",          // C library build
-                    "binding.gyp",       // Node.js build config
-                    "bindings/c",        // C bindings (not needed for Swift)
-                    "bindings/go",       // Go bindings
-                    "bindings/node",     // Node.js bindings
-                    "bindings/python",   // Python bindings
-                    "bindings/rust",     // Rust bindings
-                    "prebuilds",         // Pre-built Node.js binaries
-                    "grammar.js",        // Tree-sitter grammar definition
-                    "package.json",      // Node.js package config
-                    "package-lock.json", // Node.js lock file
-                    "pyproject.toml",    // Python package config
-                    "setup.py",          // Python build script
-                    "test",              // Tree-sitter corpus tests
-                    "examples",          // Rust examples
-                    ".editorconfig",     // Editor config
-                    ".github",           // GitHub workflows
-                    ".gitignore",        // Git ignore file
-                    ".gitattributes",    // Git attributes
-                    ".gitmodules",       // Git submodules
-                ],
+        // C parser target - compiled separately
+        .target(
+            name: "TreeSitterMermaidC",
+            path: ".",
+            exclude: [
+                "Cargo.toml",
+                "Makefile",
+                "binding.gyp",
+                "bindings",
+                "grammar.js",
+                "package.json",
+                "pyproject.toml",
+                "setup.py",
+                "test",
+                "examples",
+                "Tests",
+                ".editorconfig",
+                ".github",
+                ".gitignore",
+                ".gitattributes",
+                "CHANGELOG.md",
+                "CLAUDE.md",
+                "CODE_OF_CONDUCT.md",
+                "CONTRIBUTING.md",
+                "DEVELOPMENT_SETUP.md",
+                "DOCKER.md",
+                "Dockerfile",
+                "IMPLEMENTATION_SUMMARY.md",
+                "LICENSE",
+                "PRODUCTION_READINESS.md",
+                "PUBLISHING.md",
+                "README.md",
+                "SECURITY.md",
+                "TESTING.md",
+                "ARCHITECTURE.md",
+                "Brewfile",
+                "Package.swift",
+                "check-mermaid-spec.sh",
+                "docker-compose.yml",
+                "shell.nix",
+                "tree-sitter.json",
+                "queries",
+                "dist",
+            ],
+            sources: [
+                "src/parser.c",
+                "src/scanner.c",
+            ],
+            publicHeadersPath: "bindings/swift",
+            cSettings: [.headerSearchPath("src")]
+        ),
 
-                // Swift and C source files
-                sources: [
-                    "bindings/swift/TreeSitterMermaid/TreeSitterMermaid.swift",  // Swift bindings
-                    "src/parser.c",      // Auto-generated parser from grammar.js
-                    "src/scanner.c",     // External scanner for class diagram 'o' token
-                ],
-
-                // Include tree-sitter query files for syntax highlighting
-                resources: [
-                    .copy("queries")
-                ],
-
-                // Public C headers accessible from Swift
-                publicHeadersPath: "bindings/swift",
-
-                // C compiler settings
-                cSettings: [.headerSearchPath("src")]),
+        // Swift wrapper target
+        .target(
+            name: "TreeSitterMermaid",
+            dependencies: [
+                "TreeSitterMermaidC",
+                .product(name: "SwiftTreeSitter", package: "swift-tree-sitter")
+            ],
+            path: "bindings/swift",
+            resources: [
+                .copy("../../queries")
+            ]
+        ),
 
         // Test target for the Swift package
-        .testTarget(name: "TreeSitterMermaidTests",
-                   dependencies: ["TreeSitterMermaid", .product(name: "SwiftTreeSitter", package: "swift-tree-sitter")],
-                   path: "Tests")
+        .testTarget(
+            name: "TreeSitterMermaidTests",
+            dependencies: [
+                "TreeSitterMermaid",
+                .product(name: "SwiftTreeSitter", package: "swift-tree-sitter")
+            ],
+            path: "Tests"
+        )
     ],
 
     // Require C11 standard for parser compilation
