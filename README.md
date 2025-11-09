@@ -1,9 +1,9 @@
 # 🚀 Singularity TreeSitter Mermaid - tree-sitter-mermaid
 
 [![CI](https://github.com/Singularity-ng/singularity-parser-mermaid/actions/workflows/ci.yml/badge.svg)](https://github.com/Singularity-ng/singularity-parser-mermaid/actions/workflows/ci.yml)
-[![Production Ready](https://img.shields.io/badge/status-production%20ready-brightgreen)](PRODUCTION_READINESS.md)
-[![Tests Passing](https://img.shields.io/badge/tests-133%2F133%20passing-brightgreen)](TESTING.md)
-[![Diagram Coverage](https://img.shields.io/badge/coverage-23%2F23%20types-brightgreen)](ARCHITECTURE.md)
+[![Production Ready](https://img.shields.io/badge/status-production%20ready-brightgreen)](docs/PRODUCTION_READINESS.md)
+[![Tests Passing](https://img.shields.io/badge/tests-133%2F133%20passing-brightgreen)](docs/TESTING.md)
+[![Diagram Coverage](https://img.shields.io/badge/coverage-23%2F23%20types-brightgreen)](docs/ARCHITECTURE.md)
 [![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](LICENSE)
 [![Mermaid Version](https://img.shields.io/badge/Mermaid-11.12.0-blueviolet.svg)](https://mermaid.js.org/)
 [![tree-sitter](https://img.shields.io/badge/tree--sitter-0.25-green)](https://tree-sitter.github.io/tree-sitter/)
@@ -15,7 +15,7 @@ A modern, actively maintained [Mermaid.js](https://mermaid-js.github.io/mermaid/
 
 **Published as `tree-sitter-mermaid`** on npm, PyPI, and crates.io for easy installation and discoverability.
 
-> **✅ Production Ready**: This parser is production-ready and suitable for use in production environments. See our comprehensive [Production Readiness Assessment](PRODUCTION_READINESS.md) for detailed evaluation (Score: 89/100).
+> **✅ Production Ready**: This parser is production-ready and suitable for use in production environments. See our comprehensive [Production Readiness Assessment](docs/PRODUCTION_READINESS.md) for detailed evaluation (Score: 89/100).
 
 ## 🙏 Credits
 
@@ -592,21 +592,21 @@ npm test                     # Node.js bindings
 - **Cross-platform support** via GitHub Actions
 - **Local CI reproduction**: `docker-compose run ci` runs same tests locally
 
-See [TESTING.md](TESTING.md) for comprehensive testing guide.
+See [TESTING.md](docs/TESTING.md) for comprehensive testing guide.
 
 ## 📚 Documentation
 
 | Document | Purpose |
 |---|---|
 | [README.md](README.md) | Overview, quick start, examples, installation |
-| [PRODUCTION_READINESS.md](PRODUCTION_READINESS.md) | Comprehensive production readiness assessment |
-| [ARCHITECTURE.md](ARCHITECTURE.md) | System design, grammar structure, parser internals |
-| [TESTING.md](TESTING.md) | Testing infrastructure, how to write tests, CI/CD details |
+| [PRODUCTION_READINESS.md](docs/PRODUCTION_READINESS.md) | Comprehensive production readiness assessment |
+| [ARCHITECTURE.md](docs/ARCHITECTURE.md) | System design, grammar structure, parser internals |
+| [TESTING.md](docs/TESTING.md) | Testing infrastructure, how to write tests, CI/CD details |
 | [CONTRIBUTING.md](CONTRIBUTING.md) | Contribution guidelines, development workflow |
 | [CHANGELOG.md](CHANGELOG.md) | Version history and release notes |
 | [SECURITY.md](SECURITY.md) | Security policy and vulnerability reporting |
 | [CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md) | Community standards and expectations |
-| [PUBLISHING.md](PUBLISHING.md) | Package publishing process and distribution |
+| [PUBLISHING.md](docs/PUBLISHING.md) | Package publishing process and distribution |
 | [CLAUDE.md](CLAUDE.md) | AI assistant guidelines, development workflow |
 | [grammar.js](grammar.js) | Grammar definition with inline documentation |
 

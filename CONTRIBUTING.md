@@ -289,7 +289,7 @@ Test case name
   (expected_parse_tree))
 ```
 
-See [TESTING.md](TESTING.md) for detailed testing guide.
+See [TESTING.md](docs/TESTING.md) for detailed testing guide.
 
 ## Documentation
 
