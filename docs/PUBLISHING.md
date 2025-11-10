@@ -1,14 +1,14 @@
-# Publishing Guide for 🧜‍♀️ The Little Mermaid (tree-sitter-little-mermaid)
+# Publishing Guide for Singularity TreeSitter Mermaid (tree-sitter-mermaid)
 
-This document explains how to publish tree-sitter-little-mermaid to package registries (npm, PyPI, crates.io, Swift Package Manager).
+This document explains how to publish tree-sitter-mermaid to package registries (npm, PyPI, crates.io, Swift Package Manager).
 
 ## 📦 Package Registry Status
 
 | Registry | Package Name | Status | Owner | Notes |
 |----------|--------------|--------|-------|-------|
-| **npm** | `tree-sitter-little-mermaid` | ✅ Available | - | Ready to publish! |
-| **PyPI** | `tree-sitter-little-mermaid` | ✅ Available | - | Ready to publish! |
-| **crates.io** | `tree-sitter-little-mermaid` | ✅ Available | - | Ready to publish! |
+| **npm** | `tree-sitter-mermaid` | ✅ Available | Singularity | Ready to publish! |
+| **PyPI** | `tree-sitter-mermaid` | ✅ Available | Singularity | Ready to publish! |
+| **crates.io** | `tree-sitter-mermaid` | ✅ Available | Singularity | Ready to publish! |
 | **Swift PM** | N/A | ✅ Ready | - | Git-based, no registry |
 
 ## 🚀 Automated Publishing (Recommended)
@@ -80,7 +80,7 @@ twine check dist/*
 twine upload --repository testpypi dist/*
 
 # Test install from TestPyPI
-pip install --index-url https://test.pypi.org/simple/ tree-sitter-little-mermaid
+pip install --index-url https://test.pypi.org/simple/ tree-sitter-mermaid
 
 # If everything works, upload to real PyPI
 twine upload dist/*
@@ -94,8 +94,8 @@ Uses **OIDC trusted publishing** (no API token needed). Setup:
 
 1. Go to https://pypi.org/manage/account/publishing/
 2. Add trusted publisher:
-   - PyPI Project Name: `tree-sitter-little-mermaid`
-   - Owner: `mikkihugo`
+   - PyPI Project Name: `tree-sitter-mermaid`
+   - Owner: `Singularity`
    - Repository: `tree-sitter-mermaid`
    - Workflow: `publish-pypi.yml`
 3. Done! Release triggers automatically publish
@@ -153,7 +153,7 @@ npm publish --access public
 **No action needed!** Swift packages are Git-based. Users can install directly:
 
 ```swift
-.package(url: "https://github.com/mikkihugo/tree-sitter-mermaid.git", from: "0.9.0")
+.package(url: "https://github.com/Singularity-ng/singularity-parser-mermaid.git", from: "0.9.1")
 ```
 
 The package is already configured in `Package.swift`.
@@ -215,7 +215,7 @@ git push origin main --tags
 
 As of October 2024:
 
-- ✅ **Package renamed**: `tree-sitter-little-mermaid` (available on all registries!)
+- ✅ **Package renamed**: `tree-sitter-mermaid` (available on all registries!)
 - ✅ **Swift PM**: Ready (Git-based, working)
 - ✅ **PyPI**: Ready to publish (automated workflow configured)
 - ✅ **npm**: Ready to publish (automated workflow configured)
@@ -226,7 +226,7 @@ As of October 2024:
 1. **Create accounts** on npm, PyPI, and crates.io
 2. **Configure secrets** (NPM_TOKEN, CARGO_REGISTRY_TOKEN)
 3. **Set up PyPI trusted publisher** (no token needed!)
-4. **Create first release**: `gh release create v0.9.0 --generate-notes`
+4. **Create first release**: `gh release create v0.9.1 --generate-notes`
 5. **Automated workflows** will publish to all three registries! 🚀
 
 ---

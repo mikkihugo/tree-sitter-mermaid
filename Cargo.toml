@@ -1,16 +1,16 @@
 [package]
-name = "tree-sitter-little-mermaid"
-description = "🧜‍♀️ The Little Mermaid - Complete Mermaid.js grammar for tree-sitter with 100% test coverage (23/23 diagram types)"
-version = "0.9.0"
+name = "tree-sitter-mermaid"
+description = "🚀 Singularity tree-sitter-mermaid - Complete Mermaid.js grammar for tree-sitter with 100% test coverage (23/23 diagram types)"
+version = "0.9.1"
 keywords = ["mermaid", "tree-sitter", "parser", "diagram", "grammar"]
 categories = ["parsing", "text-editors", "development-tools"]
-repository = "https://github.com/mikkihugo/tree-sitter-mermaid"
-homepage = "https://github.com/mikkihugo/tree-sitter-mermaid"
-documentation = "https://docs.rs/ts-little-mermaid"
+repository = "https://github.com/Singularity-ng/singularity-parser-mermaid"
+homepage = "https://github.com/Singularity-ng/singularity-parser-mermaid"
+documentation = "https://docs.rs/tree-sitter-mermaid"
 edition = "2021"
 rust-version = "1.70"
 license = "MIT"
-authors = ["mikkihugo <mhugo@example.com>"]
+authors = ["Mikael Hugo <mikkihugo@users.noreply.github.com>"]
 
 build = "bindings/rust/build.rs"
 include = [
@@ -24,10 +24,13 @@ include = [
 path = "bindings/rust/lib.rs"
 
 [dependencies]
-tree-sitter = "~0.25"
+tree-sitter = "0.25"
 
 [build-dependencies]
-cc = "1.0"
+cc = "1.1"
+
+[dev-dependencies]
+serde_json = "1.0"
 
 [features]
 default = ["parser"]

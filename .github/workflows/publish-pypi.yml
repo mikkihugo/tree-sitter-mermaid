@@ -27,8 +27,8 @@
 # ------
 # 1. Go to https://pypi.org/manage/account/publishing/
 # 2. Add new trusted publisher:
-#    - PyPI Project Name: tree-sitter-little-mermaid
-#    - Owner: mikkihugo
+#    - PyPI Project Name: tree-sitter-mermaid
+#    - Owner: Singularity
 #    - Repository name: tree-sitter-mermaid
 #    - Workflow name: publish-pypi.yml
 #    - Environment name: (leave blank)
@@ -118,19 +118,19 @@ jobs:
     - name: Verify published package
       run: |
         sleep 30  # Wait for PyPI to update
-        pip index versions tree-sitter-little-mermaid || echo "Package not yet visible"
+        pip index versions tree-sitter-mermaid || echo "Package not yet visible"
 
     - name: Post summary
       run: |
         echo "## 🧜‍♀️ Package Published!" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
-        echo "✅ **tree-sitter-little-mermaid** has been published to PyPI" >> $GITHUB_STEP_SUMMARY
+        echo "✅ **tree-sitter-mermaid** has been published to PyPI" >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "### Installation" >> $GITHUB_STEP_SUMMARY
         echo '```bash' >> $GITHUB_STEP_SUMMARY
-        echo 'pip install tree-sitter-little-mermaid' >> $GITHUB_STEP_SUMMARY
+        echo 'pip install tree-sitter-mermaid' >> $GITHUB_STEP_SUMMARY
         echo '```' >> $GITHUB_STEP_SUMMARY
         echo "" >> $GITHUB_STEP_SUMMARY
         echo "### Links" >> $GITHUB_STEP_SUMMARY
-        echo "- PyPI: https://pypi.org/project/tree-sitter-little-mermaid/" >> $GITHUB_STEP_SUMMARY
-        echo "- Docs: https://github.com/mikkihugo/tree-sitter-mermaid" >> $GITHUB_STEP_SUMMARY
+        echo "- PyPI: https://pypi.org/project/tree-sitter-mermaid/" >> $GITHUB_STEP_SUMMARY
+        echo "- Docs: https://github.com/Singularity-ng/singularity-parser-mermaid" >> $GITHUB_STEP_SUMMARY

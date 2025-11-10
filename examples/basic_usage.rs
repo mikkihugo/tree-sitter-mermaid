@@ -27,35 +27,35 @@
 //! This example tests 3 common diagram types, but tree-sitter-mermaid supports
 //! all 23 Mermaid diagram types. See the README for a complete list.
 
-use tree_sitter_little_mermaid::language;
+use tree_sitter_mermaid::language;
 
 fn main() {
     // Sample Mermaid diagrams demonstrating different diagram types
     // Each string contains valid Mermaid syntax that will be parsed
-    let diagrams = vec![
+    let diagrams = [
         // Flowchart example
         // Demonstrates: nodes, edges, decision blocks, and labels
-        r#"
+        r"
 graph TD
     A[Start] --> B{Decision}
     B -->|Yes| C[Action 1]
     B -->|No| D[Action 2]
     C --> E[End]
     D --> E
-"#,
+",
         // Sequence diagram example
         // Demonstrates: participants, messages, and arrow types
-        r#"
+        r"
 sequenceDiagram
     participant A as Alice
     participant B as Bob
     A->>B: Hello Bob, how are you?
     B-->>A: Great!
     A-)B: See you later!
-"#,
+",
         // Class diagram example
         // Demonstrates: classes, attributes, methods, and inheritance
-        r#"
+        r"
 classDiagram
     class Animal {
         +String name
@@ -67,7 +67,7 @@ classDiagram
         +bark()
     }
     Animal <|-- Dog
-"#,
+",
     ];
 
     // Get the Mermaid language definition

@@ -5,16 +5,52 @@ This document provides a comprehensive guide to all testing infrastructure acros
 ## Quick Start
 
 ```bash
-# Run all tests (corpus + CI checks)
-make test                    # Run corpus tests
+# Run comprehensive test suite (RECOMMENDED for releases)
+./test-all-bindings.sh       # Validates all components: CLI, Rust, Go, Swift, Python, Node.js
+
+# Run individual test suites
+make test                    # Run corpus tests (requires tree-sitter CLI)
 make check-spec              # Validate Mermaid spec compliance
 
 # Run tests for specific languages
 cargo test                   # Rust tests
 go test ./bindings/go/...    # Go tests
 npm test                     # Node.js tests (also runs corpus)
+swift test                   # Swift tests
 python -m pytest             # Python tests (if configured)
-swift build                  # Swift tests (build project)
+```
+
+## Prerequisites: Installing tree-sitter CLI
+
+The tree-sitter CLI is required to run corpus tests. Install it using one of these methods:
+
+### Via npm (Recommended for development)
+```bash
+npm install -g tree-sitter-cli
+```
+
+### Via binary download (Recommended for CI/CD)
+```bash
+# Linux x64
+curl -L https://github.com/tree-sitter/tree-sitter/releases/download/v0.25.10/tree-sitter-linux-x64.gz | gunzip > tree-sitter
+chmod +x tree-sitter
+sudo mv tree-sitter /usr/local/bin/
+
+# macOS x64
+curl -L https://github.com/tree-sitter/tree-sitter/releases/download/v0.25.10/tree-sitter-macos-x64.gz | gunzip > tree-sitter
+chmod +x tree-sitter
+sudo mv tree-sitter /usr/local/bin/
+
+# macOS ARM64  
+curl -L https://github.com/tree-sitter/tree-sitter/releases/download/v0.25.10/tree-sitter-macos-arm64.gz | gunzip > tree-sitter
+chmod +x tree-sitter
+sudo mv tree-sitter /usr/local/bin/
+```
+
+### Verify Installation
+```bash
+tree-sitter --version
+# Should output: tree-sitter 0.25.10 (da6fe9beb4f7f67beb75914ca8e0d48ae48d6406)
 ```
 
 ## Test Infrastructure Overview

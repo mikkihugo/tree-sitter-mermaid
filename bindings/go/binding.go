@@ -31,7 +31,7 @@
 //	import (
 //		"fmt"
 //		sitter "github.com/tree-sitter/go-tree-sitter"
-//		mermaid "github.com/mikkihugo/tree-sitter-mermaid/bindings/go"
+//		mermaid "github.com/Singularity/singularity-parser-mermaid/bindings/go"
 //	)
 //
 //	func main() {
@@ -72,7 +72,7 @@
 //
 package tree_sitter_mermaid
 
-// #cgo CFLAGS: -std=c11 -fPIC
+// #cgo CFLAGS: -std=c11 -fPIC -I../../src
 // #include "../../src/parser.c"
 // #include "../../src/scanner.c"
 import "C"

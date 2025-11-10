@@ -6,6 +6,12 @@
 # when new Mermaid diagram types are detected. It's triggered by the weekly
 # spec compliance check.
 #
+# ENVIRONMENT:
+# ------------
+# - Uses Docker container (same as local development and CI)
+# - Ensures consistent tool versions across all workflows
+# - Pre-installed: Node.js, tree-sitter CLI, Python, Rust, Go, Swift
+#
 # WHAT IT DOES:
 # -------------
 # 1. Detects new diagram types from Mermaid specification
@@ -53,7 +59,7 @@ jobs:
 
     steps:
     # ==========================================================================
-    # Setup
+    # Setup - Use Docker for consistent environment
     # ==========================================================================
 
     - name: Checkout repository
@@ -61,15 +67,11 @@ jobs:
       with:
         fetch-depth: 0  # Full history for branching
 
-    - name: Setup Node.js
-      uses: actions/setup-node@v4
-      with:
-        node-version: '18'
+    - name: Set up Docker Buildx
+      uses: docker/setup-buildx-action@v3
 
-    - name: Install dependencies
-      run: |
-        npm install -g tree-sitter-cli
-        # GitHub CLI is pre-installed in GitHub Actions
+    - name: Build development container
+      run: docker build -t tree-sitter-mermaid-dev .
 
     # ==========================================================================
     # Detect new diagram types
@@ -78,9 +80,14 @@ jobs:
     - name: Check for new diagram types
       id: check
       run: |
-        # Run spec check without creating issue (we'll create PR instead)
+        # Run spec check in Docker container
         set +e  # Don't fail on exit code 1
-        ./check-mermaid-spec.sh > check-output.txt 2>&1
+        docker run -v $(pwd):/workspace tree-sitter-mermaid-dev bash -c "
+          cd /workspace
+          ./check-mermaid-spec.sh > check-output.txt 2>&1
+          cat check-output.txt
+          exit \$?
+        "
         EXIT_CODE=$?
         set -e
 

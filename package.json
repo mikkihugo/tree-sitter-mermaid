@@ -1,7 +1,7 @@
 {
-  "name": "tree-sitter-little-mermaid",
-  "version": "0.9.0",
-  "description": "🧜‍♀️ The Little Mermaid - A complete tree-sitter grammar for Mermaid.js diagrams with 100% test coverage (23/23 types)",
+  "name": "tree-sitter-mermaid",
+  "version": "0.9.1",
+  "description": "🚀 Singularity tree-sitter-mermaid - A complete Mermaid.js grammar with 100% test coverage (23/23 types)",
   "main": "bindings/node",
   "types": "bindings/node",
   "scripts": {
@@ -22,7 +22,7 @@
     "queries/*",
     "src/**"
   ],
-  "author": "monaqa",
+  "author": "Singularity",
   "license": "MIT",
   "dependencies": {
     "node-addon-api": "^7.1.0",

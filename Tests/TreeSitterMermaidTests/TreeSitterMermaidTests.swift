@@ -1,32 +1,16 @@
-import TreeSitterMermaid
+import XCTest
+@testable import TreeSitterMermaid
 
-// Simple test to verify the Swift binding works
-print("Testing TreeSitterMermaid Swift binding...")
-
-// Test that we can get the language
-let language = TreeSitterMermaid.language
-print("✅ Language created: \(language)")
-
-// Test parsing a simple diagram
-let parser = Parser()
-try parser.setLanguage(TreeSitterMermaid.language)
-
-let mermaidCode = """
-graph TD
-    A[Start] --> B{Decision}
-    B -->|Yes| C[Action 1]
-    B -->|No| D[Action 2]
-"""
-
-let tree = parser.parse(mermaidCode, nil, nil)
-if let tree = tree {
-    let rootNode = tree.rootNode
-    print("✅ Parsed diagram successfully!")
-    print("   Root node: \(rootNode.kind)")
-    print("   Child count: \(rootNode.childCount)")
-    print("   Text length: \(rootNode.endByte - rootNode.startByte) bytes")
-} else {
-    print("❌ Failed to parse diagram")
+final class TreeSitterMermaidTests: XCTestCase {
+    func testCanLoadLanguage() throws {
+        // Test that we can create the language
+        let language = TreeSitterMermaid.language
+        XCTAssertNotNil(language, "Language should be loadable")
+    }
+    
+    func testLanguageFunction() throws {
+        // Test that the C function returns a valid pointer
+        let langPtr = tree_sitter_mermaid()
+        XCTAssertNotNil(langPtr, "tree_sitter_mermaid() should return valid pointer")
+    }
 }
-
-print("✅ Swift binding test completed!")
