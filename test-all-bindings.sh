@@ -62,18 +62,58 @@ run_test() {
     fi
 }
 
-# Check if tree-sitter CLI is installed
+# Check if tree-sitter CLI is installed, auto-install if not
 check_tree_sitter_cli() {
     if ! command -v tree-sitter &> /dev/null; then
-        echo -e "${RED}✗ tree-sitter CLI not found${NC}"
-        echo "Please install tree-sitter CLI:"
-        echo "  npm install -g tree-sitter-cli"
-        echo "  OR"
-        echo "  curl -L https://github.com/tree-sitter/tree-sitter/releases/download/v0.25.10/tree-sitter-linux-x64.gz | gunzip > tree-sitter && chmod +x tree-sitter && sudo mv tree-sitter /usr/local/bin/"
-        return 1
+        echo -e "${YELLOW}⚠ tree-sitter CLI not found, auto-installing...${NC}"
+        
+        # Determine platform and install accordingly
+        local platform=$(uname -s | tr '[:upper:]' '[:lower:]')
+        local arch=$(uname -m)
+        
+        if [ "$platform" = "linux" ] && [ "$arch" = "x86_64" ]; then
+            echo "Installing tree-sitter CLI for Linux x64..."
+            curl -L https://github.com/tree-sitter/tree-sitter/releases/download/v0.25.10/tree-sitter-linux-x64.gz 2>/dev/null | gunzip > /tmp/tree-sitter
+            chmod +x /tmp/tree-sitter
+            if sudo mv /tmp/tree-sitter /usr/local/bin/ 2>/dev/null; then
+                echo -e "${GREEN}✓ tree-sitter CLI installed successfully${NC}"
+            else
+                # Fallback: try without sudo, just in local path
+                mv /tmp/tree-sitter ./tree-sitter 2>/dev/null
+                export PATH="$(pwd):$PATH"
+                echo -e "${GREEN}✓ tree-sitter CLI installed to local directory${NC}"
+            fi
+        elif [ "$platform" = "darwin" ]; then
+            if [ "$arch" = "arm64" ]; then
+                echo "Installing tree-sitter CLI for macOS ARM64..."
+                curl -L https://github.com/tree-sitter/tree-sitter/releases/download/v0.25.10/tree-sitter-macos-arm64.gz 2>/dev/null | gunzip > /tmp/tree-sitter
+            else
+                echo "Installing tree-sitter CLI for macOS x64..."
+                curl -L https://github.com/tree-sitter/tree-sitter/releases/download/v0.25.10/tree-sitter-macos-x64.gz 2>/dev/null | gunzip > /tmp/tree-sitter
+            fi
+            chmod +x /tmp/tree-sitter
+            if sudo mv /tmp/tree-sitter /usr/local/bin/ 2>/dev/null; then
+                echo -e "${GREEN}✓ tree-sitter CLI installed successfully${NC}"
+            else
+                mv /tmp/tree-sitter ./tree-sitter 2>/dev/null
+                export PATH="$(pwd):$PATH"
+                echo -e "${GREEN}✓ tree-sitter CLI installed to local directory${NC}"
+            fi
+        else
+            echo -e "${YELLOW}⚠ Unsupported platform: $platform $arch${NC}"
+            echo "Please install tree-sitter CLI manually:"
+            echo "  npm install -g tree-sitter-cli"
+            return 1
+        fi
+        
+        # Verify installation
+        if ! command -v tree-sitter &> /dev/null; then
+            echo -e "${RED}✗ tree-sitter CLI installation failed${NC}"
+            return 1
+        fi
     fi
     
-    local version=$(tree-sitter --version | head -1)
+    local version=$(tree-sitter --version 2>/dev/null | head -1)
     echo -e "${GREEN}✓ tree-sitter CLI found: $version${NC}"
     return 0
 }
@@ -105,9 +145,24 @@ run_test "tree-sitter corpus tests" tree-sitter test
 # 2. Rust Binding Tests
 # =============================================================================
 print_header "🦀 Rust Binding Tests"
+
+# Check for outdated dependencies
+echo -e "\n${YELLOW}Checking Rust dependencies...${NC}"
+if command -v cargo-outdated &> /dev/null; then
+    cargo outdated --exit-code 1 2>&1 | tee /tmp/cargo-outdated.log
+    if [ $? -eq 1 ]; then
+        echo -e "${YELLOW}⚠ Some dependencies are outdated. Run 'cargo update' to update them.${NC}"
+    else
+        echo -e "${GREEN}✓ All Rust dependencies are up-to-date${NC}"
+    fi
+else
+    echo -e "${YELLOW}⚠ cargo-outdated not installed, skipping dependency check${NC}"
+    echo "  Install with: cargo install cargo-outdated"
+fi
+
 run_test "Rust unit tests" cargo test --lib
 run_test "Rust doc tests" cargo test --doc
-run_test "Rust Clippy (pedantic)" cargo clippy --all-targets --all-features -- -W clippy::all -W clippy::pedantic -D warnings 2>&1 | grep -q "0 warnings emitted" || cargo clippy --all-targets --all-features -- -W clippy::all -W clippy::pedantic
+run_test "Rust Clippy (pedantic)" cargo clippy --all-targets --all-features -- -W clippy::all -W clippy::pedantic -D warnings
 
 # =============================================================================
 # 3. Go Binding Tests

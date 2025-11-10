@@ -202,5 +202,22 @@ test:
 check-spec:
 	./check-mermaid-spec.sh
 
+# Update Rust dependencies to latest stable versions
+# Always keeps dependencies up-to-date for security and performance
+update-deps:
+	@echo "Updating Rust dependencies to latest stable versions..."
+	cargo update
+	@echo "✓ Dependencies updated"
+
+# Check for outdated dependencies (requires cargo-outdated)
+# Install with: cargo install cargo-outdated
+check-deps:
+	@echo "Checking for outdated dependencies..."
+	@command -v cargo-outdated >/dev/null 2>&1 || { \
+		echo "Installing cargo-outdated..."; \
+		cargo install cargo-outdated; \
+	}
+	cargo outdated
+
 # Declare phony targets (not real files)
-.PHONY: all install uninstall clean test check-spec
+.PHONY: all install uninstall clean test check-spec update-deps check-deps
