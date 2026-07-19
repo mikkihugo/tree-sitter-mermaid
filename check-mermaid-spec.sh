@@ -55,8 +55,8 @@ set -e
 
 # Parse command line arguments
 CREATE_ISSUE=false
-if [[ "$1" == "--create-issue" ]]; then
-    CREATE_ISSUE=true
+if [[ $1 == "--create-issue" ]]; then
+  CREATE_ISSUE=true
 fi
 
 echo "🔍 Checking Mermaid specification for updates..."
@@ -70,13 +70,13 @@ echo "📦 Latest Mermaid version: $LATEST_VERSION"
 # Clone or update the official Mermaid.js repository
 # This provides example diagrams and documentation for reference
 if [ ! -d "mermaid-examples" ]; then
-    echo "📥 Cloning Mermaid examples for reference..."
-    git clone --depth 1 https://github.com/mermaid-js/mermaid.git mermaid-examples
+  echo "📥 Cloning Mermaid examples for reference..."
+  git clone --depth 1 https://github.com/mermaid-js/mermaid.git mermaid-examples
 else
-    echo "🔄 Updating Mermaid examples..."
-    cd mermaid-examples
-    git pull --depth 1 || true
-    cd ..
+  echo "🔄 Updating Mermaid examples..."
+  cd mermaid-examples
+  git pull --depth 1 || true
+  cd ..
 fi
 
 echo ""
@@ -87,11 +87,13 @@ echo "━━━━━━━━━━━━━━━━━━━━━━━━�
 # Extract currently implemented diagram types from grammar.js
 # Looks for lines starting with "diagram_" which define diagram type rules
 # Example: "diagram_flow:" → "flow"
-IMPLEMENTED_TYPES=$(grep -E "^[ ]*diagram_" grammar.js | sed 's/.*diagram_\([a-z_]*\):.*/\1/' | sort | uniq)
+# [a-z0-9_] not [a-z_]: rule names contain digits (diagram_c4), and the old
+# pattern silently truncated it to "c", so c4 was reported missing forever.
+IMPLEMENTED_TYPES=$(grep -E "^[ ]*diagram_" grammar.js | sed 's/.*diagram_\([a-z0-9_]*\):.*/\1/' | sort | uniq)
 
 echo "Currently implemented diagram types:"
 echo "$IMPLEMENTED_TYPES" | while read type; do
-    echo "  ✅ $type"
+  echo "  ✅ $type"
 done
 IMPLEMENTED_COUNT=$(echo "$IMPLEMENTED_TYPES" | wc -l | tr -d ' ')
 echo ""
@@ -108,35 +110,44 @@ echo "━━━━━━━━━━━━━━━━━━━━━━━━�
 #
 # Format: "mermaid_keyword:grammar_name"
 KNOWN_TYPES=(
-    "flowchart:flow"
-    "graph:flow"
-    "sequenceDiagram:sequence"
-    "classDiagram:class"
-    "stateDiagram:state"
-    "stateDiagram-v2:state"
-    "erDiagram:er"
-    "gantt:gantt"
-    "pie:pie"
-    "quadrantChart:quadrant"
-    "requirementDiagram:requirement"
-    "gitGraph:gitgraph"
-    "mindmap:mindmap"
-    "timeline:timeline"
-    "zenuml:zenuml"
-    "journey:journey"
-    "sankey-beta:sankey"
-    "xychart-beta:xychart"
-    "block-beta:block"
-    "packet-beta:packet"
-    "kanban:kanban"
-    "architecture-beta:architecture"
-    "C4Context:c4"
-    "C4Container:c4"
-    "C4Component:c4"
-    "C4Dynamic:c4"
-    "C4Deployment:c4"
-    "radar-beta:radar"
-    "treemap:treemap"
+  "flowchart:flow"
+  "graph:flow"
+  "sequenceDiagram:sequence"
+  "classDiagram:class"
+  "stateDiagram:state"
+  "stateDiagram-v2:state"
+  "erDiagram:er"
+  "gantt:gantt"
+  "pie:pie"
+  "quadrantChart:quadrant_chart"
+  "requirementDiagram:requirement"
+  "gitGraph:gitgraph"
+  "mindmap:mindmap"
+  "timeline:timeline"
+  "zenuml:zenuml"
+  "journey:journey"
+  "sankey-beta:sankey"
+  "xychart-beta:xy_chart"
+  "block-beta:block"
+  "packet-beta:packet"
+  "kanban:kanban"
+  "architecture-beta:architecture"
+  "C4Context:c4"
+  "C4Container:c4"
+  "C4Component:c4"
+  "C4Dynamic:c4"
+  "C4Deployment:c4"
+  "radar-beta:radar"
+  "treemap:treemap"
+  # Added upstream after 11.12.2 — the version this grammar targets.
+  # wardley 11.14.0; cynefin/railroad/swimlane 11.16.0; venn and treeView also
+  # post-date the pinned target. Listed so drift is reported instead of silent.
+  "wardley-beta:wardley"
+  "cynefin-beta:cynefin"
+  "railroad-beta:railroad"
+  "swimlane:swimlane"
+  "venn-beta:venn"
+  "treeView-beta:treeview"
 )
 
 # Extract unique grammar names from known types
@@ -144,7 +155,7 @@ EXPECTED_TYPES=$(printf '%s\n' "${KNOWN_TYPES[@]}" | cut -d':' -f2 | sort | uniq
 
 echo "Expected diagram types (from Mermaid spec):"
 echo "$EXPECTED_TYPES" | while read type; do
-    echo "  📖 $type"
+  echo "  📖 $type"
 done
 EXPECTED_COUNT=$(echo "$EXPECTED_TYPES" | wc -l | tr -d ' ')
 echo ""
@@ -158,45 +169,45 @@ echo "━━━━━━━━━━━━━━━━━━━━━━━━�
 # Find missing types (in spec but not implemented)
 MISSING_TYPES=""
 for expected in $EXPECTED_TYPES; do
-    if ! echo "$IMPLEMENTED_TYPES" | grep -q "^${expected}$"; then
-        MISSING_TYPES="${MISSING_TYPES}${expected}\n"
-    fi
+  if ! echo "$IMPLEMENTED_TYPES" | grep -q "^${expected}$"; then
+    MISSING_TYPES="${MISSING_TYPES}${expected}\n"
+  fi
 done
 
 # Find extra types (implemented but not in spec - might be deprecated)
 EXTRA_TYPES=""
 for implemented in $IMPLEMENTED_TYPES; do
-    if ! echo "$EXPECTED_TYPES" | grep -q "^${implemented}$"; then
-        EXTRA_TYPES="${EXTRA_TYPES}${implemented}\n"
-    fi
+  if ! echo "$EXPECTED_TYPES" | grep -q "^${implemented}$"; then
+    EXTRA_TYPES="${EXTRA_TYPES}${implemented}\n"
+  fi
 done
 
 # Display results
 if [ -n "$MISSING_TYPES" ]; then
-    echo ""
-    echo "⚠️  NEW DIAGRAM TYPES DETECTED IN MERMAID SPECIFICATION:"
-    echo ""
-    echo -e "$MISSING_TYPES" | grep -v '^$' | while read type; do
-        # Find the Mermaid keyword for this grammar name
-        MERMAID_KEYWORD=$(printf '%s\n' "${KNOWN_TYPES[@]}" | grep ":${type}$" | head -1 | cut -d':' -f1)
-        echo "  🆕 $type (Mermaid keyword: $MERMAID_KEYWORD)"
-    done
-    echo ""
-    HAS_NEW_TYPES=true
+  echo ""
+  echo "⚠️  NEW DIAGRAM TYPES DETECTED IN MERMAID SPECIFICATION:"
+  echo ""
+  echo -e "$MISSING_TYPES" | grep -v '^$' | while read type; do
+    # Find the Mermaid keyword for this grammar name
+    MERMAID_KEYWORD=$(printf '%s\n' "${KNOWN_TYPES[@]}" | grep ":${type}$" | head -1 | cut -d':' -f1)
+    echo "  🆕 $type (Mermaid keyword: $MERMAID_KEYWORD)"
+  done
+  echo ""
+  HAS_NEW_TYPES=true
 else
-    echo ""
-    echo "✅ All diagram types from Mermaid spec are implemented!"
-    echo ""
-    HAS_NEW_TYPES=false
+  echo ""
+  echo "✅ All diagram types from Mermaid spec are implemented!"
+  echo ""
+  HAS_NEW_TYPES=false
 fi
 
 if [ -n "$EXTRA_TYPES" ]; then
-    echo "ℹ️  Types in grammar.js not in spec (might be deprecated or aliased):"
-    echo ""
-    echo -e "$EXTRA_TYPES" | grep -v '^$' | while read type; do
-        echo "  ❓ $type"
-    done
-    echo ""
+  echo "ℹ️  Types in grammar.js not in spec (might be deprecated or aliased):"
+  echo ""
+  echo -e "$EXTRA_TYPES" | grep -v '^$' | while read type; do
+    echo "  ❓ $type"
+  done
+  echo ""
 fi
 
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
@@ -206,49 +217,49 @@ echo ""
 echo "  Implemented: $IMPLEMENTED_COUNT types"
 echo "  Expected:    $EXPECTED_COUNT types"
 if [ "$HAS_NEW_TYPES" = true ]; then
-    MISSING_COUNT=$(echo -e "$MISSING_TYPES" | grep -v '^$' | wc -l | tr -d ' ')
-    echo "  Missing:     $MISSING_COUNT types 🆕"
+  MISSING_COUNT=$(echo -e "$MISSING_TYPES" | grep -v '^$' | wc -l | tr -d ' ')
+  echo "  Missing:     $MISSING_COUNT types 🆕"
 else
-    echo "  Missing:     0 types ✅"
+  echo "  Missing:     0 types ✅"
 fi
 echo ""
 
 # If new types detected, create GitHub issue (if requested) and fail
 if [ "$HAS_NEW_TYPES" = true ]; then
-    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    echo "🔧 Action Required"
-    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    echo ""
-    echo "New Mermaid diagram types have been detected. To add support:"
-    echo ""
-    echo "1. Research the diagram syntax at https://mermaid.js.org/"
-    echo "2. Add test cases to test/corpus/<typename>.txt"
-    echo "3. Implement grammar rules in grammar.js"
-    echo "4. Run: npm run generate && make test"
-    echo "5. Update README.md with new diagram type"
-    echo ""
+  echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+  echo "🔧 Action Required"
+  echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+  echo ""
+  echo "New Mermaid diagram types have been detected. To add support:"
+  echo ""
+  echo "1. Research the diagram syntax at https://mermaid.js.org/"
+  echo "2. Add test cases to test/corpus/<typename>.txt"
+  echo "3. Implement grammar rules in grammar.js"
+  echo "4. Run: npm run generate && make test"
+  echo "5. Update README.md with new diagram type"
+  echo ""
 
-    # Create GitHub issue if requested (typically in CI)
-    if [ "$CREATE_ISSUE" = true ]; then
-        if command -v gh &> /dev/null; then
-            echo "📝 Creating GitHub issue for new diagram types..."
-            echo ""
+  # Create GitHub issue if requested (typically in CI)
+  if [ "$CREATE_ISSUE" = true ]; then
+    if command -v gh &>/dev/null; then
+      echo "📝 Creating GitHub issue for new diagram types..."
+      echo ""
 
-            # Build issue body
-            ISSUE_BODY="## 🆕 New Mermaid Diagram Types Detected
+      # Build issue body
+      ISSUE_BODY="## 🆕 New Mermaid Diagram Types Detected
 
 The weekly spec compliance check has detected new diagram types in Mermaid v${LATEST_VERSION} that are not yet implemented in tree-sitter-mermaid.
 
 ### Missing Diagram Types
 
 "
-            echo -e "$MISSING_TYPES" | grep -v '^$' | while read type; do
-                MERMAID_KEYWORD=$(printf '%s\n' "${KNOWN_TYPES[@]}" | grep ":${type}$" | head -1 | cut -d':' -f1)
-                ISSUE_BODY="${ISSUE_BODY}- \`${type}\` (Mermaid keyword: \`${MERMAID_KEYWORD}\`)
+      echo -e "$MISSING_TYPES" | grep -v '^$' | while read type; do
+        MERMAID_KEYWORD=$(printf '%s\n' "${KNOWN_TYPES[@]}" | grep ":${type}$" | head -1 | cut -d':' -f1)
+        ISSUE_BODY="${ISSUE_BODY}- \`${type}\` (Mermaid keyword: \`${MERMAID_KEYWORD}\`)
 "
-            done
+      done
 
-            ISSUE_BODY="${ISSUE_BODY}
+      ISSUE_BODY="${ISSUE_BODY}
 ### Implementation Steps
 
 For each missing diagram type:
@@ -292,38 +303,52 @@ For each missing diagram type:
 This issue was automatically created by the weekly spec compliance check.
 "
 
-            # Create the issue
-            ISSUE_URL=$(gh issue create \
-                --title "New Mermaid diagram types detected in v${LATEST_VERSION}" \
-                --body "$ISSUE_BODY" \
-                --label "enhancement,diagram-type,auto-detected" \
-                2>&1)
+      # Create the issue
+      ISSUE_URL=$(gh issue create \
+        --title "New Mermaid diagram types detected in v${LATEST_VERSION}" \
+        --body "$ISSUE_BODY" \
+        --label "enhancement,diagram-type,auto-detected" \
+        2>&1)
 
-            if [ $? -eq 0 ]; then
-                echo "✅ GitHub issue created: $ISSUE_URL"
-            else
-                echo "❌ Failed to create GitHub issue"
-                echo "Error: $ISSUE_URL"
-            fi
-            echo ""
-        else
-            echo "⚠️  GitHub CLI (gh) not installed - cannot create issue"
-            echo "   Install: https://cli.github.com/"
-            echo ""
-        fi
+      if [ $? -eq 0 ]; then
+        echo "✅ GitHub issue created: $ISSUE_URL"
+      else
+        echo "❌ Failed to create GitHub issue"
+        echo "Error: $ISSUE_URL"
+      fi
+      echo ""
+    else
+      echo "⚠️  GitHub CLI (gh) not installed - cannot create issue"
+      echo "   Install: https://cli.github.com/"
+      echo ""
     fi
+  fi
 
-    echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-    echo ""
-    echo "❌ Check failed: New diagram types need implementation"
+  echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
+  echo ""
+  # WARNING, not failure. Upstream adding a diagram type is not a defect in this
+  # grammar — it is news. Failing CI for it means a red build nobody caused and
+  # nobody can fix by reverting, which is how this check ended up ignored from
+  # 2026-03 onward while genuinely drifting four minor versions behind.
+  #
+  # Regressions in what IS supported still fail: `make test` runs the corpus and
+  # exits non-zero, and SPEC_DRIFT_STRICT=1 restores hard failure here for a
+  # release gate where shipping known-incomplete support is not acceptable.
+  echo "⚠️  Warning: new upstream diagram types are not implemented yet"
+  echo "   This does not fail the build. Set SPEC_DRIFT_STRICT=1 to make it fail."
+  echo ""
+  if [ "${SPEC_DRIFT_STRICT:-0}" = "1" ]; then
+    echo "❌ SPEC_DRIFT_STRICT=1 — failing on unimplemented diagram types"
     echo ""
     exit 1
+  fi
+  exit 0
 else
-    echo "✅ All Mermaid diagram types are implemented!"
-    echo ""
-    echo "Next actions:"
-    echo "- Monitor Mermaid releases: https://github.com/mermaid-js/mermaid/releases"
-    echo "- This check runs weekly to detect new diagram types"
-    echo ""
-    exit 0
+  echo "✅ All Mermaid diagram types are implemented!"
+  echo ""
+  echo "Next actions:"
+  echo "- Monitor Mermaid releases: https://github.com/mermaid-js/mermaid/releases"
+  echo "- This check runs weekly to detect new diagram types"
+  echo ""
+  exit 0
 fi

@@ -122,55 +122,60 @@ jobs:
           echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 
           # Create test corpus file with skeleton
-          cat > "test/corpus/${TYPE}.txt" << 'CORPUSEOF'
-==========================
-Basic DIAGRAM_TYPE diagram
-==========================
-
-DIAGRAM_KEYWORD
-    EXAMPLE_CONTENT
-
----
-
-(source_file
-  (diagram_DIAGRAM_TYPE
-    (DIAGRAM_TYPE_stmt)))
-
-==========================
-DIAGRAM_TYPE with title
-==========================
-
-DIAGRAM_KEYWORD
-    title Example Diagram
-    EXAMPLE_CONTENT
-
----
-
-(source_file
-  (diagram_DIAGRAM_TYPE
-    (DIAGRAM_TYPE_title)
-    (DIAGRAM_TYPE_stmt)))
-
-==========================
-Complex DIAGRAM_TYPE diagram
-==========================
-
-DIAGRAM_KEYWORD
-    title Complex Example
-    EXAMPLE_CONTENT_1
-    EXAMPLE_CONTENT_2
-    EXAMPLE_CONTENT_3
-
----
-
-(source_file
-  (diagram_DIAGRAM_TYPE
-    (DIAGRAM_TYPE_title)
-    (DIAGRAM_TYPE_stmt)
-    (DIAGRAM_TYPE_stmt)
-    (DIAGRAM_TYPE_stmt)))
-
-CORPUSEOF
+          # Heredoc body and terminator sit at the YAML block-scalar base indent
+          # so YAML strips them to column 1 in the real script — where bash requires
+          # the terminator. Do NOT indent them to match the surrounding for-loop:
+          # that leaves leading spaces bash cannot strip (<<- only removes tabs) and
+          # the heredoc never closes.
+          cat > "test/corpus/${TYPE}.txt" <<'CORPUSEOF'
+        ==========================
+        Basic DIAGRAM_TYPE diagram
+        ==========================
+        
+        DIAGRAM_KEYWORD
+            EXAMPLE_CONTENT
+        
+        ---
+        
+        (source_file
+          (diagram_DIAGRAM_TYPE
+            (DIAGRAM_TYPE_stmt)))
+        
+        ==========================
+        DIAGRAM_TYPE with title
+        ==========================
+        
+        DIAGRAM_KEYWORD
+            title Example Diagram
+            EXAMPLE_CONTENT
+        
+        ---
+        
+        (source_file
+          (diagram_DIAGRAM_TYPE
+            (DIAGRAM_TYPE_title)
+            (DIAGRAM_TYPE_stmt)))
+        
+        ==========================
+        Complex DIAGRAM_TYPE diagram
+        ==========================
+        
+        DIAGRAM_KEYWORD
+            title Complex Example
+            EXAMPLE_CONTENT_1
+            EXAMPLE_CONTENT_2
+            EXAMPLE_CONTENT_3
+        
+        ---
+        
+        (source_file
+          (diagram_DIAGRAM_TYPE
+            (DIAGRAM_TYPE_title)
+            (DIAGRAM_TYPE_stmt)
+            (DIAGRAM_TYPE_stmt)
+            (DIAGRAM_TYPE_stmt)))
+        
+        CORPUSEOF
 
           # Replace placeholders with actual type name
           sed -i "s/DIAGRAM_TYPE/${TYPE}/g" "test/corpus/${TYPE}.txt"
@@ -187,39 +192,39 @@ CORPUSEOF
           echo "📝 Adding skeleton grammar to grammar.js..."
 
           # Create skeleton grammar
-          cat > "skeleton_${TYPE}.js" << 'GRAMMAREOF'
-
-    // =========================================================================
-    // DIAGRAM_TYPE Diagram
-    // =========================================================================
-    // TODO: Implement full grammar for DIAGRAM_TYPE diagrams
-    // Reference: https://mermaid.js.org/
-
-    diagram_DIAGRAM_TYPE: $ => seq(
-      kwd("DIAGRAM_KEYWORD"),
-      repeat(choice(
-        $._DIAGRAM_TYPE_stmt,
-        $._newline
-      ))
-    ),
-
-    _DIAGRAM_TYPE_stmt: $ => choice(
-      $.DIAGRAM_TYPE_title,
-      $.DIAGRAM_TYPE_stmt
-    ),
-
-    DIAGRAM_TYPE_title: $ => seq(
-      kwd("title"),
-      /[^\n]+/,
-      $._newline
-    ),
-
-    // TODO: Replace this with actual grammar rules
-    DIAGRAM_TYPE_stmt: $ => seq(
-      /[^\n]+/,
-      $._newline
-    ),
-GRAMMAREOF
+          cat > "skeleton_${TYPE}.js" <<'GRAMMAREOF'
+        
+            // =========================================================================
+            // DIAGRAM_TYPE Diagram
+            // =========================================================================
+            // TODO: Implement full grammar for DIAGRAM_TYPE diagrams
+            // Reference: https://mermaid.js.org/
+        
+            diagram_DIAGRAM_TYPE: $ => seq(
+              kwd("DIAGRAM_KEYWORD"),
+              repeat(choice(
+                $._DIAGRAM_TYPE_stmt,
+                $._newline
+              ))
+            ),
+        
+            _DIAGRAM_TYPE_stmt: $ => choice(
+              $.DIAGRAM_TYPE_title,
+              $.DIAGRAM_TYPE_stmt
+            ),
+        
+            DIAGRAM_TYPE_title: $ => seq(
+              kwd("title"),
+              /[^\n]+/,
+              $._newline
+            ),
+        
+            // TODO: Replace this with actual grammar rules
+            DIAGRAM_TYPE_stmt: $ => seq(
+              /[^\n]+/,
+              $._newline
+            ),
+        GRAMMAREOF
 
           sed -i "s/DIAGRAM_TYPE/${TYPE}/g" "skeleton_${TYPE}.js"
 
@@ -289,70 +294,70 @@ GRAMMAREOF
         TYPES="${{ steps.check.outputs.new_types }}"
 
         # Create PR body with implementation checklist
-        cat > pr-body.md << 'EOF'
-## 🤖 Automated Skeleton Implementation
-
-This draft PR was automatically created by the weekly spec compliance check.
-New Mermaid diagram type(s) detected: **REPLACE_TYPES**
-
-### 📦 What's Included
-
-- ✅ Test corpus files (`test/corpus/<type>.txt`) with skeleton structure
-- ✅ Grammar skeleton files (`skeleton_<type>.js`) ready to integrate
-- ⏳ Grammar integration (manual step required)
-- ⏳ Real syntax examples (manual step required)
-
-### 🔧 Implementation Checklist
-
-- [ ] Review generated skeleton files
-- [ ] Integrate `skeleton_*.js` code into `grammar.js`
-  - Add to `document` rule's `choice()` list
-  - Add diagram-specific tokens if needed
-- [ ] Update test corpus with real diagram syntax
-  - Research syntax at https://mermaid.js.org/
-  - Add 3-5 test cases covering key features
-- [ ] Generate parser and run tests
-  ```bash
-  npm run generate
-  make test
-  ```
-- [ ] Fix any test failures
-- [ ] Update README.md diagram support table
-- [ ] Update ARCHITECTURE.md if needed
-- [ ] Remove skeleton_*.js files after integration
-
-### 📚 References
-
-- Mermaid documentation: https://mermaid.js.org/intro/
-- Implementation guide: [ARCHITECTURE.md](ARCHITECTURE.md)
-- Corpus format: [CORPUS_FORMAT.md](CORPUS_FORMAT.md)
-- Example implementations: See existing diagram types in `grammar.js`
-
-### 🚀 Testing
-
-Once implementation is complete:
-
-```bash
-# Regenerate parser
-npm run generate
-
-# Run all tests
-make test
-
-# Test specific diagram type
-tree-sitter test test/corpus/<type>.txt
-```
-
-### 📝 Notes
-
-- This PR is in **draft** status - review and complete the checklist before marking ready
-- Skeleton code is intentionally basic - customize based on actual diagram syntax
-- Feel free to request review or ask questions
-
----
-
-🤖 *Automatically generated by the [auto-implement workflow](.github/workflows/auto-implement.yml)*
-EOF
+        cat > pr-body.md <<'EOF'
+        ## 🤖 Automated Skeleton Implementation
+        
+        This draft PR was automatically created by the weekly spec compliance check.
+        New Mermaid diagram type(s) detected: **REPLACE_TYPES**
+        
+        ### 📦 What's Included
+        
+        - ✅ Test corpus files (`test/corpus/<type>.txt`) with skeleton structure
+        - ✅ Grammar skeleton files (`skeleton_<type>.js`) ready to integrate
+        - ⏳ Grammar integration (manual step required)
+        - ⏳ Real syntax examples (manual step required)
+        
+        ### 🔧 Implementation Checklist
+        
+        - [ ] Review generated skeleton files
+        - [ ] Integrate `skeleton_*.js` code into `grammar.js`
+          - Add to `document` rule's `choice()` list
+          - Add diagram-specific tokens if needed
+        - [ ] Update test corpus with real diagram syntax
+          - Research syntax at https://mermaid.js.org/
+          - Add 3-5 test cases covering key features
+        - [ ] Generate parser and run tests
+          ```bash
+          npm run generate
+          make test
+          ```
+        - [ ] Fix any test failures
+        - [ ] Update README.md diagram support table
+        - [ ] Update ARCHITECTURE.md if needed
+        - [ ] Remove skeleton_*.js files after integration
+        
+        ### 📚 References
+        
+        - Mermaid documentation: https://mermaid.js.org/intro/
+        - Implementation guide: [ARCHITECTURE.md](ARCHITECTURE.md)
+        - Corpus format: [CORPUS_FORMAT.md](CORPUS_FORMAT.md)
+        - Example implementations: See existing diagram types in `grammar.js`
+        
+        ### 🚀 Testing
+        
+        Once implementation is complete:
+        
+        ```bash
+        # Regenerate parser
+        npm run generate
+        
+        # Run all tests
+        make test
+        
+        # Test specific diagram type
+        tree-sitter test test/corpus/<type>.txt
+        ```
+        
+        ### 📝 Notes
+        
+        - This PR is in **draft** status - review and complete the checklist before marking ready
+        - Skeleton code is intentionally basic - customize based on actual diagram syntax
+        - Feel free to request review or ask questions
+        
+        ---
+        
+        🤖 *Automatically generated by the [auto-implement workflow](.github/workflows/auto-implement.yml)*
+        EOF
 
         # Replace placeholder with actual types
         sed -i "s/REPLACE_TYPES/$TYPES/g" pr-body.md
@@ -369,7 +374,7 @@ EOF
           --body-file pr-body.md \
           --draft \
           --label "auto-generated,diagram-type,enhancement" \
-          --base master
+          --base main
 
     # ==========================================================================
     # Notification

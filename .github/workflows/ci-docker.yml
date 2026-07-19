@@ -15,8 +15,8 @@
 #
 # TRIGGERS:
 # ---------
-# - push: Runs on all pushes to master branch
-# - pull_request: Runs on all PRs to master branch
+# - push: Runs on all pushes to main branch
+# - pull_request: Runs on all PRs to main branch
 # - schedule: Runs weekly on Sunday at 00:00 UTC to detect new Mermaid releases
 #
 # WHY DOCKER IN CI?
@@ -58,13 +58,13 @@
 name: CI
 
 on:
-  # Run on pushes to master branch
+  # Run on pushes to main branch
   push:
-    branches: [ master ]
+    branches: [ main ]
 
-  # Run on pull requests targeting master
+  # Run on pull requests targeting main
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
   # Run weekly to detect new Mermaid diagram types
   # Every Sunday at 00:00 UTC
@@ -205,7 +205,7 @@ jobs:
         echo "|-------------|--------|" >> $GITHUB_STEP_SUMMARY
         echo "| Docker | ${{ needs.test-docker.result }} |" >> $GITHUB_STEP_SUMMARY
         echo "| Native Ubuntu | ${{ needs.test-native.result }} |" >> $GITHUB_STEP_SUMMARY
-        echo "| Nix | ${{ needs.test-nix.result }} |" >> $GITHUB_STEP_SUMMARY
+        echo "| Nix | ${{ needs.nix-test.result }} |" >> $GITHUB_STEP_SUMMARY
 
     - name: Fail if any test failed
       if: contains(needs.*.result, 'failure')

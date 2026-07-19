@@ -12,8 +12,8 @@
 #
 # TRIGGERS:
 # ---------
-# - push: Runs on all pushes to master branch
-# - pull_request: Runs on all PRs to master branch
+# - push: Runs on all pushes to main branch
+# - pull_request: Runs on all PRs to main branch
 # - schedule: Runs weekly on Sunday at 00:00 UTC to detect new Mermaid releases
 #
 # WHY NO LANGUAGE BINDINGS TESTS?
@@ -46,13 +46,16 @@
 name: CI
 
 on:
-  # Run on pushes to master branch
+  # Run on pushes to the default branch.
+  # NOTE: these said `master` until 2026-07-19 while the repo's default branch
+  # is `main`, so push and pull_request triggers never fired — the only runs
+  # were the weekly cron below. That is why four months of red builds went
+  # unnoticed: nobody ever saw a failing check on a PR.
   push:
-    branches: [ master ]
+    branches: [ main ]
 
-  # Run on pull requests targeting master
   pull_request:
-    branches: [ master ]
+    branches: [ main ]
 
   # Run weekly to detect new Mermaid diagram types
   # Every Sunday at 00:00 UTC
